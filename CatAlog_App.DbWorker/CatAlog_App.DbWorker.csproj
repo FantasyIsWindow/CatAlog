@@ -10,7 +10,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DbContexts\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CatAlog_App.ConfigurationWorker\CatAlog_App.ConfigurationWorker.csproj" />
   </ItemGroup>
 
 </Project>

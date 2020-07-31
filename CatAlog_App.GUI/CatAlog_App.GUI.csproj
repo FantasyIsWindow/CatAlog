@@ -7,9 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Infrastructure\Commands\" />
+    <Folder Include="Infrastructure\Converters\" />
+    <Folder Include="Infrastructure\Services\" />
+    <Folder Include="Resources\Styles\" />
+    <Folder Include="ViewModels\" />
     <Folder Include="Views\CustomControls\" />
     <Folder Include="Views\ViewsControls\" />
-    <Folder Include="Views\Windows\" />
   </ItemGroup>
 
   <ItemGroup>
