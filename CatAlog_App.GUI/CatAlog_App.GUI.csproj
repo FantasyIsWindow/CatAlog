@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\CustomControls\" />
+    <Folder Include="Views\ViewsControls\" />
+    <Folder Include="Views\Windows\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CatAlog_App.ConfigurationWorker\CatAlog_App.ConfigurationWorker.csproj" />
+    <ProjectReference Include="..\CatAlog_App.DbWorker\CatAlog_App.DbWorker.csproj" />
+  </ItemGroup>
+
+</Project>
