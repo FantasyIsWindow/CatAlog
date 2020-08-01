@@ -11,6 +11,7 @@ namespace CatAlog_App.DbWorker.Models.GeneralModels
         public int CategoryId { get; set; }
         public Category Category { get; set; }
 
+        public int NameId { get; set; }
         public NameData Name { get; set; }
 
         public string Duration { get; set; }

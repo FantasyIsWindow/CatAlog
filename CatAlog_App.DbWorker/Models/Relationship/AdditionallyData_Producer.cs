@@ -9,7 +9,7 @@ namespace CatAlog_App.DbWorker.Models.Relationship
         public AdditionallyData AdditionallyData { get; set; }
 
 
-        public int RegisseurId { get; set; }
+        public int ProducerId { get; set; }
 
         public Producer Producer { get; set; }
     }

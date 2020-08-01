@@ -8,7 +8,7 @@
 
         public string Name { get; set; }
 
-        public int SerialDataID { get; set; }
+        public int SerialDataId { get; set; }
         public SerialData SerialData { get; set; }
     }
 }
