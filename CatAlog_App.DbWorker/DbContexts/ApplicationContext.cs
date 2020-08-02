@@ -1,9 +1,9 @@
-﻿using CatAlog_App.DbWorker.DbContexts.ModelsConfiguration.GeneralModels;
+﻿using CatAlog_App.DbWorker.DbContexts.DbModels.GeneralModels;
+using CatAlog_App.DbWorker.DbContexts.DbModels.Relationship;
+using CatAlog_App.DbWorker.DbContexts.DbModels.VideoModels;
+using CatAlog_App.DbWorker.DbContexts.ModelsConfiguration.GeneralModels;
 using CatAlog_App.DbWorker.DbContexts.ModelsConfiguration.Relationship;
 using CatAlog_App.DbWorker.DbContexts.ModelsConfiguration.VideoModels;
-using CatAlog_App.DbWorker.Models.GeneralModels;
-using CatAlog_App.DbWorker.Models.Relationship;
-using CatAlog_App.DbWorker.Models.VideoModels;
 using CatAlog_App.DbWorker.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -63,10 +63,10 @@ namespace CatAlog_App.DbWorker.DbContexts
             modelBuilder.ApplyConfiguration<NameData>(new NameDataConfiguration());
             modelBuilder.ApplyConfiguration<Producer>(new ProducerConfiguration());
             modelBuilder.ApplyConfiguration<Screenshot>(new ScreenshotConfiguration());
-            modelBuilder.ApplyConfiguration<Screenwriter>(new ScreenwriterConfiguration));
+            modelBuilder.ApplyConfiguration<Screenwriter>(new ScreenwriterConfiguration());
             modelBuilder.ApplyConfiguration<Template>(new TemplateConfiguration());
 
-            modelBuilder.ApplyConfiguration<AdditionallyData_Actor>(new AdditionallyData_ActorConfiguration));
+            modelBuilder.ApplyConfiguration<AdditionallyData_Actor>(new AdditionallyData_ActorConfiguration());
             modelBuilder.ApplyConfiguration<AdditionallyData_Company>(new AdditionallyData_CompanyConfiguration());
             modelBuilder.ApplyConfiguration<AdditionallyData_Country>(new AdditionallyData_CountryConfiguration());
             modelBuilder.ApplyConfiguration<AdditionallyData_Genre>(new AdditionallyData_GenreConfiguration());

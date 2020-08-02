@@ -1,4 +1,4 @@
-﻿using CatAlog_App.DbWorker.Models.VideoModels;
+﻿using CatAlog_App.DbWorker.DbContexts.DbModels.VideoModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

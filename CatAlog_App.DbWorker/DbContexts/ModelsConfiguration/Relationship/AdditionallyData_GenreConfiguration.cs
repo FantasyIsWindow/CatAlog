@@ -1,4 +1,4 @@
-﻿using CatAlog_App.DbWorker.Models.Relationship;
+﻿using CatAlog_App.DbWorker.DbContexts.DbModels.Relationship;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

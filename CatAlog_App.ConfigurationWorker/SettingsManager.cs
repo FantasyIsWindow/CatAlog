@@ -18,7 +18,14 @@ namespace CatAlog_App.ConfigurationWorker
         {
             ConfigurationFilePath = Path.Combine(Environment.CurrentDirectory, "settings.xml");
             Settings = new PropertyLibrary();
-            ReadConfig();
+            if (!File.Exists(ConfigurationFilePath))
+            {
+                CreateConfigurationFile();
+            }
+            else
+            {
+                ReadConfig();
+            }
         }
 
         /// <summary>
@@ -50,6 +57,18 @@ namespace CatAlog_App.ConfigurationWorker
             {
                 throw new Exception("Configuration file not found");
             }
+        }
+
+        /// <summary>
+        /// Initialize configuration file
+        /// </summary>
+        private void CreateConfigurationFile()
+        {
+            Settings.DbFileName = "catalog.db";
+            Settings.DbFolderPath = Path.Combine(Environment.CurrentDirectory, "CatAlog DataBase");
+            Settings.GraphicDataFolderName = Path.Combine(Settings.DbFolderPath, "Image Library");
+
+            SaveConfig();
         }
     }
 }

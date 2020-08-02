@@ -10,7 +10,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\GamesModels\" />
+    <Folder Include="DbContexts\DbModels\GamesModels\" />
+    <Folder Include="Repositories\" />
   </ItemGroup>
 
   <ItemGroup>

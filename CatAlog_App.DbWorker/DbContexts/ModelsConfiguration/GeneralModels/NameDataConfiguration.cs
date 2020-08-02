@@ -1,4 +1,4 @@
-﻿using CatAlog_App.DbWorker.Models.GeneralModels;
+﻿using CatAlog_App.DbWorker.DbContexts.DbModels.GeneralModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

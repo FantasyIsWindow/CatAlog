@@ -1,4 +1,4 @@
-﻿using CatAlog_App.DbWorker.Models.VideoModels;
+﻿using CatAlog_App.DbWorker.DbContexts.DbModels.VideoModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -19,7 +19,7 @@ namespace CatAlog_App.DbWorker.DbContexts.ModelsConfiguration.VideoModels
                             CountSpecials = 0,
                             SeasonNumber = 18,
                             Type = "TV",
-                            AdditionallyDataId = 6,
+                            MainRecordDataId = 6,
                             Note = "Very interesting"
                         }
                     }

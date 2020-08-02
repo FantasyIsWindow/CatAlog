@@ -7,18 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Infrastructure\Commands\" />
-    <Folder Include="Infrastructure\Converters\" />
-    <Folder Include="Infrastructure\Services\" />
-    <Folder Include="Resources\Styles\" />
-    <Folder Include="ViewModels\" />
-    <Folder Include="Views\CustomControls\" />
-    <Folder Include="Views\ViewsControls\" />
+    <PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\CatAlog_App.ConfigurationWorker\CatAlog_App.ConfigurationWorker.csproj" />
     <ProjectReference Include="..\CatAlog_App.DbWorker\CatAlog_App.DbWorker.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Infrastructure\Convertors\" />
+    <Folder Include="ViewModels\" />
+    <Folder Include="Views\CustomControls\" />
+    <Folder Include="Views\ViewControls\" />
   </ItemGroup>
 
 </Project>

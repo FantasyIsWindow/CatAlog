@@ -1,4 +1,5 @@
-﻿using CatAlog_App.DbWorker.Models.GeneralModels;
+﻿using CatAlog_App.DbWorker.DbContexts.DbModels.GeneralModels;
+using CatAlog_App.DbWorker.DbContexts.DbModels.VideoModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -47,6 +48,7 @@ namespace CatAlog_App.DbWorker.DbContexts.ModelsConfiguration.GeneralModels
             builder.HasMany(s => s.Screenshots).WithOne(m => m.MainRecordData).HasForeignKey(k => k.MainRecordDataId).OnDelete(DeleteBehavior.Cascade);
             builder.HasOne(a => a.AdditionallyData).WithOne(m => m.MainRecordData).HasForeignKey<AdditionallyData>(k => k.MainRecordDataId).OnDelete(DeleteBehavior.Cascade);
             builder.HasOne(media => media.Media).WithOne(m => m.MainRecordData).HasForeignKey<Media>(k => k.MainRecordDataId).OnDelete(DeleteBehavior.Cascade);
+            builder.HasOne(s => s.SerialData).WithOne(m => m.MainRecordData).HasForeignKey<SerialData>(k => k.MainRecordDataId).OnDelete(DeleteBehavior.Cascade);
             builder.HasData
                 (
                     new MainRecordData[]
