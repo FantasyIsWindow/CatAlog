@@ -1,0 +1,172 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Color x:Key="externalColor">#2D2D30</Color>
+    <Color x:Key="internalColor">#1E1E1E</Color>
+    <Color x:Key="lightTextColor">#E6E6E6</Color>
+    <Color x:Key="averageTextColor">#8b8b92</Color>
+    <Color x:Key="borderColor">#424245</Color>
+    <Color x:Key="selectedBorderColor">#007ACC</Color>
+    <Color x:Key="notEnabledBorderColor">#66666a</Color>
+    <Color x:Key="notEnabledBackgroundColor">#8c8c93</Color>
+    <Color x:Key="notEnabledForegroundColor">#bbbbc3</Color>
+    <Color x:Key="lightColor">#ffffff</Color>
+
+
+
+    <Color x:Key="c000">#000000</Color>
+    <Color x:Key="c001">#FF0000</Color>
+    <Color x:Key="c002">#FFDA00</Color>
+    <Color x:Key="c003">#07FF00</Color>
+    <Color x:Key="c004"></Color>
+    <Color x:Key="c005"></Color>
+
+    <!-- ListBoxBrushes -->
+    <SolidColorBrush x:Key="ItemBorderBrush" Color="{StaticResource borderColor}"/>
+    <SolidColorBrush x:Key="ItemSelectedBackgroundBrush" Color="{StaticResource averageTextColor}"/>
+
+    <SolidColorBrush x:Key="ListBoxBackgroundBrush" Color="{StaticResource externalColor}"/>
+    <SolidColorBrush x:Key="ListBoxBorderBrush" Color="{StaticResource borderColor}"/>
+    <SolidColorBrush x:Key="ListBoxSelectScreenshotBorderBrush" Color="{StaticResource lightColor}"/>
+    <SolidColorBrush x:Key="ListBoxSelectedItemBrush" Opacity="0.3" Color="{StaticResource lightTextColor}"/>
+
+
+
+
+
+
+
+
+
+    <SolidColorBrush x:Key="selectedItemListBoxColor" Color="Red" Opacity="0.4"/>
+    <SolidColorBrush x:Key="grayBolderBrush" Color="Blue"/>
+
+
+    <SolidColorBrush x:Key="RadioButtonNormalStateBrush" Color="{StaticResource c000}"/>
+    <SolidColorBrush x:Key="RadioButtonIsMouseOverStateBrush" Color="{StaticResource c001}"/>
+    <SolidColorBrush x:Key="RadioButtonIsPressedStateBrush" Color="{StaticResource c002}"/>
+    <SolidColorBrush x:Key="RadioButtonIsCheckedStateBrush" Color="{StaticResource c003}"/>
+
+    <!-- ButtonBrushes -->
+    <SolidColorBrush x:Key="NumericButtonBorderBrush" Color="{StaticResource borderColor}"/>
+    <SolidColorBrush x:Key="NumericButtonBackgroundBrush" Color="{StaticResource externalColor}"/>
+    <SolidColorBrush x:Key="NumericButtonArrowBrush" Color="{StaticResource averageTextColor}"/>
+
+    <SolidColorBrush x:Key="ButtonBorderBrush" Color="{StaticResource borderColor}"/>
+    <SolidColorBrush x:Key="ButtonBackgroundBrush" Color="{StaticResource externalColor}"/>
+    <SolidColorBrush x:Key="ButtonForegroundBrush" Color="{StaticResource lightTextColor}"/>
+    <SolidColorBrush x:Key="ButtonSelectBorderBrush" Color="{StaticResource selectedBorderColor}"/>
+    <SolidColorBrush x:Key="ButtonSelectBackgroundBrush" Color="{StaticResource internalColor}"/>
+
+    <SolidColorBrush x:Key="ButtonNotEnableForegroundBrush" Color="{StaticResource notEnabledForegroundColor}"/>
+    <SolidColorBrush x:Key="ButtonNotEnableBorderBrush" Color="{StaticResource notEnabledBorderColor}"/>
+    <SolidColorBrush x:Key="ButtonNotEnableBackgroundBrush" Color="{StaticResource notEnabledBackgroundColor}"/>
+
+
+    <!-- TextBoxBrushes -->
+    <SolidColorBrush x:Key="NumericTextBoxBorderBrush" Color="{StaticResource borderColor}"/>
+    <SolidColorBrush x:Key="NumericTextBoxBackgroundBrush" Color="{StaticResource externalColor}"/>
+    <SolidColorBrush x:Key="NumericTextBoxForegroundBrush" Color="{StaticResource lightTextColor}"/>
+    <SolidColorBrush x:Key="TextBoxBorderBrush" Color="{StaticResource borderColor}"/>
+    <SolidColorBrush x:Key="TextBoxBackgroundBrush" Color="{StaticResource externalColor}"/>
+    <SolidColorBrush x:Key="TextBoxForegroundBrush" Color="{StaticResource lightTextColor}"/>
+    <SolidColorBrush x:Key="UrlTextBoxForegroundBrush" Color="{StaticResource averageTextColor}"/>
+
+    <!-- TextBlockBrushes -->
+    <SolidColorBrush x:Key="TextBlockBackgroundBrush" Color="{StaticResource externalColor}"/>
+    <SolidColorBrush x:Key="TextBlockForegroundBrush" Color="{StaticResource lightTextColor}"/>
+
+    <!-- LabelBrushes -->
+    <SolidColorBrush x:Key="TitleLabelBackgroundBrush" Color="{StaticResource externalColor}"/>
+    <SolidColorBrush x:Key="TitleLabelForegroundBrush" Color="{StaticResource averageTextColor}"/>
+    <SolidColorBrush x:Key="LabelForegroundBrush" Color="{StaticResource lightTextColor}"/>
+    <SolidColorBrush x:Key="LabelDarkForegroundBrush" Color="{StaticResource averageTextColor}"/>
+
+    <!-- UserControlBrushes -->
+    <SolidColorBrush x:Key="UserControlsBackgroundBrush" Color="{StaticResource internalColor}"/>
+    <SolidColorBrush x:Key="UserControlsBorderBrush" Color="{StaticResource borderColor}"/>
+
+    <!-- BorderBrushes -->
+    <SolidColorBrush x:Key="BorderBrush" Color="{StaticResource borderColor}"/>
+
+    <!-- ComboBoxBrushes -->
+    <SolidColorBrush x:Key="ComboBoxToggleButtonBackgroundBrush" Color="{StaticResource externalColor}"/>
+    <SolidColorBrush x:Key="ComboBoxArrowBrush" Color="{StaticResource averageTextColor}"/>
+    <SolidColorBrush x:Key="ComboBoxHoverToggleBackgroundBrush" Color="{StaticResource internalColor}"/>
+    <SolidColorBrush x:Key="ComboBoxHoverBorderBrush" Color="{StaticResource selectedBorderColor}"/>
+    <SolidColorBrush x:Key="ComboBoxBorderBrush" Color="{StaticResource borderColor}"/>
+    <SolidColorBrush x:Key="ComboBoxBackgroundBrush" Color="{StaticResource externalColor}"/>
+    <SolidColorBrush x:Key="ComboBoxForegroundBrush" Color="{StaticResource lightTextColor}"/>
+    <SolidColorBrush x:Key="ComboBoxPopupBackgroundBrush" Color="{StaticResource internalColor}"/>
+    <SolidColorBrush x:Key="ComboBoxHoverItemBrush" Color="{StaticResource externalColor}"/>
+    <SolidColorBrush x:Key="ComboBoxDiasbledArrowBrush" Color="{StaticResource notEnabledForegroundColor}"/>
+    <SolidColorBrush x:Key="ComboBoxDisabledBackgroundBrush" Color="{StaticResource notEnabledBackgroundColor}"/>
+    <SolidColorBrush x:Key="CombobBoxDisabledBorderBrush" Color="{StaticResource notEnabledBorderColor}"/>
+    <SolidColorBrush x:Key="ComboBoxDisabledForegroundBrush" Color="{StaticResource notEnabledForegroundColor}"/>
+    <SolidColorBrush x:Key="ComboBoxEnabledForegroundBrush" Color="{StaticResource notEnabledForegroundColor}"/>
+
+    <!-- ScrollBarBrushes -->
+    <SolidColorBrush x:Key="ScrollBarRepeatButtonBrush" Color="{StaticResource internalColor}"/>
+    <SolidColorBrush x:Key="ScrollBarThumbBrush" Color="{StaticResource internalColor}"/>
+    <SolidColorBrush x:Key="ScrollBarBackgroundBrush" Color="{StaticResource externalColor}"/>
+
+
+    <!-- WindowBrushes -->
+    <SolidColorBrush x:Key="WindowBackgroundBrush" Color="{StaticResource externalColor}"/>
+    <SolidColorBrush x:Key="WindowBorderBrushBrush" Color="{StaticResource borderColor}"/>
+    <SolidColorBrush x:Key="WindowTitleBarBackgroundBrush" Color="{StaticResource externalColor}"/>
+    <SolidColorBrush x:Key="WindowTitleBarForegroundBrush" Color="{StaticResource lightTextColor}"/>
+    <SolidColorBrush x:Key="WindowDisabledBackgroundBrush" Color="{StaticResource notEnabledBackgroundColor}"/>
+
+    <!-- StatusBarBrush -->
+    <SolidColorBrush x:Key="StatusBarBorderBrush" Color="{StaticResource borderColor}"/>
+    <SolidColorBrush x:Key="StatusBarBacgroundBrush" Color="{StaticResource externalColor}"/>
+    <SolidColorBrush x:Key="StatusBarSeparatorBrush" Color="{StaticResource borderColor}"/>
+    <SolidColorBrush x:Key="StatusBarDisableBrush" Color="{StaticResource notEnabledBackgroundColor}"/>
+    <SolidColorBrush x:Key="StatusBarSelectedBrush" Color="{StaticResource selectedBorderColor}"/>
+
+    <!-- MenuBrush -->
+    <SolidColorBrush x:Key="MenuBackgroundBrush" Color="{StaticResource externalColor}"/>
+    <SolidColorBrush x:Key="MenuBorderBrushBrush" Color="{StaticResource borderColor}"/>
+    <SolidColorBrush x:Key="MenuItemForegroundBrush" Color="{StaticResource lightTextColor}"/>
+    <SolidColorBrush x:Key="MenuItemBackgroundBrush" Color="{StaticResource externalColor}"/>
+    <SolidColorBrush x:Key="MenuItemHoverForegroundBrush" Color="{StaticResource averageTextColor}"/>
+    <SolidColorBrush x:Key="MenuItemHoverBackgroundBrush" Color="{StaticResource internalColor}"/>
+    <SolidColorBrush x:Key="MenuItemHoverBorderBrush" Color="{StaticResource borderColor}"/>
+    <SolidColorBrush x:Key="MenuItemEnabledForegroundBrush" Color="{StaticResource notEnabledForegroundColor}"/>
+
+    <!-- TreeViewBrush -->
+    <SolidColorBrush x:Key="TreeViewerBackgroundBrush" Color="{StaticResource internalColor}"/>
+    <SolidColorBrush x:Key="TreeViewerForegroundBrush" Color="{StaticResource lightTextColor}"/>
+    <SolidColorBrush x:Key="TreeViewerBorderBrush" Color="{StaticResource borderColor}"/>
+    <SolidColorBrush x:Key="TreeViewerDisabledBackgroundBrush" Color="{StaticResource notEnabledBackgroundColor}"/>
+    <SolidColorBrush x:Key="TreeViewerDisabledForegroundBrush" Color="{StaticResource notEnabledForegroundColor}"/>
+    <SolidColorBrush x:Key="TreeViewerSelectedForegroundBrush" Color="{StaticResource borderColor}"/>
+
+    <!-- TabControlBrush -->
+    <SolidColorBrush x:Key="TabControlBorderBrush" Color="{StaticResource borderColor}"/>
+    <SolidColorBrush x:Key="TabControlBackgroundBrush" Color="{StaticResource externalColor}"/>
+    <SolidColorBrush x:Key="TabControlForegroundBrush" Color="{StaticResource lightTextColor}"/>
+    <SolidColorBrush x:Key="TabControlHeaderBackgroundBrush" Color="{StaticResource externalColor}"/>
+    <SolidColorBrush x:Key="TabControlSelectBorderBrush" Color="{StaticResource selectedBorderColor}"/>
+    <SolidColorBrush x:Key="TabControlSelectBackgroundBrush" Color="{StaticResource internalColor}"/>
+    <SolidColorBrush x:Key="TabControlSelectForegroundBrush" Color="{StaticResource averageTextColor}"/>
+
+    <!-- ExpanderBrush -->
+    <SolidColorBrush x:Key="ExpanderBtnBackgroundBrush" Color="{StaticResource externalColor}"/>
+    <SolidColorBrush x:Key="ExpanderBtnBorderBrush" Color="{StaticResource borderColor}"/>
+    <SolidColorBrush x:Key="ExpanderArrowBtnBrush" Color="{StaticResource averageTextColor}"/>
+    <SolidColorBrush x:Key="ExpanderArrowDisabledBtnBrush" Color="{StaticResource externalColor}"/>
+    <SolidColorBrush x:Key="ExpanderBtnDisabledBackgroundBrush" Color="{StaticResource notEnabledBorderColor}"/>
+    <SolidColorBrush x:Key="ExpanderBtnDisabledBorderBrush" Color="{StaticResource notEnabledBorderColor}"/>
+    <SolidColorBrush x:Key="ExpanderBtnSelectBackgroundBrush" Color="{StaticResource internalColor}"/>
+    <SolidColorBrush x:Key="ExpanderBtnSelectBorderBrush" Color="{StaticResource selectedBorderColor}"/>
+    <SolidColorBrush x:Key="ExpanderArrowBtnSelectBrush" Color="{StaticResource selectedBorderColor}"/>
+    <SolidColorBrush x:Key="ExpanderForegroundBrush" Color="{StaticResource lightTextColor}"/>
+
+    <!-- ToolBarBrush -->
+    <SolidColorBrush x:Key="ToolBarThumbBrush" Color="{StaticResource borderColor}"/>
+    <SolidColorBrush x:Key="ToolBarBorderBrush" Color="{StaticResource borderColor}"/>
+    <SolidColorBrush x:Key="ToolBarBackgroundBrush" Color="{StaticResource internalColor}"/>
+
+</ResourceDictionary>

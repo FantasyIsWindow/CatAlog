@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="CatAlog_App.GUI.Views.CustomControls.RatingStars"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ProgressBar x:Name="starsBar" Maximum="10">
+        <ProgressBar.Style>
+            <Style TargetType="{x:Type ProgressBar}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ProgressBar}">
+                            <Grid>
+                                <Path Data="F1 M 0.000,5.064 L 4.960,4.562 L 6.970,0.000 L 8.971,4.540 L 13.941,5.064 L 14.993,5.085 L 19.960,4.562 L 21.970,0.000 L 23.981,4.562 L 28.941,5.064 
+                                      L 30.000,5.064 L 34.960,4.562 L 36.970,0.000 L 38.981,4.562 L 44.015,5.064 L 45.000,5.064 L 49.960,4.562 L 51.970,0.000 L 53.981,4.562 L 58.941,5.064 
+                                      L 60.000,5.064 L 64.960,4.562 L 66.970,0.000 L 68.981,4.562 L 73.941,5.064 L 70.223,8.386 L 71.278,13.258 L 66.970,10.749 L 62.662,13.258 L 63.718,8.386 
+                                      L 60.000,5.064 L 58.941,5.064 L 55.223,8.386 L 56.278,13.258 L 51.970,10.749 L 47.662,13.258 L 48.718,8.386 L 45.000,5.064 L 43.941,5.064 L 40.223,8.386 
+                                      L 41.278,13.258 L 36.970,10.749 L 32.662,13.258 L 33.718,8.386 L 30.000,5.064 L 28.941,5.064 L 25.223,8.386 L 26.278,13.258 L 21.970,10.749 L 17.674,13.204 
+                                      L 18.718,8.386 L 14.993,5.085 L 13.941,5.064 L 10.223,8.386 L 11.278,13.258 L 6.970,10.749 L 2.662,13.258 L 3.718,8.386 L 0.000,5.064 Z"
+                                      VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="PART_Track" Fill="{TemplateBinding Background}" RenderTransformOrigin="0.5, 0.5"/>
+                                <Path Data="F1 M 0.000,5.064 L 4.960,4.562 L 6.970,0.000 L 8.971,4.540 L 13.941,5.064 L 14.993,5.085 L 19.960,4.562 L 21.970,0.000 L 23.981,4.562 L 28.941,5.064 
+                                      L 30.000,5.064 L 34.960,4.562 L 36.970,0.000 L 38.981,4.562 L 44.015,5.064 L 45.000,5.064 L 49.960,4.562 L 51.970,0.000 L 53.981,4.562 L 58.941,5.064 
+                                      L 60.000,5.064 L 64.960,4.562 L 66.970,0.000 L 68.981,4.562 L 73.941,5.064 L 70.223,8.386 L 71.278,13.258 L 66.970,10.749 L 62.662,13.258 L 63.718,8.386 
+                                      L 60.000,5.064 L 58.941,5.064 L 55.223,8.386 L 56.278,13.258 L 51.970,10.749 L 47.662,13.258 L 48.718,8.386 L 45.000,5.064 L 43.941,5.064 L 40.223,8.386 
+                                      L 41.278,13.258 L 36.970,10.749 L 32.662,13.258 L 33.718,8.386 L 30.000,5.064 L 28.941,5.064 L 25.223,8.386 L 26.278,13.258 L 21.970,10.749 L 17.674,13.204 
+                                      L 18.718,8.386 L 14.993,5.085 L 13.941,5.064 L 10.223,8.386 L 11.278,13.258 L 6.970,10.749 L 2.662,13.258 L 3.718,8.386 L 0.000,5.064 Z"
+                                      VerticalAlignment="Center" HorizontalAlignment="Left" x:Name="PART_Indicator" Fill="{TemplateBinding Foreground}" RenderTransformOrigin="0.5, 0.5"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ProgressBar.Style>
+    </ProgressBar>
+</UserControl>

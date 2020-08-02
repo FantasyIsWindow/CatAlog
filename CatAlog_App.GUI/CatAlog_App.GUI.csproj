@@ -16,9 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Infrastructure\Convertors\" />
     <Folder Include="ViewModels\" />
-    <Folder Include="Views\CustomControls\" />
     <Folder Include="Views\ViewControls\" />
   </ItemGroup>
 
