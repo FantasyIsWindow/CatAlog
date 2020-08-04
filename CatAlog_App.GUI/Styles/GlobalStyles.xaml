@@ -52,7 +52,7 @@
     </Style>
 
     <!-- ListBox -->
-    <Style TargetType="{x:Type ListBox}" x:Key="listBoxTemplate">
+    <Style TargetType="{x:Type ListBox}" x:Key="listBoxGlobalTemplate">
         <Setter Property="VerticalAlignment" Value="Stretch"/>
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
@@ -61,7 +61,586 @@
         <Setter Property="Background" Value="{StaticResource ListBoxBackgroundBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
     </Style>
+
+    <Style TargetType="{x:Type ListBoxItem}" x:Key="sympleStyle">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                    <Border BorderThickness="1, 0, 1, 1" BorderBrush="{StaticResource ItemBorderBrush}" Padding="3" x:Name="mainBorder">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding FirstName}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                            <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding SecondName}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                            <TextBlock Grid.Row="2" Text="{Binding ReleaseDate}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Rating}" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="mainBorder" Property="Background" Value="{StaticResource ItemSelectedBackgroundBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type ListBoxItem}" x:Key="compactStyle">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                    <Border BorderThickness="1, 0, 1, 1" BorderBrush="{StaticResource ItemBorderBrush}" Padding="3" x:Name="mainBorder">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.28*"/>
+                                <RowDefinition Height="0.28*"/>
+                                <RowDefinition Height="0.28*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.18*"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.RowSpan="3" Source="{Binding TitleImage}" Height="80" Margin="0, 0, 3, 0"/>
+                            <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding FirstName}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                            <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding SecondName}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding ReleaseDate}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                            <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding Rating}" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="mainBorder" Property="Background" Value="{StaticResource ItemSelectedBackgroundBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type ListBoxItem}" x:Key="extendedStyle">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                    <Border BorderThickness="1, 0, 1, 1" BorderBrush="{StaticResource ItemBorderBrush}" Padding="3" x:Name="mainBorder">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="25"/>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="25"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.ColumnSpan="3" Text="{Binding FirstName}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="11" TextWrapping="Wrap"/>
+                            <TextBlock Grid.Row="1" Grid.ColumnSpan="3" Text="{Binding SecondName}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="11" TextWrapping="Wrap"/>
+                            <Image Grid.Row="2" Grid.ColumnSpan="3" Source="{Binding TitleImage}" Height="150" Margin="5"/>
+                            <TextBlock Grid.Row="3" Grid.Column="0" Text="{Binding ReleaseDate}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Row="3" Grid.Column="2" Text="{Binding Rating}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="mainBorder" Property="Background" Value="{StaticResource ItemSelectedBackgroundBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>    
     
+    <!-- Label -->
+    <Style TargetType="{x:Type Label}" x:Key="labelGlobalTemplate">
+        <Setter Property="Foreground" Value="{StaticResource LabelForegroundBrush}"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="FontFamily" Value="{StaticResource MainFont}"/>
+    </Style>
     
+    <!-- TextBlock -->
+    <Style TargetType="{x:Type TextBlock}" x:Key="textBlockGlobalTemplate">
+        <Setter Property="Background" Value="{StaticResource TextBlockBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource TextBlockForegroundBrush}"/>
+        <Setter Property="FontFamily" Value="{StaticResource MainFont}"/>
+    </Style>
+
+    <!-- StatusBar -->
+    <Style TargetType="{x:Type StatusBar}" x:Key="statusBarGlobalTemplate">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type StatusBar}">
+                    <Border Padding="1" BorderThickness="0, 1, 0, 0"
+                            BorderBrush="{StaticResource StatusBarBorderBrush}"
+                            Background="{StaticResource StatusBarBacgroundBrush}">
+                        <ItemsPresenter/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type Separator}" x:Key="{x:Static StatusBar.SeparatorStyleKey}">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Separator}">
+                    <Rectangle Width="1" 
+                               Margin="3"
+                               Fill="{StaticResource StatusBarSeparatorBrush}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ToolBar -->
+    <Style TargetType="{x:Type Button}" x:Key="{x:Static ToolBar.ButtonStyleKey}" BasedOn="{StaticResource buttonGlobalTemplate}"/>
+
+    <Style TargetType="{x:Type Thumb}" x:Key="toolBarThumbStyle">
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="Cursor" Value="SizeAll"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Thumb}">
+                    <Border Background="Transparent" SnapsToDevicePixels="True">
+                        <Rectangle Margin="0, 2">
+                            <Rectangle.Fill>
+                                <DrawingBrush Viewport="0, 0, 4, 4"
+                                              ViewportUnits="Absolute"
+                                              Viewbox="0, 0, 8, 8"
+                                              ViewboxUnits="Absolute"
+                                              TileMode="Tile">
+                                    <DrawingBrush.Drawing>
+                                        <DrawingGroup>
+                                            <GeometryDrawing Brush="{StaticResource ToolBarThumbBrush}" Geometry="M 4 4 L 4 8 L 8 8 L 8 4 z"/>
+                                        </DrawingGroup>
+                                    </DrawingBrush.Drawing>
+                                </DrawingBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type ToolBar}" x:Key="toolBarGlobalTemplate">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToolBar}">
+                    <Border x:Name="border" 
+                            BorderThickness="1" 
+                            BorderBrush="{StaticResource ToolBarBorderBrush}" 
+                            Background="{StaticResource ToolBarBackgroundBrush}">
+                        <DockPanel>
+                            <Thumb x:Name="toolBarThumb" Width="10" Style="{StaticResource toolBarThumbStyle}"/>
+                            <ToolBarPanel x:Name="PART_ToolBarPanel" IsItemsHost="True" Margin="0, 1, 2, 2"/>
+                        </DockPanel>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsOverflowOpen" Value="True">
+                            <Setter TargetName="toolBarThumb" Property="IsEnabled" Value="False"/>
+                        </Trigger>
+                        <Trigger Property="ToolBarTray.IsLocked" Value="True">
+                            <Setter TargetName="toolBarThumb" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Menu -->
+    <Style TargetType="{x:Type Menu}" x:Key="menuGlobalTemplate">
+        <Setter Property="Background" Value="{StaticResource MenuBackgroundBrush}"/>
+        <Setter Property="BorderThickness" Value="0, 1, 0, 0"/>
+        <Setter Property="BorderBrush" Value="{StaticResource MenuBorderBrushBrush}"/>
+    </Style>
+
+    <Style TargetType="{x:Type MenuItem}">
+        <Setter Property="Foreground" Value="{StaticResource MenuItemForegroundBrush}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type MenuItem}">
+                    <Border x:Name="border">
+                        <Grid>
+                            <ContentPresenter Margin="6, 5" ContentSource="Header" RecognizesAccessKey="True"/>
+                            <Popup x:Name="popup" 
+                                   Placement="Bottom"
+                                   IsOpen="{TemplateBinding IsSubmenuOpen}" 
+                                   AllowsTransparency="True" 
+                                   PopupAnimation="Fade" 
+                                   MinWidth="80">
+                                <Border x:Name="subMenuBorder" SnapsToDevicePixels="True" Background="{StaticResource MenuItemBackgroundBrush}">
+                                    <StackPanel IsItemsHost="True" 
+                                            KeyboardNavigation.DirectionalNavigation="Cycle"/>
+                                </Border>
+                            </Popup>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSuspendingPopupAnimation" Value="True">
+                            <Setter TargetName="popup" Property="PopupAnimation" Value="None"/>
+                            <Setter Property="Foreground" Value="{StaticResource MenuItemHoverForegroundBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsHighlighted" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="{StaticResource MenuItemHoverBackgroundBrush}"/>
+                            <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource MenuItemHoverBorderBrush}"/>
+                            <Setter Property="Foreground" Value="{StaticResource MenuItemHoverForegroundBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{StaticResource MenuItemEnabledForegroundBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ScrollViewer -->
+    <Style TargetType="{x:Type RepeatButton}" x:Key="upRepeatButtonStyle">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RepeatButton}">
+                    <Canvas Height="18">
+                        <Polygon Fill="{StaticResource ScrollBarRepeatButtonBrush}" Points="3,15 15,15 9,3"/>
+                    </Canvas>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type RepeatButton}" x:Key="downRepeatButtonStyle">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RepeatButton}">
+                    <Canvas Height="18">
+                        <Polygon Fill="{StaticResource ScrollBarRepeatButtonBrush}" Points="3,3 9,15 15,3"/>
+                    </Canvas>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type Thumb}" x:Key="verticalScrollThumbStyle">
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="IsTabStop" Value="false" />
+        <Setter Property="Focusable" Value="false" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Thumb}">
+                    <Rectangle Width="13" Fill="{StaticResource ScrollBarThumbBrush}" RadiusX="5" RadiusY="5" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <!-- HorizontalScrollBar -->
+    <Style TargetType="{x:Type RepeatButton}" x:Key="leftRepeatButtonStyle">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RepeatButton}">
+                    <Canvas Width="18">
+                        <Polygon Fill="{StaticResource ScrollBarRepeatButtonBrush}" Points="15,3 15,15 3,9"/>
+                    </Canvas>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type RepeatButton}" x:Key="rightRepeatButtonStyle">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RepeatButton}">
+                    <Canvas Width="18">
+                        <Polygon Fill="{StaticResource ScrollBarRepeatButtonBrush}" Points="15,9 3,3 3,15"/>
+                    </Canvas>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type Thumb}" x:Key="horizontalScrollThumbStyle">
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="IsTabStop" Value="false" />
+        <Setter Property="Focusable" Value="false" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Thumb}">
+                    <Rectangle Height="13" Fill="{StaticResource ScrollBarThumbBrush}" RadiusX="5" RadiusY="5" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type ScrollBar}" x:Key="horizontalScrollBoxStyle">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ScrollBar}">
+                    <Grid Height="18">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.ColumnSpan="3" 
+                                Margin="1, 0, 1, 1"
+                                Height="15" 
+                                VerticalAlignment="Center" 
+                                Background="{StaticResource ScrollBarBackgroundBrush}" 
+                                CornerRadius="2" />
+                        <RepeatButton Grid.Column="0" 
+                          Command="ScrollBar.LineLeftCommand" 
+                          Style="{StaticResource leftRepeatButtonStyle}"/>
+                        <Track Grid.Column="1"
+                               Name="PART_Track" 
+                               Height="{TemplateBinding Width}" 
+                               VerticalAlignment="Center" 
+                               IsDirectionReversed="False" 
+                               Maximum="{TemplateBinding Maximum}" 
+                               Minimum="{TemplateBinding Minimum}"
+                               Value="{TemplateBinding Value}">
+                            <Track.Thumb>
+                                <Thumb Style="{StaticResource horizontalScrollThumbStyle}" />
+                            </Track.Thumb>
+                        </Track>
+                        <RepeatButton Grid.Column="2" 
+                                      Command="ScrollBar.LineRightCommand" 
+                                      Style="{StaticResource rightRepeatButtonStyle}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type ScrollBar}" x:Key="verticalScrollBoxStyle">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ScrollBar}">
+                    <Grid Width="18">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Border Grid.RowSpan="3" 
+                                Margin="0, 1, 1, 1"
+                                Width="15" 
+                                HorizontalAlignment="Center" 
+                                Background="{StaticResource ScrollBarBackgroundBrush}" 
+                                CornerRadius="2" />
+                        <RepeatButton Grid.Row="0" 
+                                      Command="ScrollBar.LineUpCommand" 
+                                      Style="{StaticResource upRepeatButtonStyle}"/>
+                        <Track Grid.Row="1" 
+                               Name="PART_Track" 
+                               Width="{TemplateBinding Width}" 
+                               HorizontalAlignment="Center" 
+                               IsDirectionReversed="true" 
+                               Maximum="{TemplateBinding Maximum}" 
+                               Minimum="{TemplateBinding Minimum}"
+                               Value="{TemplateBinding Value}">
+                            <Track.Thumb>
+                                <Thumb Style="{StaticResource verticalScrollThumbStyle}" />
+                            </Track.Thumb>
+                        </Track>
+                        <RepeatButton Grid.Row="2" 
+                                      Command="ScrollBar.LineDownCommand" 
+                                      Style="{StaticResource downRepeatButtonStyle}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type ScrollViewer}" x:Key="scrollViewerGlobalTemplate">
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="IsEnabled" Value="True"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ScrollViewer}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <ScrollContentPresenter Grid.Row="0" Grid.Column="0"/>
+                        <ScrollBar x:Name="PART_VerticalScrollBar" 
+                                   Grid.Column="1"                                   
+                                   Maximum="{TemplateBinding ScrollableHeight}" 
+                                   Orientation="Vertical"
+                                   Value="{TemplateBinding VerticalOffset}"
+                                   Style="{StaticResource verticalScrollBoxStyle}"
+                                   ViewportSize="{TemplateBinding ViewportHeight}"
+                                   Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"/>
+                        <ScrollBar x:Name="PART_HorizontalScrollBar" 
+                                   Grid.Row="1" 
+                                   Grid.Column="0"
+                                   Grid.ColumnSpan="2"
+                                   Maximum="{TemplateBinding ScrollableWidth}" 
+                                   Orientation="Horizontal" 
+                                   Value="{TemplateBinding HorizontalOffset}"
+                                   Style="{StaticResource horizontalScrollBoxStyle}" 
+                                   ViewportSize="{TemplateBinding ViewportWidth}" 
+                                   Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- TreeView -->
+    <Style TargetType="{x:Type TreeView}" x:Key="treeViewGlobalTemplate">
+        <Setter Property="FontFamily" Value="{StaticResource MainFont}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TreeView}">
+                    <Border x:Name="border" 
+                            Background="{StaticResource TreeViewerBackgroundBrush}"
+                            BorderBrush="{StaticResource TreeViewerBorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            SnapsToDevicePixels="True">
+                        <ScrollViewer x:Name="scrollViewer">
+                            <ItemsPresenter/>
+                        </ScrollViewer>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="border" Property="Background" Value="{StaticResource TreeViewerDisabledBackgroundBrush}"/>
+                        </Trigger>
+                        <Trigger Property="VirtualizingPanel.IsVirtualizing" Value="False">
+                            <Setter TargetName="scrollViewer" Property="CanContentScroll" Value="True"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="VirtualizingPanel.IsVirtualizing" Value="True">
+                <Setter Property="ItemsPanel">
+                    <Setter.Value>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel/>
+                        </ItemsPanelTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="{x:Type TreeViewItem}">
+        <Style.Resources>
+            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="{StaticResource selectedBorderColor}"/>
+            <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="{StaticResource notEnabledBackgroundColor}"/>
+        </Style.Resources>
+        <Setter Property="Foreground" Value="{StaticResource TreeViewerForegroundBrush}"/>
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource TreeViewerSelectedForegroundBrush}"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="{StaticResource TreeViewerDisabledForegroundBrush}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- TabControl -->
+    <Style TargetType="{x:Type TabControl}" x:Key="tabControlGlobalTemplate">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TabControl}">
+                    <Grid KeyboardNavigation.TabNavigation="Local" Width="{TemplateBinding Width}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" Background="Transparent">
+                            <TabPanel x:Name="headerPanel" 
+                                      Panel.ZIndex="1" 
+                                      HorizontalAlignment="Left"
+                                      VerticalAlignment="Center"
+                                      IsItemsHost="True"
+                                      KeyboardNavigation.TabIndex="1" 
+                                      Background="Transparent"/>
+                        </Grid>
+                        <Border x:Name="border" 
+                                Grid.Row="1" 
+                                Background="{StaticResource TabControlBackgroundBrush}"
+                                BorderBrush="{StaticResource TabControlBorderBrush}" 
+                                BorderThickness="2, 2, 2, 0"
+                                KeyboardNavigation.TabNavigation="Local" 
+                                KeyboardNavigation.DirectionalNavigation="Contained" 
+                                KeyboardNavigation.TabIndex="2">
+                            <ContentPresenter x:Name="PART_SelectedContentHost" 
+                                              Margin="4" 
+                                              ContentSource="SelectedContent"/>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type TabItem}">
+        <Setter Property="Foreground" Value="{StaticResource TabControlForegroundBrush}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TabItem}">
+                    <Grid>
+                        <Border x:Name="border"
+                            Margin="0,0,2,0"
+                            BorderThickness="1,1,1,1" 
+                            Background="{StaticResource TabControlBackgroundBrush}"                            
+                            BorderBrush="{StaticResource TabControlBorderBrush}">
+                            <ContentPresenter x:Name="ContentSite"
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Center"
+                                          ContentSource="Header"
+                                          Margin="12,2,12,2"
+                                          RecognizesAccessKey="True" />
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Trigger.Setters>
+                                <Setter TargetName="border" Property="Background" Value="{StaticResource TabControlSelectBackgroundBrush}"/>
+                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource TabControlSelectBorderBrush}"/>
+                            </Trigger.Setters>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Trigger.Setters>
+                    <Setter Property="Foreground" Value="{StaticResource TabControlSelectForegroundBrush}"/>
+                </Trigger.Setters>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 
 </ResourceDictionary>

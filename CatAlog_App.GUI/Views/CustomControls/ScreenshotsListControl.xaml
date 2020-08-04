@@ -11,7 +11,7 @@
                  DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}"
                  SelectedItem="{Binding SelectedImage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <ListBox.Style>
-                <Style TargetType="{x:Type ListBox}" BasedOn="{StaticResource listBoxTemplate}">
+                <Style TargetType="{x:Type ListBox}" BasedOn="{StaticResource listBoxGlobalTemplate}">
                     <Setter Property="ItemContainerStyle">
                         <Setter.Value>
                             <Style TargetType="{x:Type ListBoxItem}">
