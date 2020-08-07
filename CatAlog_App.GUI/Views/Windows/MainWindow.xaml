@@ -49,7 +49,7 @@
             <TreeView Name="treeView"
                       Height="300"
                       BorderThickness="1, 0, 1, 1"
-                      ItemsSource="{Binding EntitiesListForTreeView}">
+                      ItemsSource="{Binding CategoryHierarhy}">
                 <TreeView.ItemTemplate>
                     <HierarchicalDataTemplate ItemsSource="{Binding Categories}">
                         <TextBlock>
@@ -80,10 +80,10 @@
             <RadioButton GroupName="mainLBView" Margin="5" x:Name="extendedStyleRadioButton" Style="{StaticResource extendedRbStyle}"/>
         </StackPanel>
 
-        <ListBox Grid.Row="3" Grid.RowSpan="2" Grid.Column="2" Style="{StaticResource mainListBoxStyle}" ItemsSource="{Binding MainListBoxCollection}" x:Name="lb">
+        <ListBox Grid.Row="3" Grid.RowSpan="2" Grid.Column="2" Style="{StaticResource mainListBoxStyle}" ItemsSource="{Binding DisplayedCollection}" x:Name="lb">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
-                    <i:InvokeCommandAction Command="{Binding LBSelectionChanged}" CommandParameter="{Binding ElementName=lb, Path=SelectedItem}"/>
+                    <i:InvokeCommandAction Command="{Binding ListBoxSelectionChanged}" CommandParameter="{Binding ElementName=lb, Path=SelectedItem}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </ListBox>
@@ -99,7 +99,7 @@
                       Background="Transparent" 
                       BorderBrush="Transparent"/>
 
-        <Grid Grid.Row="2" Grid.RowSpan="2" Grid.Column="4" DataContext="{Binding Model, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+        <Grid Grid.Row="2" Grid.RowSpan="2" Grid.Column="4" DataContext="{Binding MainInfoModel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
@@ -121,31 +121,31 @@
                                   HorizontalContentAlignment="Center"
                                   VerticalAlignment="Top"/>
             <StackPanel Grid.Row="2" Grid.RowSpan="2" Grid.Column="1" Margin="5, 10, 0, 0">
-                <Controls:TextFieldWithTitleControl TitleName="Name:" Text="{Binding MainData.Name.ThirdName}" />
-                <Controls:TextFieldWithTitleControl TitleName="Name:" Text="{Binding MainData.Name.FourthName}" />
-                <Controls:TextFieldWithTitleControl TitleName="Company:" Text="{Binding AdditionalyData.Companies, Converter={StaticResource listToStringConverter}}"/>
-                <Controls:TextFieldWithTitleControl TitleName="Release date:" Text="{Binding MainData.ReleaseDate}"/>
-                <Controls:TextFieldWithTitleControl TitleName="Duration:" Text="{Binding MainData.Duration}"/>
-                <Controls:TextFieldWithTitleControl TitleName="Type:" Text="{Binding SeriesData, Converter={StaticResource serialTypeConverter}}"/>
-                <Controls:TextFieldWithTitleControl TitleName="Country:" Text="{Binding AdditionalyData.Countries, Converter={StaticResource listToStringConverter}}"/>
-                <Controls:TextFieldWithTitleControl TitleName="Genre:" Text="{Binding AdditionalyData.Genres, Converter={StaticResource listToStringConverter}}"/>
-                <Controls:TextFieldWithTitleControl TitleName="Producer:" Text="{Binding AdditionalyData.Producers, Converter={StaticResource listToStringConverter}}"/>
-                <Controls:TextFieldWithTitleControl TitleName="Screenwriters:" Text="{Binding AdditionalyData.Screenwriters, Converter={StaticResource listToStringConverter}}"/>
-                <Controls:TextFieldWithTitleControl TitleName="Actors:" Text="{Binding AdditionalyData.Actors, Converter={StaticResource listToStringConverter}}"/>
+                <Controls:TextFieldWithTitleControl FieldName="Name:" Text="{Binding MainData.Name.ThirdName}" />
+                <Controls:TextFieldWithTitleControl FieldName="Name:" Text="{Binding MainData.Name.FourthName}" />
+                <Controls:TextFieldWithTitleControl FieldName="Company:" Text="{Binding AdditionallyData.Companies, Converter={StaticResource listToStringConverter}}"/>
+                <Controls:TextFieldWithTitleControl FieldName="Release date:" Text="{Binding MainData.ReleaseDate}"/>
+                <Controls:TextFieldWithTitleControl FieldName="Duration:" Text="{Binding MainData.Duration}"/>
+                <Controls:TextFieldWithTitleControl FieldName="Type:" Text="{Binding SeriesData, Converter={StaticResource serialTypeConverter}}"/>
+                <Controls:TextFieldWithTitleControl FieldName="Country:" Text="{Binding AdditionallyData.Countries, Converter={StaticResource listToStringConverter}}"/>
+                <Controls:TextFieldWithTitleControl FieldName="Genre:" Text="{Binding AdditionallyData.Genres, Converter={StaticResource listToStringConverter}}"/>
+                <Controls:TextFieldWithTitleControl FieldName="Producer:" Text="{Binding AdditionallyData.Producers, Converter={StaticResource listToStringConverter}}"/>
+                <Controls:TextFieldWithTitleControl FieldName="Screenwriters:" Text="{Binding AdditionallyData.Screenwriters, Converter={StaticResource listToStringConverter}}"/>
+                <Controls:TextFieldWithTitleControl FieldName="Actors:" Text="{Binding AdditionallyData.Actors, Converter={StaticResource listToStringConverter}}"/>
             </StackPanel>
         </Grid>
 
-        <TabControl Grid.Row="4" Grid.Column="4" x:Name="tab" DataContext="{Binding Model}" Margin="0, 0, 1, 0">
+        <TabControl Grid.Row="4" Grid.Column="4" x:Name="tab" DataContext="{Binding MainInfoModel}" Margin="0, 0, 1, 0">
             <TabItem Header="Description" IsSelected="True" Visibility="{Binding ElementName=descriptionTB, Path=Text, Converter={StaticResource visibilityConverter}}">
                 <TextBlock Text="{Binding MainData.Description}" x:Name="descriptionTB" TextWrapping="Wrap" Padding="10" />
             </TabItem>
             <TabItem Header="Series" Visibility="{Binding ElementName=seriesTB, Path=Text, Converter={StaticResource visibilityConverter}}">
-                <TextBox IsReadOnly="True" x:Name="seriesTB" Padding="10, 5, 5, 5" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" Text="{Binding SeriesData.Series, Converter={StaticResource episodeNameConverter}}"/>
+                <TextBox IsReadOnly="True" x:Name="seriesTB" Padding="10, 5, 5, 5" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" Text="{Binding SerialData.Episodes, Converter={StaticResource episodeNameConverter}}"/>
             </TabItem>
-            <TabItem Header="Screenshots" >
-                <!--<Controls:ScreenshotsListControl DataList="{Binding MainData.Screenshots}" PlacementTarget="{Binding ElementName=window}"/>-->
+            <TabItem Header="Screenshots" Visibility="{Binding ElementName=scr, Path=DataList, Converter={StaticResource visibilityConverter}}">
+                <Controls:ScreenshotsListControl DataList="{Binding MainData.Screenshots}" PlacementTarget="{Binding ElementName=window}" x:Name="scr"/>
             </TabItem>
-            <TabItem Header="Media">
+            <TabItem Header="Media" >
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
@@ -157,15 +157,15 @@
                     </StackPanel>
                     <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                         <StackPanel Orientation="Vertical">
-                            <ListBox ItemsSource="{Binding VideoData}" Style="{StaticResource mediaDataDysplayngStyle}"/>
-                            <ListBox ItemsSource="{Binding AudioData}" Style="{StaticResource mediaDataDysplayngStyle}"/>
-                            <ListBox ItemsSource="{Binding SubtitleData}" Style="{StaticResource mediaDataDysplayngStyle}"/>
+                            <ListBox ItemsSource="{Binding MediaData.VideoData}" Style="{StaticResource mediaDataDysplayngStyle}"/>
+                            <ListBox ItemsSource="{Binding MediaData.AudioData}" Style="{StaticResource mediaDataDysplayngStyle}"/>
+                            <ListBox ItemsSource="{Binding MediaData.SubtitleData}" Style="{StaticResource mediaDataDysplayngStyle}"/>
                         </StackPanel>
                     </ScrollViewer>
                 </Grid>
             </TabItem>
             <TabItem Header="Note" Visibility="{Binding ElementName=noteView, Path=Text, Converter={StaticResource visibilityConverter}}">
-                <TextBlock Text="{Binding AdditionalyData.Note}" x:Name="noteView" Padding="10"/>
+                <TextBlock Text="{Binding AdditionallyData.Note}" x:Name="noteView" Padding="10"/>
             </TabItem>
         </TabControl>
 

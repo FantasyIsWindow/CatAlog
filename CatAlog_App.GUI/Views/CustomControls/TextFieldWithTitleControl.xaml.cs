@@ -5,14 +5,14 @@ namespace CatAlog_App.GUI.Views.CustomControls
 {
     public partial class TextFieldWithTitleControl : UserControl
     {
-        public static DependencyProperty TitleNameProperty;
+        public static DependencyProperty FieldNameProperty;
 
         public static DependencyProperty TextProperty;
 
-        public string TitleName
+        public string FieldName
         {
-            get => (string)GetValue(TitleNameProperty);
-            set => SetValue(TitleNameProperty, value);
+            get => (string)GetValue(FieldNameProperty);
+            set => SetValue(FieldNameProperty, value);
         }
 
         public string Text
@@ -28,7 +28,7 @@ namespace CatAlog_App.GUI.Views.CustomControls
 
         static TextFieldWithTitleControl()
         {
-            TitleNameProperty = DependencyProperty.Register("TitleName", typeof(string), typeof(TextFieldWithTitleControl), new FrameworkPropertyMetadata("", new PropertyChangedCallback(SetTitleName)), new ValidateValueCallback(ValidateReceivedData));
+            FieldNameProperty = DependencyProperty.Register("FieldName", typeof(string), typeof(TextFieldWithTitleControl), new FrameworkPropertyMetadata("", new PropertyChangedCallback(SetTitleName)), new ValidateValueCallback(ValidateReceivedData));
             TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(TextFieldWithTitleControl), new FrameworkPropertyMetadata("", new PropertyChangedCallback(SetText)), new ValidateValueCallback(ValidateReceivedData));
         }
 
@@ -40,7 +40,7 @@ namespace CatAlog_App.GUI.Views.CustomControls
 
         private void SetText() => textBox.Text = Text;
 
-        private void SetTitle() => label.Content = TitleName;
+        private void SetTitle() => label.Content = FieldName;
 
         private static bool ValidateReceivedData(object value) =>
             value != null ? true : false;

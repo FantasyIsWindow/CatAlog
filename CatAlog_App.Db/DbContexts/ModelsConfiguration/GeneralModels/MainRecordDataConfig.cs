@@ -1,6 +1,8 @@
-﻿using CatAlog_App.Db.DbContexts.DbModels.GeneralModels;
+﻿using CatAlog_App.ConfigurationWorker;
+using CatAlog_App.Db.DbContexts.DbModels.GeneralModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.IO;
 
 namespace CatAlog_App.Db.DbContexts.ModelsConfiguration.GeneralModels
 {
@@ -42,6 +44,16 @@ namespace CatAlog_App.Db.DbContexts.ModelsConfiguration.GeneralModels
                              "предстоит преодолеть свои препятствия: одна будет сражаться за право продолжить свое путешествие, другой столкнется c соперником из прошлого - и все они должны " +
                              "будут объединиться, чтобы спасти остров от сильнейшего столкновения трех таинственных и могущественных легендарных покемонов.";
 
+            SettingsManager settings = new SettingsManager();
+            string path = Path.Combine(settings.Settings.DbFolderPath, settings.Settings.GraphicDataFolderName);
+
+            string _01 = Path.Combine(path, "Terminator 2", "title.png");
+            string _02 = Path.Combine(path, "Inferno", "title.jpg");
+            string _03 = Path.Combine(path, "Little Monsters", "title.jpg");
+            string _04 = Path.Combine(path, "Batman - Hush", "title.jpg");
+            string _05 = Path.Combine(path, "Black fox", "title.jpg");
+            string _06 = Path.Combine(path, "Pokemon, Black and White - Adventures in Unova", "title.jpg");
+
             builder.HasOne(c => c.Category).WithMany(m => m.MainRecordsData).HasForeignKey(k => k.CategoryId).OnDelete(DeleteBehavior.Cascade);
             builder.HasOne(n => n.Name).WithOne(m => m.MainRecordData).HasForeignKey<NameData>(k => k.MainRecordDataId).OnDelete(DeleteBehavior.Cascade);
             builder.HasData
@@ -54,7 +66,7 @@ namespace CatAlog_App.Db.DbContexts.ModelsConfiguration.GeneralModels
                             Rating = 8.5f,
                             Description = Terminator,
                             Duration = "2, 17, 08",
-                            TitleImage = @"L:\ExamProject\CatAlog\CatAlog.GUI\bin\Debug\netcoreapp3.1\Scrinshots\Terminator 2\title.png",
+                            TitleImage = _01,
                             ReleaseDate = "1991, 1, 1",
                             CategoryId = 1
                         },
@@ -64,7 +76,7 @@ namespace CatAlog_App.Db.DbContexts.ModelsConfiguration.GeneralModels
                             Rating = 7.2f,
                             Description = Inferno,
                             Duration = "1, 45, 22",
-                            TitleImage = @"L:\ExamProject\CatAlog\CatAlog.GUI\bin\Debug\netcoreapp3.1\Scrinshots\Inferno\title.jpg",
+                            TitleImage = _02,
                             ReleaseDate = "1999, 1, 1",
                             CategoryId = 1
                         },
@@ -74,7 +86,7 @@ namespace CatAlog_App.Db.DbContexts.ModelsConfiguration.GeneralModels
                             Rating = 7.5f,
                             Description = LittleMonsters,
                             Duration = "1, 33, 43",
-                            TitleImage = @"L:\ExamProject\CatAlog\CatAlog.GUI\bin\Debug\netcoreapp3.1\Scrinshots\Little Monsters\title.jpg",
+                            TitleImage = _03,
                             ReleaseDate = "2019, 1, 1",
                             CategoryId = 1
                         },
@@ -84,7 +96,7 @@ namespace CatAlog_App.Db.DbContexts.ModelsConfiguration.GeneralModels
                             Rating = 9.3f,
                             Description = Batman,
                             Duration = "1, 22, 06",
-                            TitleImage = @"L:\ExamProject\CatAlog\CatAlog.GUI\bin\Debug\netcoreapp3.1\Scrinshots\Batman - Hush\title.jpg",
+                            TitleImage = _04,
                             ReleaseDate = "2019, 1, 1",
                             CategoryId = 2
                         },
@@ -94,7 +106,7 @@ namespace CatAlog_App.Db.DbContexts.ModelsConfiguration.GeneralModels
                             Rating = 9.4f,
                             Description = BlackFox,
                             Duration = "1, 30, 00",
-                            TitleImage = @"L:\ExamProject\CatAlog\CatAlog.GUI\bin\Debug\netcoreapp3.1\Scrinshots\Black fox\title.jpg",
+                            TitleImage = _05,
                             ReleaseDate = "2019, 10, 5",
                             CategoryId = 2
                         },
@@ -104,7 +116,7 @@ namespace CatAlog_App.Db.DbContexts.ModelsConfiguration.GeneralModels
                             Rating = 9.8f,
                             Description = Pokemon,
                             Duration = "0, 21, 00",
-                            TitleImage = @"L:\ExamProject\CatAlog\CatAlog.GUI\bin\Debug\netcoreapp3.1\Scrinshots\Pokemon, Black and White - Adventures in Unova\title.jpg",
+                            TitleImage = _06,
                             ReleaseDate = "2013, 1, 1",
                             CategoryId = 3
                         }

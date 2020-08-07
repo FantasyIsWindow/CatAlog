@@ -15,7 +15,7 @@ namespace CatAlog_App.GUI.Infrastructure.Commands
 
         private readonly Predicate<object> _canExecute;
 
-        public RellayCommand(Action<object> execute, Predicate<object> canExecute)
+        public RellayCommand(Action<object> execute, Predicate<object> canExecute = null)
         {
             _execute = execute ?? throw new Exception("Execute is null!!!");
             _canExecute = canExecute;

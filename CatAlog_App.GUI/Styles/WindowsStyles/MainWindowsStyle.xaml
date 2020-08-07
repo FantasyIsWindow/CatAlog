@@ -149,26 +149,10 @@
                               X2="{TemplateBinding ActualWidth}" 
                               Y1="1" 
                               Y2="{TemplateBinding ActualHeight}"/>
-                        <Rectangle x:Name="TopLeftSide"
-                                   MouseDown="OnTopLeftSide"
-                                   Cursor="SizeNWSE"
-                                   VerticalAlignment="Top"
-                                   HorizontalAlignment="Left"/>
-                        <Rectangle x:Name="TopRightSide"
-                                   MouseDown="OnTopRightSide"
-                                   Cursor="SizeNESW"
-                                   VerticalAlignment="Top"
-                                   HorizontalAlignment="Right"/>
-                        <Rectangle x:Name="BottomLeftSide"
-                                   MouseDown="OnBottomLeftSide"
-                                   Cursor="SizeNESW"
-                                   VerticalAlignment="Bottom"
-                                   HorizontalAlignment="Left"/>
-                        <Rectangle x:Name="BottomRightSide"
-                                   MouseDown="OnBottomRightSide"
-                                   Cursor="SizeNWSE"
-                                   VerticalAlignment="Bottom"
-                                   HorizontalAlignment="Right"/>
+                        <Rectangle x:Name="TopLeftSide" MouseDown="OnTopLeftSide" Cursor="SizeNWSE" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                        <Rectangle x:Name="TopRightSide" MouseDown="OnTopRightSide" Cursor="SizeNESW" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+                        <Rectangle x:Name="BottomLeftSide" MouseDown="OnBottomLeftSide" Cursor="SizeNESW" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                        <Rectangle x:Name="BottomRightSide" MouseDown="OnBottomRightSide" Cursor="SizeNWSE" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="WindowState" Value="Maximized">

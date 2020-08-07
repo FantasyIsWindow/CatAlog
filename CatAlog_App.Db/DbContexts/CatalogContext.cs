@@ -42,6 +42,7 @@ namespace CatAlog_App.Db.DbContexts
 
         public CatalogContext()
         {
+            //Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 

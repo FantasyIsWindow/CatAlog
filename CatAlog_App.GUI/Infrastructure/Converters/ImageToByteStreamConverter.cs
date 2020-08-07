@@ -16,8 +16,8 @@ namespace CatAlog_App.GUI.Infrastructure.Converters
                 byte[] data = File.ReadAllBytes(str);
                 BitmapImage source = new BitmapImage();
                 source.BeginInit();
-                source.StreamSource = new MemoryStream(data);
-                source.EndInit();
+                source.StreamSource = new MemoryStream(data);                
+                source.EndInit();               
                 ImageSource imageSource = source;
 
                 return imageSource;

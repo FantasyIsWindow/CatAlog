@@ -6,12 +6,10 @@ namespace CatAlog_App.Db.DbContexts.DbModels.Relationship
     {
         public int Id { get; set; }
 
-        public int AdditionallyInfoId { get; set; }
-
+        public int AdditionallyDataId { get; set; }
         public AdditionallyData AdditionallyData { get; set; }
 
         public int ScreenwriterId { get; set; }
-
         public Screenwriter Screenwriter { get; set; }
     }
 }

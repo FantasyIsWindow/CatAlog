@@ -9,7 +9,14 @@ namespace CatAlog_App.GUI.Infrastructure.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value != null ? Visibility.Visible : Visibility.Collapsed;
+            if (value is string str)
+            {
+                return string.IsNullOrEmpty(str) ? Visibility.Collapsed : Visibility.Visible;
+            }
+            else
+            {
+                return value != null ? Visibility.Visible : Visibility.Collapsed;
+            }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

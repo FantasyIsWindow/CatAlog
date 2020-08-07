@@ -9,33 +9,29 @@ namespace CatAlog_App.GUI.Infrastructure.Converters
 {
     public class ListDataToStringConverter : IValueConverter
     {
-        //    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        //    {
-        //        if (value != null && value is ObservableCollection<PairModel> list)
-        //        {
-        //            StringBuilder builder = new StringBuilder();
-        //            foreach (var item in list)
-        //            {
-        //                builder.Append(item.Name + ", ");
-        //            }
-        //            return builder;
-        //        }
-
-        //        return null;
-        //    }
-
-        //    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        //    {
-        //        return null;
-        //    }
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            if (value != null && value is ObservableCollection<PairModel> list)
+            {
+                StringBuilder builder = new StringBuilder();
+                foreach (var item in list)
+                {                    
+                    builder.Append(item.Name + ", ");
+                }
+
+                if (builder.Length != 0)
+                {
+                    builder.Remove(builder.Length - 2, 2);
+                }
+                return builder;
+            }
+
+            return null;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            return null;
         }
     }
 }

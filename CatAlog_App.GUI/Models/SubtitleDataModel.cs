@@ -1,77 +1,79 @@
-﻿namespace CatAlog_App.GUI.Models
+﻿using CatAlog_App.Db.DtoModels;
+
+namespace CatAlog_App.GUI.Models
 {
-    //public class SubtitleDataModel : ModelBase
-    //{
-    //    internal DtoSubtitleDataModel _subtitleModel;
+    public class SubtitleDataModel : ModelBase
+    {
+        internal DtoSubtitleData _subtitleModel;
 
-    //    internal int _number;
+        internal short _number;
 
-    //    public SubtitleDataModel(DtoSubtitleDataModel subtitleModel)
-    //    {
-    //        _subtitleModel = subtitleModel;
-    //    }
+        public SubtitleDataModel(DtoSubtitleData subtitleModel)
+        {
+            _subtitleModel = subtitleModel;
+        }
 
-    //    public SubtitleDataModel()
-    //    {
-    //        _subtitleModel = new DtoSubtitleDataModel();
-    //    }
+        public SubtitleDataModel()
+        {
+            _subtitleModel = new DtoSubtitleData();
+        }
 
-    //    public int Id
-    //    {
-    //        get => _subtitleModel.Id;
-    //        set
-    //        {
-    //            _subtitleModel.Id = value;
-    //            OnPropertyChanged("Id");
-    //        }
-    //    }
+        public int Id
+        {
+            get => _subtitleModel.Id;
+            set
+            {
+                _subtitleModel.Id = value;
+                OnPropertyChanged("Id");
+            }
+        }
 
-    //    public int Number
-    //    {
-    //        get => _number;
-    //        set => SetProperty(ref _number, value, "Number");
-    //    }
+        public short Number
+        {
+            get => _number;
+            set => SetProperty(ref _number, value, "Number");
+        }
 
-    //    public string Language
-    //    {
-    //        get => _subtitleModel.Language;
-    //        set
-    //        {
-    //            _subtitleModel.Language = value;
-    //            OnPropertyChanged("Language");
-    //        }
-    //    }
+        public string Language
+        {
+            get => _subtitleModel.Language;
+            set
+            {
+                _subtitleModel.Language = value;
+                OnPropertyChanged("Language");
+            }
+        }
 
-    //    public string Author
-    //    {
-    //        get => _subtitleModel.Author;
-    //        set
-    //        {
-    //            _subtitleModel.Author = value;
-    //            OnPropertyChanged("Author");
-    //        }
-    //    }
+        public string Author
+        {
+            get => _subtitleModel.Author;
+            set
+            {
+                _subtitleModel.Author = value;
+                OnPropertyChanged("Author");
+            }
+        }
 
-    //    public string SubtitleFormat
-    //    {
-    //        get => _subtitleModel.SubtitleFormat;
-    //        set
-    //        {
-    //            _subtitleModel.SubtitleFormat = value;
-    //            OnPropertyChanged("SubtitleFormat");
-    //        }
-    //    }
+        public string SubtitleFormat
+        {
+            get => _subtitleModel.SubtitleFormat;
+            set
+            {
+                _subtitleModel.SubtitleFormat = value;
+                OnPropertyChanged("SubtitleFormat");
+            }
+        }
 
-    //    public string Note
-    //    {
-    //        get => _subtitleModel.Note;
-    //        set
-    //        {
-    //            _subtitleModel.Note = value;
-    //            OnPropertyChanged("Note");
-    //        }
-    //    }
+        public string Note
+        {
+            get => _subtitleModel.Note;
+            set
+            {
+                _subtitleModel.Note = value;
+                OnPropertyChanged("Note");
+            }
+        }
 
-    //    internal DtoSubtitleDataModel GetModel() => _subtitleModel;
-    //}
+        internal DtoSubtitleData GetModel() => _subtitleModel;
+    }
 }

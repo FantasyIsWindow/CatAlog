@@ -10,11 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DtoModels\" />
-    <Folder Include="Repositories\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\CatAlog_App.ConfigurationWorker\CatAlog_App.ConfigurationWorker.csproj" />
   </ItemGroup>
 
