@@ -2,7 +2,7 @@
 {
     public class DtoAudioDataModel
     {
-        public int Id { get; set; }
+        public uint Id { get; set; }
 
         public string AudioFormat { get; set; }
 

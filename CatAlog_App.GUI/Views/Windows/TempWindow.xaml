@@ -1,0 +1,8 @@
+﻿<Window x:Class="CatAlog_App.GUI.Views.Windows.TempWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        WindowStartupLocation="CenterOwner"
+        Title="{Binding Title}"
+        Style="{StaticResource tempWindowStyle}">
+    <ContentPresenter Content="{Binding }"/>
+</Window>

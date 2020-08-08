@@ -4,7 +4,7 @@ namespace CatAlog_App.Db.DbContexts.DbModels.GeneralModels
 {
     public class Template
     {
-        public int Id { get; set; }
+        public uint Id { get; set; }
 
         public string Name { get; set; }
 

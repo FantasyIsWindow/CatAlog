@@ -4,7 +4,7 @@ namespace CatAlog_App.Db.DtoModels
 {
     public class DtoMainRecordModel
     {
-        public int Id { get; set; }
+        public uint Id { get; set; }
 
         public string TitleImage { get; set; }
 
@@ -27,7 +27,7 @@ namespace CatAlog_App.Db.DtoModels
 
     public class DtoNameModel
     {
-        public int Id { get; set; }
+        public uint Id { get; set; }
 
         public string FirstName { get; set; }
 
@@ -40,7 +40,7 @@ namespace CatAlog_App.Db.DtoModels
 
     public class DtoScreenshotModel
     {
-        public int Id { get; set; }
+        public uint Id { get; set; }
 
         public string Path { get; set; }
     }

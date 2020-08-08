@@ -4,14 +4,12 @@ namespace CatAlog_App.Db.DbContexts.DbModels.Relationship
 {
     public class AdditionallyData_Genre
     {
-        public int Id { get; set; }
+        public uint Id { get; set; }
 
-        public int AdditionallyDataId { get; set; }
-
+        public uint AdditionallyDataId { get; set; }
         public AdditionallyData AdditionallyData { get; set; }
 
-        public int GenreId { get; set; }
-
+        public uint GenreId { get; set; }
         public Genre Genre { get; set; }
     }
 }

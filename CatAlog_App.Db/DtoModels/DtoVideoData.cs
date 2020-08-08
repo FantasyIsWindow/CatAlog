@@ -2,7 +2,7 @@
 {
     public class DtoVideoData
     {
-        public int Id { get; set; }
+        public uint Id { get; set; }
 
         public string VideoQuality { get; set; }
 
@@ -10,9 +10,9 @@
 
         public string Relation { get; set; }
 
-        public int ResolutionHeigth { get; set; }
+        public ushort ResolutionHeigth { get; set; }
 
-        public int ResolutionWidth { get; set; }
+        public ushort ResolutionWidth { get; set; }
 
         public float? FrameRate { get; set; }
 

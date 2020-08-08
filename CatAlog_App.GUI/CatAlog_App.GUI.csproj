@@ -16,8 +16,4 @@
     <ProjectReference Include="..\CatAlog_App.Db\CatAlog_App.Db.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\ViewControls\" />
-  </ItemGroup>
-
 </Project>

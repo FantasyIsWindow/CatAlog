@@ -5,13 +5,13 @@ namespace CatAlog_App.Db.DbContexts.DbModels.GeneralModels
 {
     public class AdditionallyData
     {
-        public int Id { get; set; }
+        public uint Id { get; set; }
 
         public string ReleaseAuthor { get; set; }
 
         public string Note { get; set; }
 
-        public int MainRecordDataId { get; set; }
+        public uint MainRecordDataId { get; set; }
         public MainRecordData MainRecordData { get; set; }
 
         public IEnumerable<AdditionallyData_Actor> AdditionallyData_Actors { get; set; }

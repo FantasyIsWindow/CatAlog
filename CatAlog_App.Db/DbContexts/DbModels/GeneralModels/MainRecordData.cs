@@ -5,11 +5,11 @@ namespace CatAlog_App.Db.DbContexts.DbModels.GeneralModels
 {
     public class MainRecordData
     {
-        public int Id { get; set; }
+        public uint Id { get; set; }
 
         public string TitleImage { get; set; }
 
-        public int CategoryId { get; set; }
+        public uint CategoryId { get; set; }
         public Category Category { get; set; }
 
         public NameData Name { get; set; }

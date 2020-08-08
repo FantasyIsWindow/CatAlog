@@ -1,9 +1,11 @@
 ﻿<Window x:Class="CatAlog_App.GUI.Views.Windows.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:Converters="clr-namespace:CatAlog_App.GUI.Infrastructure.Converters"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:Converters="clr-namespace:CatAlog_App.GUI.Infrastructure.Converters"        
         xmlns:Controls="clr-namespace:CatAlog_App.GUI.Views.CustomControls"
+        xmlns:ViewModels="clr-namespace:CatAlog_App.GUI.ViewModels"
+        xmlns:ViewControls="clr-namespace:CatAlog_App.GUI.Views.ViewControls"
         x:Name="window"
         Title="CatAlog" 
         WindowStartupLocation="CenterScreen"
@@ -40,7 +42,7 @@
         </Menu>
 
         <ToolBar Grid.Row="1" Grid.ColumnSpan="5">
-            <Button Margin="5, 2, 0, 2" Padding="3, 3, 1, 1" Command="{Binding OpenViewForNewRecord}" Style="{StaticResource addNewRecordBtnStyle}"/>
+            <Button Margin="5, 2, 0, 2" Padding="3, 3, 1, 1" Command="{Binding OpenTemplateSelectionView}" Style="{StaticResource addNewRecordBtnStyle}"/>
             <Button Margin="5, 2, 0, 2" Padding="5, 3, 1, 1" Command="{Binding UpdateSelectedRecord}" CommandParameter="{Binding ElementName=lb, Path=SelectedItem}" Style="{StaticResource updateRecordBtnStyle}"/>
             <Button Margin="5, 2, 0, 2" Padding="3, 3, 1, 1" Command="{Binding RemovieSelectedRecord}" CommandParameter="{Binding ElementName=lb, Path=SelectedItem}" Style="{StaticResource deleteRecordBtnStyle}"/>
         </ToolBar>
@@ -126,7 +128,7 @@
                 <Controls:TextFieldWithTitleControl FieldName="Company:" Text="{Binding AdditionallyData.Companies, Converter={StaticResource listToStringConverter}}"/>
                 <Controls:TextFieldWithTitleControl FieldName="Release date:" Text="{Binding MainData.ReleaseDate}"/>
                 <Controls:TextFieldWithTitleControl FieldName="Duration:" Text="{Binding MainData.Duration}"/>
-                <Controls:TextFieldWithTitleControl FieldName="Type:" Text="{Binding SeriesData, Converter={StaticResource serialTypeConverter}}"/>
+                <Controls:TextFieldWithTitleControl FieldName="Type:" Text="{Binding SerialData, Converter={StaticResource serialTypeConverter}}"/>
                 <Controls:TextFieldWithTitleControl FieldName="Country:" Text="{Binding AdditionallyData.Countries, Converter={StaticResource listToStringConverter}}"/>
                 <Controls:TextFieldWithTitleControl FieldName="Genre:" Text="{Binding AdditionallyData.Genres, Converter={StaticResource listToStringConverter}}"/>
                 <Controls:TextFieldWithTitleControl FieldName="Producer:" Text="{Binding AdditionallyData.Producers, Converter={StaticResource listToStringConverter}}"/>
@@ -173,24 +175,24 @@
             <Label Content="Hi"/>
         </StatusBar>
 
-        <!--<Border Grid.Row="1" 
+        <Border Grid.Row="1" 
                 Grid.RowSpan="5" 
                 Grid.ColumnSpan="5" 
                 Background="#3F000000" 
                 Visibility="{Binding ElementName=presenter, Path=Content, Converter={StaticResource visibilityConverter}}">
-            <ContentPresenter x:Name="presenter" Content="{Binding CurrentPageContent}">
+            <ContentPresenter x:Name="presenter" Content="{Binding ViewContent}">
                 <ContentPresenter.Resources>
-                    <DataTemplate DataType="{x:Type ViewModels:MessageBoxVM}">
+                    <!--<DataTemplate DataType="{x:Type ViewModels:MessageBoxVM}">
                         <Views:MessageBoxView/>
+                    </DataTemplate>-->
+                    <DataTemplate DataType="{x:Type ViewModels:TemplateSelectionVCModel}">
+                        <ViewControls:TemplateSelectionViewControl/>
                     </DataTemplate>
-                    <DataTemplate DataType="{x:Type ViewModels:RecordTemplateSelectVM}">
-                        <Views:RecordTemplateSelectView/>
-                    </DataTemplate>
-                    <DataTemplate DataType="{x:Type ViewModels:DbInfoBoxVM}">
+                    <!--<DataTemplate DataType="{x:Type ViewModels:DbInfoBoxVM}">
                         <Views:DbInfoBox/>
-                    </DataTemplate>
+                    </DataTemplate>-->
                 </ContentPresenter.Resources>
             </ContentPresenter>
-        </Border>-->
+        </Border>
     </Grid>
 </Window>

@@ -4,9 +4,9 @@ namespace CatAlog_App.Db.DbContexts.DbModels.VideoModels
 {
     public class VideoData
     {
-        public int Id { get; set; }
+        public uint Id { get; set; }
 
-        public int MediaId { get; set; }
+        public uint MediaId { get; set; }
         public Media Media { get; set; }
 
         public string VideoQuality { get; set; }
@@ -15,9 +15,9 @@ namespace CatAlog_App.Db.DbContexts.DbModels.VideoModels
 
         public string Relation { get; set; }
 
-        public int ResolutionHeigth { get; set; }
+        public ushort ResolutionHeigth { get; set; }
 
-        public int ResolutionWidth { get; set; }
+        public ushort ResolutionWidth { get; set; }
 
         public float? FrameRate { get; set; }
 

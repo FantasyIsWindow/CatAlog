@@ -26,7 +26,7 @@ namespace CatAlog_App.GUI.Models
             _episodes = new ObservableCollection<EpisodeModel>();
         }
 
-        public int Id
+        public uint Id
         {
             get => _serialModel.Id;
             set
@@ -42,7 +42,7 @@ namespace CatAlog_App.GUI.Models
             set => _episodes = value;
         }
 
-        public int? SeasonNumber
+        public byte? SeasonNumber
         {
             get => _serialModel.SeasonNumber;
             set
@@ -62,7 +62,7 @@ namespace CatAlog_App.GUI.Models
             }
         }
 
-        public int? CountSpecials
+        public byte? CountSpecials
         {
             get => _serialModel.CountSpecials;
             set
@@ -107,7 +107,7 @@ namespace CatAlog_App.GUI.Models
             _episodeModel = new DtoEpisode();
         }
 
-        public int Id
+        public uint Id
         {
             get => _episodeModel.Id;
             set
@@ -117,7 +117,7 @@ namespace CatAlog_App.GUI.Models
             }
         }
 
-        public string Number
+        public ushort Number
         {
             get => _episodeModel.Number;
             set

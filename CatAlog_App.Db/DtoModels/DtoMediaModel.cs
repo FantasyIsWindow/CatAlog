@@ -4,7 +4,7 @@ namespace CatAlog_App.Db.DtoModels
 {
     public class DtoMediaModel
     {
-        public int Id { get; set; }
+        public uint Id { get; set; }
 
         public float? Size { get; set; }
 

@@ -16,7 +16,7 @@ namespace CatAlog_App.GUI.Models
             _pairModel = new DtoPairModel();
         }
 
-        public int Id
+        public uint Id
         {
             get => _pairModel.Id;
             set

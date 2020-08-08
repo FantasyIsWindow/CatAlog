@@ -6,7 +6,7 @@ namespace CatAlog_App.GUI.Models
     {
         internal DtoVideoData _videoModel;
 
-        private short _number;
+        private byte _number;
 
         public VideoDataModel(DtoVideoData videoModel)
         {
@@ -18,7 +18,7 @@ namespace CatAlog_App.GUI.Models
             _videoModel = new DtoVideoData();
         }
 
-        public int Id
+        public uint Id
         {
             get => _videoModel.Id;
             set
@@ -28,7 +28,7 @@ namespace CatAlog_App.GUI.Models
             }
         }
 
-        public short Number
+        public byte Number
         {
             get => _number;
             set => SetProperty(ref _number, value, "Number");
@@ -64,7 +64,7 @@ namespace CatAlog_App.GUI.Models
             }
         }
 
-        public int HeigthR
+        public ushort HeigthR
         {
             get => _videoModel.ResolutionHeigth;
             set
@@ -74,7 +74,7 @@ namespace CatAlog_App.GUI.Models
             }
         }
 
-        public int WidthR
+        public ushort WidthR
         {
             get => _videoModel.ResolutionWidth;
             set

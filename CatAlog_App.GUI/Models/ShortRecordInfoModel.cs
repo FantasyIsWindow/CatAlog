@@ -11,7 +11,7 @@ namespace CatAlog_App.GUI.Models
             _model = model;
         }
 
-        public int Id
+        public uint Id
         {
             get => _model.Id;
         }

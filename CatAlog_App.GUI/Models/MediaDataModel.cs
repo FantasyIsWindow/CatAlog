@@ -18,7 +18,7 @@ namespace CatAlog_App.GUI.Models
         {
             _mediaModel = mediaModel;
 
-            short number = 0;
+            byte number = 0;
             _videoData = new ObservableCollection<VideoDataModel>();
             mediaModel.VideoData.ForEach(v => _videoData.Add(new VideoDataModel(v) { Number = ++number }));
 
@@ -36,7 +36,7 @@ namespace CatAlog_App.GUI.Models
             _mediaModel = new DtoMediaModel();
         }
 
-        public int Id
+        public uint Id
         {
             get => _mediaModel.Id;
             set

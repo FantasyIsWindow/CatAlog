@@ -1,0 +1,32 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style TargetType="{x:Type UserControl}" BasedOn="{StaticResource viewsControlTemplate}" x:Key="templateSelectionCVStyle">
+        <Style.Resources>
+            <Style TargetType="{x:Type Label}" BasedOn="{StaticResource labelGlobalTemplate}"/>
+            <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource comboBoxGlobalTemplateStyle}"/>
+            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource buttonGlobalTemplate}"/>
+            <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource textBoxGlobalTemplate}"/>
+        </Style.Resources>
+        <Setter Property="Height" Value="185"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding ElementName=recordType, Path=Text}" Value="-- New record type --">
+                <Setter Property="Height" Value="250"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="{x:Type Label}" BasedOn="{StaticResource titleLabelGlobalTemplate}" x:Key="titleLabel"/>
+
+    <Style TargetType="{x:Type StackPanel}" x:Key="recordTemSelStackPanelStyle">
+        <Setter Property="Visibility" Value="Collapsed"/>
+        <Setter Property="Orientation" Value="Horizontal"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding ElementName=recordType, Path=Text}" Value="-- New record type --">
+                <Setter Property="Visibility" Value="Visible"/>
+                <Setter Property="MinHeight" Value="25"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+</ResourceDictionary>

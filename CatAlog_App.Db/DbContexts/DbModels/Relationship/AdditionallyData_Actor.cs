@@ -4,15 +4,13 @@ namespace CatAlog_App.Db.DbContexts.DbModels.Relationship
 {
     public class AdditionallyData_Actor
     {
-        public int Id { get; set; }
+        public uint Id { get; set; }
 
-        public int AdditionallyDataId { get; set; }
-
+        public uint AdditionallyDataId { get; set; }
         public AdditionallyData AdditionallyData { get; set; }
 
 
-        public int ActorId { get; set; }
-
+        public uint ActorId { get; set; }
         public Actor Actor { get; set; }
     }
 }

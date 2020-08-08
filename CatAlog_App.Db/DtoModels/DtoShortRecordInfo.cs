@@ -2,7 +2,7 @@
 {
     public class DtoShortRecordInfo
     {
-        public int Id { get; set; }
+        public uint Id { get; set; }
 
         public string FirstName { get; set; }
 

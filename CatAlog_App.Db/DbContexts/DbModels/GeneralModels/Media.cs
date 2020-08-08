@@ -5,11 +5,11 @@ namespace CatAlog_App.Db.DbContexts.DbModels.GeneralModels
 {
     public class Media
     {
-        public int Id { get; set; }
+        public uint Id { get; set; }
 
         public float? Size { get; set; }
 
-        public int MainRecordDataId { get; set; }
+        public uint MainRecordDataId { get; set; }
         public MainRecordData MainRecordData { get; set; }
 
         public IEnumerable<VideoData> VideoData { get; set; }

@@ -6,7 +6,7 @@ namespace CatAlog_App.GUI.Models
     {
         internal DtoSubtitleData _subtitleModel;
 
-        internal short _number;
+        internal byte _number;
 
         public SubtitleDataModel(DtoSubtitleData subtitleModel)
         {
@@ -18,7 +18,7 @@ namespace CatAlog_App.GUI.Models
             _subtitleModel = new DtoSubtitleData();
         }
 
-        public int Id
+        public uint Id
         {
             get => _subtitleModel.Id;
             set
@@ -28,7 +28,7 @@ namespace CatAlog_App.GUI.Models
             }
         }
 
-        public short Number
+        public byte Number
         {
             get => _number;
             set => SetProperty(ref _number, value, "Number");

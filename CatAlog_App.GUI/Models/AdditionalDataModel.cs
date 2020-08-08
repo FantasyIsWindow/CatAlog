@@ -48,7 +48,7 @@ namespace CatAlog_App.GUI.Models
             _additionallyModel = new DtoAdditionalDataModel();
         }
 
-        public int Id
+        public uint Id
         {
             get => _additionallyModel.Id;
             set

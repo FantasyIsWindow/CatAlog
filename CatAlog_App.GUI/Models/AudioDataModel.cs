@@ -6,7 +6,7 @@ namespace CatAlog_App.GUI.Models
     {
         private DtoAudioData _audioModel;
 
-        private short _number;
+        private byte _number;
 
         public AudioDataModel(DtoAudioData audioModel)
         {
@@ -18,7 +18,7 @@ namespace CatAlog_App.GUI.Models
             _audioModel = new DtoAudioData();
         }
 
-        public int Id
+        public uint Id
         {
             get => _audioModel.Id;
             set
@@ -28,7 +28,7 @@ namespace CatAlog_App.GUI.Models
             }
         }
 
-        public short Number
+        public byte Number
         {
             get => _number;
             set => SetProperty(ref _number, value, "Number");

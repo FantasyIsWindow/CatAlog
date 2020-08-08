@@ -2,6 +2,7 @@
 using CatAlog_App.Db.DtoModels;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 
 namespace CatAlog_App.Db.Repositories
 {
@@ -25,7 +26,7 @@ namespace CatAlog_App.Db.Repositories
                                 select new DtoCategory
                                 {
                                     CategoryName = c.Type,
-                                    Count = (from m in _db.MainRecordDatas
+                                    Count = (ushort)(from m in _db.MainRecordDatas
                                              where c.Id == m.CategoryId
                                              select m).Count()
                                 }).ToList();
@@ -57,7 +58,13 @@ namespace CatAlog_App.Db.Repositories
             return result;
         }
 
-        public DtoFullVideoData GetFullVideoData(int id)
+        public List<string> GetTemplates() =>
+            (from i in _db.Templates orderby i.Name select i.Name).ToList();
+
+        public List<string> GetCategories() => 
+            (from c in _db.Categories orderby c.Type select c.Type).ToList();
+
+        public DtoFullVideoData GetFullVideoData(uint id)
         {
             DtoFullVideoData model = new DtoFullVideoData()
             {
@@ -69,7 +76,7 @@ namespace CatAlog_App.Db.Repositories
             return model;
         }
 
-        private DtoMainRecordModel GetMaidDataModel(int id)
+        private DtoMainRecordModel GetMaidDataModel(uint id)
         {
             var model = (from m in _db.MainRecordDatas
                          where m.Id == id
@@ -106,7 +113,7 @@ namespace CatAlog_App.Db.Repositories
             return model;
         }
 
-        private DtoSerialData GetSerialDataModel(int id)
+        private DtoSerialData GetSerialDataModel(uint id)
         {
             var model = (from s in _db.SerialDatas
                          where s.MainRecordDataId == id
@@ -130,7 +137,7 @@ namespace CatAlog_App.Db.Repositories
             return model;
         }
 
-        private DtoAdditionalDataModel GetAdditinallyDataModel(int id)
+        private DtoAdditionalDataModel GetAdditinallyDataModel(uint id)
         {
             var model = (from a in _db.AdditionallyDatas
                          where a.MainRecordDataId == id
@@ -192,7 +199,7 @@ namespace CatAlog_App.Db.Repositories
             return model;
         }
 
-        private DtoMediaModel GetMediaDataModel(int id)
+        private DtoMediaModel GetMediaDataModel(uint id)
         {
             var model = (from m in _db.Medias
                          where m.MainRecordDataId == id

@@ -25,7 +25,7 @@ namespace CatAlog_App.GUI.Models
             _mainModel = new DtoMainRecordModel();
         }
 
-        public int Id
+        public uint Id
         {
             get => _mainModel.Id;
             set
@@ -147,7 +147,7 @@ namespace CatAlog_App.GUI.Models
             _nameModel = new DtoNameModel();
         }
 
-        public int Id
+        public uint Id
         {
             get => _nameModel.Id;
             set
@@ -214,7 +214,7 @@ namespace CatAlog_App.GUI.Models
             _screenshotModel = new DtoScreenshotModel();
         }
 
-        public int Id
+        public uint Id
         {
             get => _screenshotModel.Id;
             set

@@ -1,6 +1,8 @@
 ﻿<Application x:Class="CatAlog_App.GUI.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ViewModels="clr-namespace:CatAlog_App.GUI.ViewModels"
+             xmlns:ViewControls="clr-namespace:CatAlog_App.GUI.Views.ViewControls">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -9,7 +11,15 @@
                 <ResourceDictionary Source="Styles/Icons.xaml"/>
                 <ResourceDictionary Source="Styles/GlobalStyles.xaml"/>
                 <ResourceDictionary Source="Styles/WindowsStyles/MainWindowsStyle.xaml"/>
+                <ResourceDictionary Source="Styles/WindowsStyles/TempWindowStyle.xaml"/>
+
+                <ResourceDictionary Source="Styles/ViewControlsStyles/TemplateSelectionStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+
+            <!--<DataTemplate DataType="{x:Type ViewModels}">
+                <ViewControls:TemplateSelectionViewControl/>
+            </DataTemplate>-->
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>

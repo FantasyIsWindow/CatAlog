@@ -4,7 +4,7 @@ namespace CatAlog_App.Db.DtoModels
 {
     public class DtoAdditionalDataModel
     {
-        public int Id { get; set; }
+        public uint Id { get; set; }
 
         public string ReleaseAuthor { get; set; }
 

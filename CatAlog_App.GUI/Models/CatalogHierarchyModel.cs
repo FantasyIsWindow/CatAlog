@@ -52,7 +52,7 @@ namespace CatAlog_App.GUI.Models
             }
         }
 
-        public int Count
+        public ushort Count
         {
             get => _category.Count;
             set

@@ -1,6 +1,7 @@
 ﻿using CatAlog_App.Db.Repositories;
 using CatAlog_App.GUI.Infrastructure.Commands;
 using CatAlog_App.GUI.Models;
+using System;
 using System.Collections.ObjectModel;
 
 namespace CatAlog_App.GUI.ViewModels
@@ -17,7 +18,7 @@ namespace CatAlog_App.GUI.ViewModels
 
         private ObservableCollection<ShortRecordInfoModel> _displayedCollection;
 
-         
+        private object _viewContent;
 
 
 
@@ -38,6 +39,12 @@ namespace CatAlog_App.GUI.ViewModels
         {
             get => _mainInfoModel;
             set => SetProperty(ref _mainInfoModel, value, "MainInfoModel");
+        }
+
+        public object ViewContent
+        {
+            get => _viewContent;
+            set => SetProperty(ref _viewContent, value, "ViewContent");
         }
 
         public MainViewModel()
@@ -84,6 +91,28 @@ namespace CatAlog_App.GUI.ViewModels
             }
         }
 
+        private RellayCommand _openTemplateSelectionView;
+        public RellayCommand OpenTemplateSelectionView
+        {
+            get
+            {
+                return _openTemplateSelectionView ??
+                    (_openTemplateSelectionView = new RellayCommand(obj =>
+                    {
+                        TemplateSelectionVCModel tSelectionVC = new TemplateSelectionVCModel(_loadDb);
+                        ViewContent = tSelectionVC;
+                        tSelectionVC.CloseHandler += (() => ViewContent = null);
+                        tSelectionVC.OkHandler += ((sender, e) => OpenEditorRecordWindow(sender, e));
+
+                    }));
+            }
+        }
+
+        private void OpenEditorRecordWindow(object sender, EventArgs e)
+        {
+            var package = e as ViewControlEventArgs;
+
+        }
 
         private void GetDataForTreeView()
         {

@@ -2,11 +2,11 @@
 {
     public class Screenshot
     {
-        public int Id { get; set; }
+        public uint Id { get; set; }
 
         public string Path { get; set; }
 
-        public int MainRecordDataId { get; set; }
+        public uint MainRecordDataId { get; set; }
         public MainRecordData MainRecordData { get; set; }
     }
 }

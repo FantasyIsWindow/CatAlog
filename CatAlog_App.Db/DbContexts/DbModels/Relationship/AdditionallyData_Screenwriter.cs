@@ -4,12 +4,12 @@ namespace CatAlog_App.Db.DbContexts.DbModels.Relationship
 {
     public class AdditionallyData_Screenwriter
     {
-        public int Id { get; set; }
+        public uint Id { get; set; }
 
-        public int AdditionallyDataId { get; set; }
+        public uint AdditionallyDataId { get; set; }
         public AdditionallyData AdditionallyData { get; set; }
 
-        public int ScreenwriterId { get; set; }
+        public uint ScreenwriterId { get; set; }
         public Screenwriter Screenwriter { get; set; }
     }
 }

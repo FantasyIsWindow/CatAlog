@@ -2,7 +2,7 @@
 {
     public class NameData
     {
-        public int Id { get; set; }
+        public uint Id { get; set; }
 
         public string FirstName { get; set; }
 
@@ -12,7 +12,7 @@
 
         public string FourthName { get; set; }
 
-        public int MainRecordDataId { get; set; }
+        public uint MainRecordDataId { get; set; }
         public MainRecordData MainRecordData { get; set; }
     }
 }

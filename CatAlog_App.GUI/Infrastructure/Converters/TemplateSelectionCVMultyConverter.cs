@@ -4,19 +4,13 @@ using System.Windows.Data;
 
 namespace CatAlog_App.GUI.Infrastructure.Converters
 {
-    public class NewEntryPageOkMultipleConverter : IMultiValueConverter
+    public class TemplateSelectionCVMultyConverter : IMultiValueConverter
     {
-        private string _template;
-
-        private string _recordType;
-
-        private string _newRecordType;
-
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
-        {            
-            _template = values[0] as string;
-            _recordType = values[1] as string;
-            _newRecordType = values[2] as string;
+        {
+            string _template = values[0] as string;
+            string _recordType = values[1] as string;
+            string _newRecordType = values[2] as string;
 
             if (!string.IsNullOrEmpty(_template))
             {
