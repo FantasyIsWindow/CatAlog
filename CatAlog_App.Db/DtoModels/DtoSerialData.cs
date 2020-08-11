@@ -21,7 +21,7 @@ namespace CatAlog_App.Db.DtoModels
     {
         public uint Id { get; set; }
 
-        public ushort Number { get; set; }
+        public string Number { get; set; }
 
         public string Name { get; set; }
     }

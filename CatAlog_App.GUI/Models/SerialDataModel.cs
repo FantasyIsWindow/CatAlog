@@ -1,4 +1,5 @@
 ﻿using CatAlog_App.Db.DtoModels;
+using CatAlog_App.GUI.Infrastructure.Services;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
@@ -117,7 +118,7 @@ namespace CatAlog_App.GUI.Models
             }
         }
 
-        public ushort Number
+        public string Number
         {
             get => _episodeModel.Number;
             set

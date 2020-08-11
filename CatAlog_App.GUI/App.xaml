@@ -6,19 +6,27 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Styles/Colors.xaml"/>
-                <ResourceDictionary Source="Styles/Fonts.xaml"/>
-                <ResourceDictionary Source="Styles/Icons.xaml"/>
-                <ResourceDictionary Source="Styles/GlobalStyles.xaml"/>
-                <ResourceDictionary Source="Styles/WindowsStyles/MainWindowsStyle.xaml"/>
-                <ResourceDictionary Source="Styles/WindowsStyles/TempWindowStyle.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/Colors.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/Fonts.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/Icons.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/GlobalStyles.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/WindowsStyles/MainWindowsStyle.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/WindowsStyles/TempWindowStyle.xaml"/>
 
-                <ResourceDictionary Source="Styles/ViewControlsStyles/TemplateSelectionStyle.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/ViewControlsStyles/TemplateSelectionStyle.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/ViewControlsStyles/NewDataBaseOptions.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/ViewControlsStyles/UriEntering.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/ViewControlsStyles/FillRecordData.xaml"/>
+
+                <ResourceDictionary Source="Resources/Styles/CustomControlsStyles/IntelliTextBox.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
-            <!--<DataTemplate DataType="{x:Type ViewModels}">
-                <ViewControls:TemplateSelectionViewControl/>
-            </DataTemplate>-->
+            <DataTemplate DataType="{x:Type ViewModels:CreatorRecordViewModel}">
+                <ViewControls:FillRecordDataViewControl/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type ViewModels:UpdaterRecordViewModel}">
+                <ViewControls:FillRecordDataViewControl/>
+            </DataTemplate>
             
         </ResourceDictionary>
     </Application.Resources>

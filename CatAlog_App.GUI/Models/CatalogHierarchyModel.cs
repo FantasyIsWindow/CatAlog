@@ -1,4 +1,5 @@
 ﻿using CatAlog_App.Db.DtoModels;
+using CatAlog_App.GUI.Infrastructure.Services;
 using System.Collections.ObjectModel;
 
 namespace CatAlog_App.GUI.Models

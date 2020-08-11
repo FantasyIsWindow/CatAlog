@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 
-namespace CatAlog_App.GUI.Styles.WindowsStyles
+namespace CatAlog_App.GUI.Resources.Styles.WindowsStyles
 {
     public static class WindowObjectExtesion
     {

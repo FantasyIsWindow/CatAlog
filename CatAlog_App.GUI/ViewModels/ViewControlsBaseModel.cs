@@ -1,5 +1,4 @@
-﻿using CatAlog_App.GUI.Infrastructure.Commands;
-using CatAlog_App.GUI.Models;
+﻿using CatAlog_App.GUI.Infrastructure.Services;
 
 namespace CatAlog_App.GUI.ViewModels
 {

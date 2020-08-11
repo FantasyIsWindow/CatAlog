@@ -27,8 +27,8 @@ namespace CatAlog_App.Db.Repositories
                                 {
                                     CategoryName = c.Type,
                                     Count = (ushort)(from m in _db.MainRecordDatas
-                                             where c.Id == m.CategoryId
-                                             select m).Count()
+                                                     where c.Id == m.CategoryId
+                                                     select m).Count()
                                 }).ToList();
 
                 data.Add(new DtoCatalogHierarchy
@@ -61,7 +61,7 @@ namespace CatAlog_App.Db.Repositories
         public List<string> GetTemplates() =>
             (from i in _db.Templates orderby i.Name select i.Name).ToList();
 
-        public List<string> GetCategories() => 
+        public List<string> GetCategories() =>
             (from c in _db.Categories orderby c.Type select c.Type).ToList();
 
         public DtoFullVideoData GetFullVideoData(uint id)
@@ -250,5 +250,129 @@ namespace CatAlog_App.Db.Repositories
                                   }).ToList();
             return model;
         }
+
+        public List<DtoPairModel> GetCountiesList() =>
+            (from c in _db.Countries
+             select new DtoPairModel
+             {
+                 Id = c.Id,
+                 Name = c.Name
+             }).ToList();
+
+        public List<DtoPairModel> GetGenresList() =>
+            (from g in _db.Genres
+             select new DtoPairModel
+             {
+                 Id = g.Id,
+                 Name = g.Name
+             }).ToList();
+
+        public List<DtoPairModel> GetCompaniesList() =>
+            (from c in _db.Companies
+             select new DtoPairModel
+             {
+                 Id = c.Id,
+                 Name = c.Name
+             }).ToList();
+
+        public List<string> GetReleaseAuthorsList() =>
+            (from a in _db.AdditionallyDatas
+             orderby a.ReleaseAuthor
+             select a.ReleaseAuthor).ToList();
+
+        public List<DtoPairModel> GetProducersList() =>
+            (from p in _db.Producers
+             select new DtoPairModel
+             {
+                 Id = p.Id,
+                 Name = p.Name
+             }).ToList();
+
+        public List<DtoPairModel> GetScreenwritersList() =>
+            (from s in _db.Screenwriters
+             select new DtoPairModel
+             {
+                 Id = s.Id,
+                 Name = s.Name
+             }).ToList();
+
+        public List<DtoPairModel> GetActorsList() =>
+            (from s in _db.Actors
+             select new DtoPairModel
+             {
+                 Id = s.Id,
+                 Name = s.Name
+             }).ToList();
+
+        public List<string> GetSerialTypeList() =>
+            (from a in _db.SerialDatas
+             orderby a.Type 
+             select a.Type).ToList();
+
+        public List<string> GetVideoQualityList() =>
+            (from a in _db.VideoDatas
+             orderby a.VideoQuality
+             select a.VideoQuality).ToList();
+
+        public List<string> GetVideoRelationList() =>
+            (from a in _db.VideoDatas
+             orderby a.Relation
+             select a.Relation).ToList();
+
+        public List<ushort> GetVideoWidthList() =>
+            (from a in _db.VideoDatas
+             orderby a.ResolutionWidth
+             select a.ResolutionWidth).ToList();
+
+        public List<ushort> GetVideoHeightList() =>
+            (from a in _db.VideoDatas
+             orderby a.ResolutionHeigth
+             select a.ResolutionHeigth).ToList();
+
+        public List<string> GetVideoFormatsList() =>
+            (from a in _db.VideoDatas
+             orderby a.VideoFormat
+             select a.VideoFormat).ToList();
+
+        public List<string> GetAudioChanelsList() =>
+            (from a in _db.AudioDatas
+             orderby a.Channel
+             select a.Channel).ToList();
+
+        public List<string> GetAudioLanguagesList() =>
+            (from a in _db.AudioDatas
+             orderby a.Language
+             select a.Language).ToList();
+
+        public List<string> GetAudioAuthorsList() =>
+            (from a in _db.AudioDatas
+             orderby a.Author
+             select a.Author).ToList();
+
+        public List<string> GetAudioFormatsList() =>
+            (from a in _db.AudioDatas
+             orderby a.AudioFormat
+             select a.AudioFormat).ToList();
+
+        //public List<string> GetSubtitleLanguagesList() =>
+        //    (from a in _db.SubtitleDatas
+        //     orderby a.Language
+        //     select a.Language).ToList();
+
+        public List<string> GetSubtitleLanguagesList() => 
+            _db.SubtitleDatas.Select(l => l.Language).Distinct().ToList();
+
+        public List<string> GetSubtitleAuthorsList() =>
+            (from a in _db.SubtitleDatas
+             orderby a.Author
+             select a.Author).ToList();
+
+        //public List<string> GetSubtitlesFormatList() =>
+        //    (from a in _db.SubtitleDatas
+        //     orderby a.SubtitleFormat
+        //     select a.SubtitleFormat).ToList();
+
+        public List<string> GetSubtitlesFormatList() => 
+            _db.SubtitleDatas.Select(n => n.SubtitleFormat).Distinct().ToList();
     }
 }

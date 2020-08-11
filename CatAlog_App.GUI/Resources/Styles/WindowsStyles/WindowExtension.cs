@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Interop;
 
-namespace CatAlog_App.GUI.Styles.WindowsStyles
+namespace CatAlog_App.GUI.Resources.Styles.WindowsStyles
 {
     public static class WindowExtension
     {

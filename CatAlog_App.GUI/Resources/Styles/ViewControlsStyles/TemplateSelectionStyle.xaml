@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Style TargetType="{x:Type UserControl}" BasedOn="{StaticResource viewsControlTemplate}" x:Key="templateSelectionCVStyle">
+    <Style TargetType="{x:Type UserControl}" BasedOn="{StaticResource userControlGlobalTemplateStyle}" x:Key="templateSelectionCVStyle">
         <Style.Resources>
             <Style TargetType="{x:Type Label}" BasedOn="{StaticResource labelGlobalTemplate}"/>
             <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource comboBoxGlobalTemplateStyle}"/>

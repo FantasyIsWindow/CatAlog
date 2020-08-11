@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace CatAlog_App.GUI.Infrastructure.Commands
+namespace CatAlog_App.GUI.Infrastructure.Services
 {
     public class RellayCommand : ICommand
     {

@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
 
-namespace CatAlog_App.GUI.Styles.WindowsStyles
+namespace CatAlog_App.GUI.Resources.Styles.WindowsStyles
 {
     public enum SizingAction
     {

@@ -6,14 +6,8 @@ using System.Windows.Threading;
 
 namespace CatAlog_App.GUI.Views.CustomControls
 {
-    /// <summary>
-    /// Interaction logic for NumericUpDownControlControl.xaml
-    /// </summary>
     public partial class NumericUpDownControl : UserControl
     {
-        /// <summary>
-        /// Maximum value
-        /// </summary>
         private const float MAXIMUM = 10f;
 
         private DispatcherTimer _upTimer;
@@ -36,11 +30,6 @@ namespace CatAlog_App.GUI.Views.CustomControls
             set => SetValue(NewValueProperty, value);
         }
 
-        /// <summary>
-        /// Validation of entered data
-        /// </summary>
-        /// <param name="columnName">Entered value</param>
-        /// <returns></returns>
         public string this[string columnName]
         {
             get
@@ -57,9 +46,6 @@ namespace CatAlog_App.GUI.Views.CustomControls
             }
         }
 
-        /// <summary>
-        /// Exception
-        /// </summary>
         public string Error =>
             throw new NotImplementedException();
 

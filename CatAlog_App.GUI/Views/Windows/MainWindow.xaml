@@ -43,8 +43,9 @@
 
         <ToolBar Grid.Row="1" Grid.ColumnSpan="5">
             <Button Margin="5, 2, 0, 2" Padding="3, 3, 1, 1" Command="{Binding OpenTemplateSelectionView}" Style="{StaticResource addNewRecordBtnStyle}"/>
-            <Button Margin="5, 2, 0, 2" Padding="5, 3, 1, 1" Command="{Binding UpdateSelectedRecord}" CommandParameter="{Binding ElementName=lb, Path=SelectedItem}" Style="{StaticResource updateRecordBtnStyle}"/>
-            <Button Margin="5, 2, 0, 2" Padding="3, 3, 1, 1" Command="{Binding RemovieSelectedRecord}" CommandParameter="{Binding ElementName=lb, Path=SelectedItem}" Style="{StaticResource deleteRecordBtnStyle}"/>
+            <Button Margin="5, 2, 0, 2" Padding="5, 3, 1, 1" Command="{Binding UpdateSelectedRecord}" Style="{StaticResource updateRecordBtnStyle}"/>
+            <Button Margin="5, 2, 0, 2" Padding="3, 3, 1, 1" Command="{Binding RemovieSelectedRecord}" Style="{StaticResource deleteRecordBtnStyle}"/>
+            <Button Margin="5, 2, 0, 2" Style="{StaticResource buttonGlobalTemplate}" Content="Db" Command="{Binding DbAdd}"/>
         </ToolBar>
 
         <StackPanel Grid.Row="2" Grid.RowSpan="5" Grid.Column="0">
@@ -175,8 +176,8 @@
             <Label Content="Hi"/>
         </StatusBar>
 
-        <Border Grid.Row="1" 
-                Grid.RowSpan="5" 
+        <Border Grid.Row="0" 
+                Grid.RowSpan="6" 
                 Grid.ColumnSpan="5" 
                 Background="#3F000000" 
                 Visibility="{Binding ElementName=presenter, Path=Content, Converter={StaticResource visibilityConverter}}">
@@ -188,9 +189,9 @@
                     <DataTemplate DataType="{x:Type ViewModels:TemplateSelectionVCModel}">
                         <ViewControls:TemplateSelectionViewControl/>
                     </DataTemplate>
-                    <!--<DataTemplate DataType="{x:Type ViewModels:DbInfoBoxVM}">
-                        <Views:DbInfoBox/>
-                    </DataTemplate>-->
+                    <DataTemplate DataType="{x:Type ViewModels:NewDataBaseOptionsVCModel}">
+                        <ViewControls:NewDataBaseOptionsViewControl/>
+                    </DataTemplate>
                 </ContentPresenter.Resources>
             </ContentPresenter>
         </Border>

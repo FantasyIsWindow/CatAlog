@@ -1,0 +1,13 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style TargetType="{x:Type UserControl}" x:Key="intelliTextBoxStyle">
+        <Style.Resources>
+            <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource textBoxGlobalTemplate}"/>
+            <Style TargetType="{x:Type ListBox}" BasedOn="{StaticResource listBoxGlobalTemplate}">
+                <Setter Property="Foreground" Value="{StaticResource TextBlockForegroundBrush}"/>
+            </Style>
+        </Style.Resources>
+    </Style>
+    
+</ResourceDictionary>

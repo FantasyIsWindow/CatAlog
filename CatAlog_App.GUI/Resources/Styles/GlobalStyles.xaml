@@ -819,11 +819,133 @@
     </Style>
 
     <!-- UserControl -->
-    <Style TargetType="{x:Type UserControl}" x:Key="viewsControlTemplate">
+    <Style TargetType="{x:Type UserControl}" x:Key="userControlGlobalTemplateStyle">
         <Setter Property="Background" Value="{StaticResource UserControlsBackgroundBrush}"/>
         <Setter Property="BorderBrush" Value="{StaticResource UserControlsBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
     </Style>
 
+    <!-- Expander -->
+    <Style TargetType="{x:Type ToggleButton}" x:Key="downOpenTogleBtnStyle">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <Border>
+                        <Grid Background="Transparent" SnapsToDevicePixels="True">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="19"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Ellipse x:Name="circle"
+                                     Fill="{StaticResource ExpanderBtnBackgroundBrush}"
+                                     HorizontalAlignment="Center"
+                                     Height="19"
+                                     Stroke="{StaticResource ExpanderBtnBorderBrush}"
+                                     VerticalAlignment="Center"
+                                     Width="19"/>
+                            <Path x:Name="arrow"
+                                  Data="M 1,1.5 L 4.5,5 L 8,1.5"
+                                  HorizontalAlignment="Center"
+                                  SnapsToDevicePixels="True"
+                                  Stroke="{StaticResource ExpanderArrowBtnBrush}"
+                                  StrokeThickness="2"
+                                  VerticalAlignment="Center"/>
+                            <ContentPresenter Grid.Column="1"
+                                              HorizontalAlignment="Left"
+                                              Margin="4, 0, 0, 0"
+                                              RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="True"
+                                              VerticalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="arrow" Property="Data" Value="M 1,4.5 L 4.5,1 L 8,4.5"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="circle" Property="Stroke" Value="{StaticResource ExpanderBtnDisabledBorderBrush}"/>
+                            <Setter TargetName="circle" Property="Fill" Value="{StaticResource ExpanderBtnDisabledBackgroundBrush}"/>
+                            <Setter TargetName="arrow" Property="Stroke" Value="{StaticResource ExpanderArrowDisabledBtnBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="circle" Property="Stroke" Value="{StaticResource ExpanderBtnSelectBorderBrush}"/>
+                            <Setter TargetName="circle" Property="Fill" Value="{StaticResource ExpanderBtnSelectBackgroundBrush}"/>
+                            <Setter TargetName="circle" Property="StrokeThickness" Value="1.5"/>
+                            <Setter TargetName="arrow" Property="Stroke" Value="{StaticResource ExpanderArrowBtnSelectBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="expanderHeaderFocusVisual">
+        <Setter Property="ItemsControl.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border>
+                        <Rectangle Margin="0"
+                                   SnapsToDevicePixels="True"
+                                   Stroke="Black"
+                                   StrokeThickness="1"
+                                   StrokeDashArray="1 2"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type Expander}" x:Key="expanderGlobalTemplateStyle">
+        <Setter Property="Foreground" Value="{StaticResource ExpanderForegroundBrush}"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Expander}">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="3"
+                            SnapsToDevicePixels="True">
+                        <DockPanel>
+                            <ToggleButton x:Name="headerSite"
+                                          DockPanel.Dock="Top"
+                                          ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                          ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}"
+                                          Content="{TemplateBinding Header}"
+                                          Foreground="{TemplateBinding Foreground}"
+                                          FontWeight="{TemplateBinding FontWeight}"
+                                          FocusVisualStyle="{StaticResource expanderHeaderFocusVisual}"
+                                          FontStyle="{TemplateBinding FontStyle}"
+                                          FontStretch="{TemplateBinding FontStretch}"
+                                          FontSize="{TemplateBinding FontSize}"
+                                          FontFamily="{StaticResource MainFont}"
+                                          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                          Margin="1"
+                                          Padding="{TemplateBinding Padding}"
+                                          Style="{StaticResource downOpenTogleBtnStyle}"
+                                          VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            <ContentPresenter x:Name="expandSite"
+                                              DockPanel.Dock="Bottom"
+                                              Focusable="False"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              Margin="{TemplateBinding Padding}"
+                                              Visibility="Collapsed"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </DockPanel>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsExpanded" Value="True">
+                            <Setter TargetName="expandSite" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
 </ResourceDictionary>
