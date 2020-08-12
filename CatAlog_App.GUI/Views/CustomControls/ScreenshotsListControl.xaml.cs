@@ -11,9 +11,9 @@ namespace CatAlog_App.GUI.Views.CustomControls
 
         public static readonly DependencyProperty PlacementTargetProperty;
 
-        public ObservableCollection<ScreenshotModel> DataList
+        public ObservableCollection<ScreenshotDataModel> DataList
         {
-            get => (ObservableCollection<ScreenshotModel>)GetValue(DataListProperty);
+            get => (ObservableCollection<ScreenshotDataModel>)GetValue(DataListProperty);
             set => SetValue(DataListProperty, value);
         }
 
@@ -30,7 +30,7 @@ namespace CatAlog_App.GUI.Views.CustomControls
 
         static ScreenshotsListControl()
         {
-            DataListProperty = DependencyProperty.Register("DataList", typeof(ObservableCollection<ScreenshotModel>), typeof(ScreenshotsListControl), new PropertyMetadata(null));
+            DataListProperty = DependencyProperty.Register("DataList", typeof(ObservableCollection<ScreenshotDataModel>), typeof(ScreenshotsListControl), new PropertyMetadata(null));
             PlacementTargetProperty = DependencyProperty.Register("PlacementTarget", typeof(object), typeof(ScreenshotsListControl), new PropertyMetadata(null));
         }
     }

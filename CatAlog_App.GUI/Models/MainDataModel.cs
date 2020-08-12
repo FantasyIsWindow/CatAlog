@@ -9,20 +9,22 @@ namespace CatAlog_App.GUI.Models
     {
         private DtoMainRecordModel _mainModel;
 
-        private NameModel _name;
+        private NameDataModel _name;
 
-        private ObservableCollection<ScreenshotModel> _screenshots;
+        private ObservableCollection<ScreenshotDataModel> _screenshots;
 
         public MainDataModel(DtoMainRecordModel mainModel)
         {
             _mainModel = mainModel;
-            _name = new NameModel(_mainModel.Name);
-            _screenshots = new ObservableCollection<ScreenshotModel>();
-            _mainModel.Screenshots.ForEach(e => _screenshots.Add(new ScreenshotModel(e)));
+            _name = new NameDataModel(_mainModel.Name);
+            _screenshots = new ObservableCollection<ScreenshotDataModel>();
+            _mainModel.Screenshots.ForEach(e => _screenshots.Add(new ScreenshotDataModel(e)));
         }
 
         public MainDataModel()
         {
+            _name = new NameDataModel();
+            _screenshots = new ObservableCollection<ScreenshotDataModel>();
             _mainModel = new DtoMainRecordModel();
         }
 
@@ -66,7 +68,7 @@ namespace CatAlog_App.GUI.Models
             }
         }
 
-        public NameModel Name
+        public NameDataModel Name
         {
             get => _name;
             set
@@ -116,7 +118,7 @@ namespace CatAlog_App.GUI.Models
             }
         }
 
-        public ObservableCollection<ScreenshotModel> Screenshots
+        public ObservableCollection<ScreenshotDataModel> Screenshots
         {
             get => _screenshots;
             set => _screenshots = value;
@@ -132,109 +134,5 @@ namespace CatAlog_App.GUI.Models
             }
             return _mainModel;
         }
-    }
-
-    public class NameModel : ModelBase
-    {
-        private DtoNameModel _nameModel;
-
-        public NameModel(DtoNameModel nameModel)
-        {
-            _nameModel = nameModel;
-        }
-
-        public NameModel()
-        {
-            _nameModel = new DtoNameModel();
-        }
-
-        public uint Id
-        {
-            get => _nameModel.Id;
-            set
-            {
-                _nameModel.Id = value;
-                OnPropertyChanged("Id");
-            }
-        }
-
-        public string FirstName
-        {
-            get => _nameModel.FirstName;
-            set
-            {
-                _nameModel.FirstName = value;
-                OnPropertyChanged("FirstName");
-            }
-        }
-
-        public string SecondName
-        {
-            get => _nameModel.SecondName;
-            set
-            {
-                _nameModel.SecondName = value;
-                OnPropertyChanged("SecondName");
-            }
-        }
-
-        public string ThirdName
-        {
-            get => _nameModel.ThirdName;
-            set
-            {
-                _nameModel.ThirdName = value;
-                OnPropertyChanged("ThirdName");
-            }
-        }
-
-        public string FourthName
-        {
-            get => _nameModel.FourthName;
-            set
-            {
-                _nameModel.FourthName = value;
-                OnPropertyChanged("FourthName");
-            }
-        }
-
-        internal DtoNameModel GetModel() => _nameModel;
-    }
-
-    public class ScreenshotModel : ModelBase
-    {
-        private DtoScreenshotModel _screenshotModel;
-
-        public ScreenshotModel(DtoScreenshotModel screenshotModel)
-        {
-            _screenshotModel = screenshotModel;
-        }
-
-        public ScreenshotModel()
-        {
-            _screenshotModel = new DtoScreenshotModel();
-        }
-
-        public uint Id
-        {
-            get => _screenshotModel.Id;
-            set
-            {
-                _screenshotModel.Id = value;
-                OnPropertyChanged("Id");
-            }
-        }
-
-        public string Path
-        {
-            get => _screenshotModel.Path;
-            set
-            {
-                _screenshotModel.Path = value;
-                OnPropertyChanged("Path");
-            }
-        }
-
-        internal DtoScreenshotModel GetModel() => _screenshotModel;
     }
 }

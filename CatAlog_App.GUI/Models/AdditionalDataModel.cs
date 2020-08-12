@@ -47,6 +47,13 @@ namespace CatAlog_App.GUI.Models
         public AdditionalDataModel()
         {
             _additionallyModel = new DtoAdditionalDataModel();
+
+            _companies = new ObservableCollection<PairModel>();
+            _countries = new ObservableCollection<PairModel>();
+            _genres = new ObservableCollection<PairModel>();
+            _producers = new ObservableCollection<PairModel>();
+            _screenwriters = new ObservableCollection<PairModel>();
+            _actors = new ObservableCollection<PairModel>();
         }
 
         public uint Id

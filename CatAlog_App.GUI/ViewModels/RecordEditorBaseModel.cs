@@ -131,11 +131,11 @@ namespace CatAlog_App.GUI.ViewModels
 
         #region SCREENSHOTS_DATA
 
-        protected ScreenshotModel _selectedScreenshot;
+        protected ScreenshotDataModel _selectedScreenshot;
 
         protected string _screenshotUrl;
 
-        public ScreenshotModel SelectedScreenshot
+        public ScreenshotDataModel SelectedScreenshot
         {
             get => _selectedScreenshot;
             set => SetProperty(ref _selectedScreenshot, value, "SelectedScreenshot");
@@ -171,7 +171,7 @@ namespace CatAlog_App.GUI.ViewModels
                             UriEventArgs e = args as UriEventArgs;
                             foreach (var item in e.Uri)
                             {
-                                _generalData.Screenshots.Add(new ScreenshotModel()
+                                _generalData.Screenshots.Add(new ScreenshotDataModel()
                                 {
                                     Path = item
                                 });
@@ -193,7 +193,7 @@ namespace CatAlog_App.GUI.ViewModels
                         var paths = OpenDialogManager.OpenFilesDialog();
                         foreach (var path in paths)
                         {
-                            _generalData.Screenshots.Add(new ScreenshotModel()
+                            _generalData.Screenshots.Add(new ScreenshotDataModel()
                             {
                                 Path = path
                             });
@@ -237,7 +237,7 @@ namespace CatAlog_App.GUI.ViewModels
                 return _enterScreenUrlCommand ??
                     (_enterScreenUrlCommand = new RellayCommand(obj =>
                     {
-                        _generalData.Screenshots.Add(new ScreenshotModel()
+                        _generalData.Screenshots.Add(new ScreenshotDataModel()
                         {
                             Path = _screenshotUrl
                         });

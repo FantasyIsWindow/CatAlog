@@ -11,6 +11,8 @@ namespace CatAlog_App.GUI.ViewModels
     {
         public event EventHandler OkHandler;
 
+        private SaveRepository _saveDb;
+
         #region SHARED_PAGE_DATA
 
         public RellayCommand OkCommand
@@ -34,7 +36,7 @@ namespace CatAlog_App.GUI.ViewModels
                         gData.MediaData.AudioData = _audioInfo;
                         gData.MediaData.SubtitleData = _subtitleInfo;
 
-                        var result = gData.GetModel();
+                        //      var result = gData.GetModel();
                         //int id = _repository.SaveData.SaveNewRecord(result.GetModel(), _configModel.PathToDbLocation);
                         //if (OkHandler != null)
                         //{
@@ -44,6 +46,8 @@ namespace CatAlog_App.GUI.ViewModels
                         //    };
                         //    OkHandler.Invoke(null, args);
                         //}
+
+                        int index = _saveDb.SaveNewRecord(gData.GetModel());
                         CancelCommand.Execute(null);
                     }));
             }
@@ -55,6 +59,7 @@ namespace CatAlog_App.GUI.ViewModels
 
         public CreatorRecordViewModel(string template, string recordType, LoadRepository repository, PropertyLibrary config) : base(repository, config)
         {
+            _saveDb = new SaveRepository();
             DisplayType = "Editing";
             _generalData = new MainDataModel()
             {
