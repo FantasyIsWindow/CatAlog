@@ -47,11 +47,11 @@
             <Label Content="Template:" VerticalAlignment="Center" VerticalContentAlignment="Center"/>
             <TextBox IsEnabled="False" Text="{Binding GeneralData.Template}" Width="220" Height="25"/>
             <Label Content="Record type:" VerticalAlignment="Center" Margin="20, 0, 5, 0"/>
-            <TextBox Text="{Binding GeneralData.Category}" Width="220" Height="25" x:Name="generalDataTb" Style="{StaticResource type}"/>
+            <TextBox Text="{Binding GeneralData.Category}" Width="240" Height="25" x:Name="generalDataTb" Style="{StaticResource type}"/>
         </StackPanel>
 
         <Border Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" BorderThickness="1, 1, 0, 1" BorderBrush="Gray">
-            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Margin="5">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Margin="5" VerticalContentAlignment="Center">
                 <StackPanel Orientation="Vertical" Margin="5">
                     <Expander Header="General Information" Margin="5">
                         <Grid>
@@ -81,7 +81,7 @@
                             <Label   Grid.Row="5" Content="Duration:" Margin="5"/>
                             <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding GeneralData.Duration, StringFormat=HH:mm:ss}" Margin="5"/>
                             <Label   Grid.Row="6" Content="Description:*" Margin="5"/>
-                            <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding GeneralData.Description}" VerticalContentAlignment="Top" AcceptsReturn="True" TextWrapping="Wrap" AcceptsTab="True" Height="200" Margin="5" x:Name="recordDescription"/>
+                            <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding GeneralData.Description}" Style="{StaticResource textBoxGlobalTemplate}" AcceptsReturn="True" TextWrapping="Wrap" AcceptsTab="True" Height="200" Margin="5" x:Name="recordDescription"/>
                         </Grid>
                     </Expander>
 
@@ -124,27 +124,27 @@
                             </Grid.ColumnDefinitions>
                             <Label Content="Genres" Margin="5"/>
                             <Controls:IntelliTextBoxControl Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Height="55" DataSource="{Binding Genres}" 
-                                    Text="{Binding AdditionalInfo.Genres, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+                                    Text="{Binding Path=AdditionalInfo.Genres, Mode=TwoWay}" Margin="5"/>
                            <Label Grid.Row="1" Content="Countries" Margin="5"/>
                             <Controls:IntelliTextBoxControl Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Height="55" DataSource="{Binding Countries}" 
-                                    Text="{Binding AdditionalInfo.Countries, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+                                    Text="{Binding AdditionalInfo.Countries, Mode=TwoWay}" Margin="5"/>
                             <Label Grid.Row="2" Content="Companies" Margin="5"/>
                             <Controls:IntelliTextBoxControl Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Height="55" DataSource="{Binding Companies}"
-                                    Text="{Binding AdditionalInfo.Companies, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
-                            <Label Grid.Row="3" Content="Regisseurs" Margin="5"/>
+                                    Text="{Binding AdditionalInfo.Companies, Mode=TwoWay}" Margin="5"/>
+                            <Label Grid.Row="3" Content="Producers" Margin="5"/>
                             <Controls:IntelliTextBoxControl Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Height="55" DataSource="{Binding Regisseurs}"
-                                    Text="{Binding AdditionalInfo.Regisseurs, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+                                    Text="{Binding AdditionalInfo.Producers, Mode=TwoWay}" Margin="5"/>
                             <Label Grid.Row="4" Content="Screenwriters" Margin="5"/>
                             <Controls:IntelliTextBoxControl Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" Height="55" DataSource="{Binding Screenwriters}"
-                                    Text="{Binding AdditionalInfo.Screenwriters, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+                                    Text="{Binding AdditionalInfo.Screenwriters, Mode=TwoWay}" Margin="5"/>
                             <Label Grid.Row="5" Content="Actors" Margin="5"/>
                             <Controls:IntelliTextBoxControl Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" Height="55" DataSource="{Binding Actors}"
-                                    Text="{Binding AdditionalInfo.Actors, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+                                    Text="{Binding AdditionalInfo.Actors, Mode=TwoWay}" Margin="5"/>
                             <Label Grid.Row="6" Content="ReleaseAuthor" Margin="5"/>
                             <ComboBox Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" IsReadOnly="False" IsEditable="True" 
                                   ItemsSource="{Binding ReleaseAuthors}" Text="{Binding AdditionalInfo.ReleaseAuthor}" Margin="5"/>
                             <Label Grid.Row="7" Content="Note:" Margin="5"/>
-                            <TextBox Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding AdditionalInfo.Note}" AcceptsReturn="True" MinHeight="130" Margin="5"/>
+                            <TextBox Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding AdditionalInfo.Note}" Style="{StaticResource textBoxGlobalTemplate}" AcceptsReturn="True" MinHeight="130" Margin="5"/>
                         </Grid>
                     </Expander>
 
@@ -167,7 +167,7 @@
                             <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SerialInfo.SeasonNumber}" Margin="5"/>
 
                             <Label Grid.Row="0" Grid.Column="2" Content="Serial type:" Margin="5"/>
-                            <ComboBox Grid.Row="0" Grid.Column="3" Margin="5" IsEditable="True" ItemsSource="{Binding SerialTypes}" Text="{Binding SerialInfo.Version}"/>
+                            <ComboBox Grid.Row="0" Grid.Column="3" Margin="5" IsEditable="True" ItemsSource="{Binding SerialTypes}" Text="{Binding SerialInfo.Type}"/>
 
                             <Label Grid.Row="1" Grid.Column="0" Content="Count special:" Margin="5"/>
                             <TextBox Grid.Row="1" Grid.Column="1" Height="25" VerticalAlignment="Top" Text="{Binding SerialInfo.CountSpecials}" Margin="5"/>
@@ -176,7 +176,7 @@
                             <TextBox Grid.Row="1" Grid.Column="3" Text="{Binding SerialInfo.Note}" TextWrapping="Wrap" AcceptsReturn="True" Margin="5"/>
 
                             <Label Grid.Row="2" Grid.ColumnSpan="4" Content="Enter number and name series: "/>
-                            <TextBox Grid.Row="3" Grid.ColumnSpan="4" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Series}" Height="200" Margin="5" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                            <TextBox Grid.Row="3" Grid.ColumnSpan="4" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Episodes}" Height="200" Margin="5">
                                 <TextBox.Style>
                                     <Style TargetType="{x:Type TextBox}">
                                         <Style.Resources>

@@ -17,8 +17,6 @@
                 <ResourceDictionary Source="Resources/Styles/ViewControlsStyles/NewDataBaseOptions.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/ViewControlsStyles/UriEntering.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/ViewControlsStyles/FillRecordData.xaml"/>
-
-                <ResourceDictionary Source="Resources/Styles/CustomControlsStyles/IntelliTextBox.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type ViewModels:CreatorRecordViewModel}">

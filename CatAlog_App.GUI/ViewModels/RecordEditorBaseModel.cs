@@ -18,6 +18,8 @@ namespace CatAlog_App.GUI.ViewModels
 
         protected PropertyLibrary _configModel;
 
+        protected ImageFileAdmin _fileAdmin;
+
         protected object _currentPage;
 
         public object CurrentPage
@@ -46,19 +48,22 @@ namespace CatAlog_App.GUI.ViewModels
         /// Splitting a string and collecting a new array of objects of the SeriesGUI class
         /// </summary>
         /// <returns></returns>
-        protected ObservableCollection<EpisodeModel> ParsingSeries()
+        protected ObservableCollection<EpisodeModel> EpisodesParser()
         {
             ObservableCollection<EpisodeModel> series = new ObservableCollection<EpisodeModel>();
-            var temp = Series.Split('\n');
-            foreach (var item in temp)
+            if (Episodes != null)
             {
-                var str = item.Split(new string[] { ". ", ") " }, StringSplitOptions.RemoveEmptyEntries);
-                EpisodeModel sGui = new EpisodeModel()
+                var temp = Episodes.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+                foreach (var item in temp)
                 {
-                    Number = str[0],
-                    Name = str[1]
-                };
-                series.Add(sGui);
+                    var str = item.Split(new string[] { ". ", ") " }, StringSplitOptions.RemoveEmptyEntries);
+                    EpisodeModel sGui = new EpisodeModel()
+                    {
+                        Number = str[0],
+                        Name = str[1]
+                    };
+                    series.Add(sGui);
+                }
             }
             return series;
         }
@@ -336,12 +341,12 @@ namespace CatAlog_App.GUI.ViewModels
             set { _serialTypes = value; }
         }
 
-        protected private string _series;
+        protected private string _episodes;
 
-        public string Series
+        public string Episodes
         {
-            get => _series;
-            set => SetProperty(ref _series, value, "Series");
+            get => _episodes;
+            set => SetProperty(ref _episodes, value, "Episodes");
         }
 
 
@@ -663,8 +668,9 @@ namespace CatAlog_App.GUI.ViewModels
         {
             _repository = repository;
             _configModel = config;
-            _countries = _repository.GetCountiesList();
+            _fileAdmin = new ImageFileAdmin();
 
+            _countries = _repository.GetCountiesList();
             _genres = _repository.GetGenresList();
             _companies = _repository.GetCompaniesList();
             _releaseAuthors = _repository.GetReleaseAuthorsList();

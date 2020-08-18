@@ -31,6 +31,9 @@ namespace CatAlog_App.GUI.ViewModels
                         //gData.MediaData.AudioData = _audioInfo;
                         //gData.MediaData.SubtitleData = _subtitleInfo;
 
+                        UpdateRepository updateRepository = new UpdateRepository();
+                        updateRepository.UpdateRecord()
+
                        // _repository.UpdateData.UpdateRecord(gData.GetModel(), _configModel.DbFolderPath);
 
                         CancelCommand.Execute(null);
@@ -66,7 +69,7 @@ namespace CatAlog_App.GUI.ViewModels
                 {
                     builder.Append($"{info.Number}. {info.Name}.\n");
                 }
-                _series = builder.ToString();
+                _episodes = builder.ToString();
             }
         }
 

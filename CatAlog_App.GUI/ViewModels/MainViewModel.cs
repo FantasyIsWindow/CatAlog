@@ -11,7 +11,11 @@ namespace CatAlog_App.GUI.ViewModels
     {
         private LoadRepository _loadDb;
 
+        private DeleteRepository _deleteDb;
+
         private CategoryModel _selectedCategoryModel;
+
+        private ShortRecordInfoModel _selectedShortRecordModel;
 
         private DataPackModel _mainInfoModel;
 
@@ -47,9 +51,16 @@ namespace CatAlog_App.GUI.ViewModels
             set => SetProperty(ref _viewContent, value, "ViewContent");
         }
 
+        public ShortRecordInfoModel SelectedShortRecordModel
+        {
+            get => _selectedShortRecordModel;
+            set => SetProperty(ref _selectedShortRecordModel, value, "SelectedShortRecordModel");
+        }
+
         public MainViewModel()
         {
             _loadDb = new LoadRepository();
+            _deleteDb = new DeleteRepository();
             _categoryHierarhy = new ObservableCollection<CatalogHierarchyModel>();
             _displayedCollection = new ObservableCollection<ShortRecordInfoModel>();
             _settingsManager = new SettingsManager();
@@ -82,10 +93,9 @@ namespace CatAlog_App.GUI.ViewModels
                 return _listBoxSelectionChanged ??
                     (_listBoxSelectionChanged = new RellayCommand(obj =>
                     {
-                        if (obj is ShortRecordInfoModel model)
+                        if (_selectedShortRecordModel != null)
                         {
-                            MainInfoModel = new DataPackModel(_loadDb.GetFullVideoData(model.Id));
-                            var q = 0;
+                            MainInfoModel = new DataPackModel(_loadDb.GetFullVideoData(_selectedShortRecordModel.Id));
                         }
 
                     }));
@@ -108,25 +118,6 @@ namespace CatAlog_App.GUI.ViewModels
             }
         }
 
-        private RellayCommand _updateSelectedRecord;
-        public RellayCommand UpdateSelectedRecord
-        {
-            get
-            {
-                return _updateSelectedRecord ??
-                    (_updateSelectedRecord = new RellayCommand(obj =>
-                    {
-                        UpdaterRecordViewModel updaterRecord = new UpdaterRecordViewModel(MainInfoModel, _loadDb, _settingsManager.Settings)
-                        {
-                            Title = $"Editing {MainInfoModel.MainData.Name.FirstName} record"
-                        };
-                        ShowDialog(updaterRecord);
-                    },
-                        (obj) => MainInfoModel != null
-                    ));
-            }
-        }
-
         private RellayCommand _removieSelectedRecord;
         public RellayCommand RemovieSelectedRecord
         {
@@ -135,7 +126,10 @@ namespace CatAlog_App.GUI.ViewModels
                 return _removieSelectedRecord ??
                     (_removieSelectedRecord = new RellayCommand(obj =>
                     {
-
+                        uint id = MainInfoModel.MainData.Id;
+                        _deleteDb.RemoveRecord(id);
+                        _displayedCollection.Remove(_selectedShortRecordModel);
+                        _selectedCategoryModel.Count -= 1;
                     },
                         (obj) => MainInfoModel != null
                     ));
@@ -166,8 +160,27 @@ namespace CatAlog_App.GUI.ViewModels
             {
                 Title = $"Filling in a new {eventArgs.FirstValue.ToLower()} record"
             };
-            //baseModel.OkHandler += (() )
+            baseModel.OkHandler += (() => _selectedCategoryModel.Count += 1);
             ShowDialog(baseModel);
+        }
+
+        private RellayCommand _updateSelectedRecord;
+        public RellayCommand UpdateSelectedRecord
+        {
+            get
+            {
+                return _updateSelectedRecord ??
+                    (_updateSelectedRecord = new RellayCommand(obj =>
+                    {
+                        UpdaterRecordViewModel updaterRecord = new UpdaterRecordViewModel(MainInfoModel, _loadDb, _settingsManager.Settings)
+                        {
+                            Title = $"Editing {MainInfoModel.MainData.Name.FirstName} record"
+                        };
+                        ShowDialog(updaterRecord);
+                    },
+                        (obj) => MainInfoModel != null
+                    ));
+            }
         }
 
         private void CreateNewDb()
@@ -188,7 +201,5 @@ namespace CatAlog_App.GUI.ViewModels
             var resultCollection = _loadDb.GetShortInfo(categoryName);
             resultCollection.ForEach(d => DisplayedCollection.Add(new ShortRecordInfoModel(d)));
         }
-
-
     }
 }

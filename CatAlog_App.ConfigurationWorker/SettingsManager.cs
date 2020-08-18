@@ -67,6 +67,7 @@ namespace CatAlog_App.ConfigurationWorker
             Settings.DbFileName = "catalog.db";
             Settings.DbFolderPath = Path.Combine(Environment.CurrentDirectory, "CatAlog DataBase");
             Settings.GraphicDataFolderName = Path.Combine(Settings.DbFolderPath, "Image Library");
+            Settings.TitleImageName = "title";
 
             SaveConfig();
         }

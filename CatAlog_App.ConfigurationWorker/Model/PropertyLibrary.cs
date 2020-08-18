@@ -11,6 +11,8 @@ namespace CatAlog_App.ConfigurationWorker.Model
 
         private string _graphicDataFolderName;
 
+        private string _titleImageName;
+
         public string DbFolderPath
         {
             get => _dbFolderPath; 
@@ -38,6 +40,16 @@ namespace CatAlog_App.ConfigurationWorker.Model
             {
                 _graphicDataFolderName = value;
                 OnPropertyChanged("GraphicDataFolderName");
+            }
+        }
+
+        public string TitleImageName
+        {
+            get => _titleImageName; 
+            set
+            {
+                _titleImageName = value;
+                OnPropertyChanged("TitleImageName");
             }
         }
 

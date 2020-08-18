@@ -17,20 +17,11 @@
         </Grid.RowDefinitions>
         <TextBox Grid.RowSpan="2" 
                  x:Name="mainTB" 
-                 DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}" 
                  PreviewTextInput="mainTB_previewTextInput" 
                  TextChanged="mainTB_TextChanged"
-                 Style="{StaticResource textBoxGlobalTemplate}"
+                 Style="{StaticResource textBoxWithoutScrollViewer}"
                  Height="24"
-                 Padding="0, 0, 25, 0">
-            <TextBox.Text>
-                <Binding Path="Rating">
-                    <Binding.ValidationRules>
-                        <DataErrorValidationRule/>
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-        </TextBox>
+                 Padding="0, 0, 25, 0"/>
         <Button Grid.Row="0" 
                 Grid.Column="1" 
                 x:Name="UpButton"  

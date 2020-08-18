@@ -7,7 +7,7 @@
             <Style TargetType="{x:Type Label}" BasedOn="{StaticResource labelGlobalTemplate}">
                 <Setter Property="Margin" Value="5"/>
             </Style>
-            <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource textBoxGlobalTemplate}">
+            <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource textBoxWithoutScrollViewer}">
                 <Setter Property="Margin" Value="5"/>
             </Style>
             <Style TargetType="{x:Type ScrollViewer}" BasedOn="{StaticResource scrollViewerGlobalTemplate}"/>
@@ -122,25 +122,24 @@
                                             <ColumnDefinition Width="auto"/>
                                             <ColumnDefinition Width="auto"/>
                                             <ColumnDefinition Width="auto"/>
-                                            <ColumnDefinition Width="auto"/>
                                         </Grid.ColumnDefinitions>
-                                        <Label Content="Video record №"/>
+                                        <Label Grid.ColumnSpan="6" Content="Video record №"/>
                                         <Label Grid.Row="1" Content="Quality:"/>
-                                        <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding ElementName=videoList, Path=DataContext.VideoQuality}" Text="{Binding VideoQuality}" Width="130"/>
+                                        <ComboBox Grid.Row="1" Grid.Column="1" IsEditable="True" ItemsSource="{Binding ElementName=videoList, Path=DataContext.VideoQuality}" Text="{Binding VideoQuality}" Width="140"/>
                                         <Label Grid.Row="1" Grid.Column="2" Content="Bitrate:"/>
-                                        <TextBox Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="3" Text="{Binding Bitrate}" Width="190"/>
+                                        <TextBox Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="3" Text="{Binding Bitrate}" Width="210"/>
                                         <Label Grid.Row="2" Content="Relation:"/>
-                                        <ComboBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding ElementName=videoList, Path=DataContext.VideoRelation}" Text="{Binding Relation}" Width="130"/>
+                                        <ComboBox Grid.Row="2" Grid.Column="1" IsEditable="True" ItemsSource="{Binding ElementName=videoList, Path=DataContext.VideoRelation}" Text="{Binding Relation}" Width="140"/>
                                         <Label Grid.Row="2" Grid.Column="2" Content="Width:"/>
-                                        <ComboBox Grid.Row="2" Grid.Column="3" ItemsSource="{Binding ElementName=videoList, Path=DataContext.VideoResolutionWidth}" Text="{Binding ResolutionWidth}" Width="60"/>
+                                        <ComboBox Grid.Row="2" Grid.Column="3" IsEditable="True" ItemsSource="{Binding ElementName=videoList, Path=DataContext.VideoResolutionWidth}" Text="{Binding WidthR}" Width="70"/>
                                         <Label Grid.Row="2" Grid.Column="4" Content="Height:"/>
-                                        <ComboBox Grid.Row="2" Grid.Column="5" ItemsSource="{Binding ElementName=videoList, Path=DataContext.VideoResolutionHeigth}" Text="{Binding ResolutionHeigth}" Width="60"/>
+                                        <ComboBox Grid.Row="2" Grid.Column="5" IsEditable="True" ItemsSource="{Binding ElementName=videoList, Path=DataContext.VideoResolutionHeigth}" Text="{Binding HeigthR}" Width="70"/>
                                         <Label Grid.Row="3" Content="Video format:"/>
-                                        <ComboBox Grid.Row="3" Grid.Column="1" ItemsSource="{Binding ElementName=videoList, Path=DataContext.VideoFormats}" Text="{Binding VideoFormat}" Width="130"/>
+                                        <ComboBox Grid.Row="3" Grid.Column="1" IsEditable="True" ItemsSource="{Binding ElementName=videoList, Path=DataContext.VideoFormats}" Text="{Binding VideoFormat}" Width="140"/>
                                         <Label Grid.Row="3" Grid.Column="2" Content="Frame rate:"/>
-                                        <TextBox Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="3" Text="{Binding FrameRate}" Width="190"/>
+                                        <TextBox Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="3" Text="{Binding FrameRate}" Width="210"/>
                                         <Label Grid.Row="4" Content="Note:"/>
-                                        <TextBox Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="5" Text="{Binding Note}" AcceptsReturn="True" TextWrapping="Wrap" Height="50" Width="410" VerticalScrollBarVisibility="Auto"/>
+                                        <TextBox Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="5" Text="{Binding Note}" AcceptsReturn="True" TextWrapping="Wrap" Height="50" Width="440" Style="{StaticResource textBoxGlobalTemplate}"/>
                                     </Grid>
                                 </Border>
                                 <ControlTemplate.Triggers>
@@ -179,21 +178,21 @@
                                             <ColumnDefinition Width="auto"/>
                                             <ColumnDefinition Width="auto"/>
                                         </Grid.ColumnDefinitions>
-                                        <Label Content="Audio record №"/>
+                                        <Label Grid.ColumnSpan="4" Content="Audio record №"/>
                                         <Label Grid.Row="1" Content="AudioFormat:"/>
-                                        <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding ElementName=audioList, Path=DataContext.AudioFormat}" Text="{Binding AudioFormat}"/>
+                                        <ComboBox Grid.Row="1" Grid.Column="1" IsEditable="True" ItemsSource="{Binding ElementName=audioList, Path=DataContext.AudioFormat}" Text="{Binding AudioFormat}" Width="160"/>
                                         <Label Grid.Row="1" Grid.Column="2" Content="Bitrate:"/>
-                                        <TextBox Grid.Row="1" Grid.Column="3" Text="{Binding Bitrate}"/>
+                                        <TextBox Grid.Row="1" Grid.Column="3" Text="{Binding Bitrate}" Width="190"/>
                                         <Label Grid.Row="2" Content="Channels:"/>
-                                        <ComboBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding ElementName=audioList, Path=DataContext.AudioChannel}" Text="{Binding Channel}"/>
+                                        <ComboBox Grid.Row="2" Grid.Column="1" IsEditable="True" ItemsSource="{Binding ElementName=audioList, Path=DataContext.AudioChannel}" Text="{Binding Channel}" Width="160"/>
                                         <Label Grid.Row="2" Grid.Column="2" Content="Frequency:"/>
-                                        <TextBox Grid.Row="2" Grid.Column="3" Text="{Binding Frequency}"/>
+                                        <TextBox Grid.Row="2" Grid.Column="3" Text="{Binding Frequency}" Width="190"/>
                                         <Label Grid.Row="3" Grid.Column="0" Content="Language:"/>
-                                        <ComboBox Grid.Row="3" Grid.Column="1" ItemsSource="{Binding ElementName=audioList, Path=DataContext.AudioLanguage}" Text="{Binding Language}"/>
+                                        <ComboBox Grid.Row="3" Grid.Column="1" IsEditable="True" ItemsSource="{Binding ElementName=audioList, Path=DataContext.AudioLanguage}" Text="{Binding Language}" Width="160"/>
                                         <Label Grid.Row="3" Grid.Column="2" Content="Author:"/>
-                                        <ComboBox Grid.Row="3" Grid.Column="3" ItemsSource="{Binding ElementName=audioList, Path=DataContext.AudioAuthor}" Text="{Binding Author}"/>
+                                        <ComboBox Grid.Row="3" Grid.Column="3" IsEditable="True" ItemsSource="{Binding ElementName=audioList, Path=DataContext.AudioAuthor}" Text="{Binding Author}" Width="190"/>
                                         <Label Grid.Row="5" Grid.Column="0" Content="Note:"/>
-                                        <TextBox Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Note}" Width="410"/>
+                                        <TextBox Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Note}" Width="440" Style="{StaticResource textBoxGlobalTemplate}"/>
                                     </Grid>
                                 </Border>
                                 <ControlTemplate.Triggers>
@@ -229,18 +228,16 @@
                                             <ColumnDefinition Width="auto"/>
                                             <ColumnDefinition Width="auto"/>
                                             <ColumnDefinition Width="auto"/>
-                                            <ColumnDefinition Width="auto"/>
-                                            <ColumnDefinition Width="auto"/>
                                         </Grid.ColumnDefinitions>
-                                        <Label Content="Subtitle record №"/>
+                                        <Label Grid.ColumnSpan="4" Content="Subtitle record №"/>
                                         <Label Grid.Row="1" Content="Language:"/>
-                                        <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding ElementName=subtitleList, Path=DataContext.SubtitleLanguage}" Text="{Binding Language}" Width="120"/>
+                                        <ComboBox Grid.Row="1" Grid.Column="1" IsEditable="True" ItemsSource="{Binding ElementName=subtitleList, Path=DataContext.SubtitleLanguage}" Text="{Binding Language}" Width="150"/>
                                         <Label Grid.Row="1" Grid.Column="2" Content="Author:"/>
-                                        <ComboBox Grid.Row="1" Grid.Column="3" ItemsSource="{Binding ElementName=subtitleList, Path=DataContext.SubtitleAuthor}" Text="{Binding Author}" Width="220"/>
+                                        <ComboBox Grid.Row="1" Grid.Column="3" IsEditable="True" ItemsSource="{Binding ElementName=subtitleList, Path=DataContext.SubtitleAuthor}" Text="{Binding Author}" Width="210"/>
                                         <Label Grid.Row="2" Grid.Column="0" Content="Subtitle Format:"/>
-                                        <ComboBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding ElementName=subtitleList, Path=DataContext.SubtitleFormat}" Text="{Binding SubtitleFormat}" Width="120"/>
+                                        <ComboBox Grid.Row="2" Grid.Column="1" IsEditable="True" ItemsSource="{Binding ElementName=subtitleList, Path=DataContext.SubtitleFormat}" Text="{Binding SubtitleFormat}" Width="150"/>
                                         <Label Grid.Row="3" Content="Note:"/>
-                                        <TextBox Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Note}" Width="400" Margin="5"/>
+                                        <TextBox Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Note}" Width="430" Margin="5" Style="{StaticResource textBoxGlobalTemplate}"/>
                                     </Grid>
                                 </Border>
                                 <ControlTemplate.Triggers>

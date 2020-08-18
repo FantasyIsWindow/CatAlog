@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System;
 using CatAlog_App.Db.DtoModels;
+using CatAlog_App.GUI.Models;
 
 namespace CatAlog_App.GUI.Views.CustomControls
 {
@@ -30,9 +31,9 @@ namespace CatAlog_App.GUI.Views.CustomControls
             set => _displayedData = value;
         }
 
-        public string Text
+        public ObservableCollection<PairModel> Text
         {
-            get => (string)GetValue(TextProperty);
+            get => (ObservableCollection<PairModel>)GetValue(TextProperty);
             set => SetValue(TextProperty, value);
         }
 
@@ -53,7 +54,7 @@ namespace CatAlog_App.GUI.Views.CustomControls
             TextProperty = DependencyProperty.Register
                 (
                     "Text",
-                    typeof(string),
+                    typeof(ObservableCollection<PairModel>),
                     typeof(IntelliTextBoxControl)
                 );
 
@@ -144,6 +145,7 @@ namespace CatAlog_App.GUI.Views.CustomControls
 
         private void displayDictionary_MouseEnter(object sender, MouseButtonEventArgs e)
         {
+            textBox.Focus();
             popup.IsOpen = false;
             int endWordIndex = textBox.CaretIndex - 1;
             int startWordIndex = textBox.Text.LastIndexOf(' ', endWordIndex);
@@ -166,7 +168,18 @@ namespace CatAlog_App.GUI.Views.CustomControls
             string str = _selectedItem.Name + ", ";
             textBox.Text = textBox.Text.Insert(endWordIndex, str);
             textBox.CaretIndex = endWordIndex + str.Length;
-            textBox.Focus();
+        }
+
+        private void UserControl_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (textBox.IsFocused == false && popup.IsOpen == false)
+            {
+                var temp = textBox.Text.Split(", ", StringSplitOptions.RemoveEmptyEntries);
+                foreach (var item in temp)
+                {
+                    Text.Add(new PairModel() { Name = item.Trim() });
+                }
+            }
         }
     }
 }

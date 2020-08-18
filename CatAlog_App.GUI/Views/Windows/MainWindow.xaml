@@ -83,10 +83,10 @@
             <RadioButton GroupName="mainLBView" Margin="5" x:Name="extendedStyleRadioButton" Style="{StaticResource extendedRbStyle}"/>
         </StackPanel>
 
-        <ListBox Grid.Row="3" Grid.RowSpan="2" Grid.Column="2" Style="{StaticResource mainListBoxStyle}" ItemsSource="{Binding DisplayedCollection}" x:Name="lb">
+        <ListBox Grid.Row="3" Grid.RowSpan="2" Grid.Column="2" Style="{StaticResource mainListBoxStyle}" ItemsSource="{Binding DisplayedCollection}" SelectedItem="{Binding SelectedShortRecordModel}" x:Name="lb">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
-                    <i:InvokeCommandAction Command="{Binding ListBoxSelectionChanged}" CommandParameter="{Binding ElementName=lb, Path=SelectedItem}"/>
+                    <i:InvokeCommandAction Command="{Binding ListBoxSelectionChanged}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </ListBox>
@@ -148,7 +148,7 @@
             <TabItem Header="Screenshots" Visibility="{Binding ElementName=scr, Path=DataList, Converter={StaticResource visibilityConverter}}">
                 <Controls:ScreenshotsListControl DataList="{Binding MainData.Screenshots}" PlacementTarget="{Binding ElementName=window}" x:Name="scr"/>
             </TabItem>
-            <TabItem Header="Media" >
+            <TabItem Header="Media" Visibility="{Binding ElementName=descriptionTB, Path=Text, Converter={StaticResource visibilityConverter}}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>

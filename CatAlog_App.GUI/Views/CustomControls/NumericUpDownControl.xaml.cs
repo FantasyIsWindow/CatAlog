@@ -10,9 +10,11 @@ namespace CatAlog_App.GUI.Views.CustomControls
     {
         private const float MAXIMUM = 10f;
 
+        private const float MINIMUM = 0;
+
         private DispatcherTimer _upTimer;
 
-        public float Rating { get; set; }
+        private DispatcherTimer _downTimer;
 
         public static readonly DependencyProperty NewWidthProperty;
 
@@ -30,31 +32,14 @@ namespace CatAlog_App.GUI.Views.CustomControls
             set => SetValue(NewValueProperty, value);
         }
 
-        public string this[string columnName]
-        {
-            get
-            {
-                string error = null;
-                if (columnName == "Rating")
-                {
-                    if (this.Rating < 0 || this.Rating > 10)
-                    {
-                        error = "The rating cannot be less than 0 or more than 10 points";
-                    }
-                }
-                return error;
-            }
-        }
-
-        public string Error =>
-            throw new NotImplementedException();
-
         public NumericUpDownControl()
         {
             InitializeComponent();
 
-            _upTimer = new DispatcherTimer() { Interval = new TimeSpan(0, 0, 0, 0, 80) };
+            _upTimer = new DispatcherTimer() { Interval = new TimeSpan(0, 0, 0, 0, 200) };
             _upTimer.Tick += UpValue;
+            _downTimer = new DispatcherTimer() { Interval = new TimeSpan(0, 0, 0, 0, 200) };
+            _downTimer.Tick += DownValue;
         }
 
         static NumericUpDownControl()
@@ -64,7 +49,7 @@ namespace CatAlog_App.GUI.Views.CustomControls
                 typeof(float),
                 typeof(NumericUpDownControl),
                 new FrameworkPropertyMetadata(
-                    MAXIMUM,
+                    5f,
                     new PropertyChangedCallback(SetNewWidthData)
                 )
              );
@@ -74,7 +59,7 @@ namespace CatAlog_App.GUI.Views.CustomControls
                 typeof(float),
                 typeof(NumericUpDownControl),
                 new FrameworkPropertyMetadata(
-                    0f,
+                    MINIMUM,
                     new PropertyChangedCallback(SetNewValueData)
                 )
             );
@@ -87,7 +72,7 @@ namespace CatAlog_App.GUI.Views.CustomControls
 
         private void SetNewValue()
         {
-            if (NewValue >= 0 && NewValue <= 10)
+            if (NewValue >= MINIMUM && NewValue <= MAXIMUM)
             {
                 mainTB.Text = NewValue.ToString();
             }
@@ -103,90 +88,72 @@ namespace CatAlog_App.GUI.Views.CustomControls
             mainTB.Width = NewWidth;
         }
 
-        private void UpButton_Click(object sender, RoutedEventArgs e)
+        private void mainTB_previewTextInput(object sender, TextCompositionEventArgs e)
         {
-            float currentValue = 0;
-            if (float.TryParse(mainTB.Text, out currentValue))
+            if (!(Char.IsDigit(e.Text, 0) || (e.Text == "." || e.Text == ",")
+               && (!mainTB.Text.Contains(".") && mainTB.Text.Length != 0)))
             {
-                currentValue += 0.1f;
-                if (currentValue <= 10.0)
-                {
-                    string str = String.Format("{0:F1}", currentValue);
-                    mainTB.Text = str;
-                }
+                e.Handled = true;
             }
         }
-
-        private void DownButton_Click(object sender, RoutedEventArgs e)
+        
+        private void mainTB_TextChanged(object sender, TextChangedEventArgs e)
         {
             float currentValue = 0;
             if (float.TryParse(mainTB.Text, out currentValue))
             {
                 if (currentValue > 10)
                 {
-                    mainTB.Text = MAXIMUM.ToString();
+                    NewValue = MAXIMUM;
                 }
-
-                currentValue -= 0.1f;
-
-                if (currentValue >= 0 && currentValue < MAXIMUM)
+                else
                 {
-                    string str = String.Format("{0:F1}", currentValue);
-                    mainTB.Text = str;
+                    NewValue = currentValue;
                 }
             }
         }
 
-        private void mainTB_previewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            if (!(Char.IsDigit(e.Text, 0) || (e.Text == ".")
-               && (!mainTB.Text.Contains(".") && mainTB.Text.Length != 0)))
-            {
-                e.Handled = true;
-            }
-        }
+        private void UpButton_Click(object sender, RoutedEventArgs e)  => UpValue(null, EventArgs.Empty);      
 
-        private void mainTB_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            float currentValue = 0;
-            if (float.TryParse(mainTB.Text, out currentValue))
-            {
-                NewValue = currentValue;
-            }
-        }
+        private void DownButton_Click(object sender, RoutedEventArgs e) => DownValue(null, EventArgs.Empty);
 
-        private void UpButton_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            _upTimer.Start();
-        }
+        private void UpButton_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e) => _upTimer.Start();        
 
-        private void UpButton_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            _upTimer.Stop();
-        }
+        private void UpButton_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => _upTimer.Stop();
+
+        private void DownButton_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e) => _downTimer.Start();
+
+        private void DownButton_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => _downTimer.Stop();
 
         private void UpValue(object sender, EventArgs e)
         {
-            float currentValue = 0;
-            if (float.TryParse(mainTB.Text, out currentValue))
+            float currentValue = StringValueConverter(mainTB.Text);
+            currentValue += 0.1f;
+            if (currentValue <= MAXIMUM)
             {
-                currentValue += 0.1f;
-                if (currentValue <= 10.0)
-                {
-                    string str = String.Format("{0:F1}", currentValue);
-                    mainTB.Text = str;
-                }
+                mainTB.Text = String.Format("{0:F1}", currentValue);
             }
         }
 
-        private void DownButton_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void DownValue(object sender, EventArgs e)
         {
-
+            float currentValue = StringValueConverter(mainTB.Text);
+            currentValue -= 0.1f;
+            if (currentValue >= MINIMUM)
+            {
+                mainTB.Text = String.Format("{0:F1}", currentValue);
+            }
         }
 
-        private void DownButton_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private float StringValueConverter(string text)
         {
-
+            float value = 0;
+            text = text.Replace('.', ',');
+            if (float.TryParse(text, out value))
+            {
+                return value;
+            }
+            return value; 
         }
     }
 }

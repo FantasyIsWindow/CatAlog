@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CatAlog_App.GUI.Infrastructure.Constants;
+using System;
 using System.Globalization;
 using System.IO;
 using System.Windows.Data;
@@ -13,14 +14,20 @@ namespace CatAlog_App.GUI.Infrastructure.Converters
         {
             if (value is string str)
             {
-                byte[] data = File.ReadAllBytes(str);
-                BitmapImage source = new BitmapImage();
-                source.BeginInit();
-                source.StreamSource = new MemoryStream(data);                
-                source.EndInit();               
-                ImageSource imageSource = source;
-
-                return imageSource;
+                if (!File.Exists(str))
+                {
+                    return OtherConstants.TitleImageDummy;
+                }
+                else
+                {
+                    byte[] data = File.ReadAllBytes(str);
+                    BitmapImage source = new BitmapImage();
+                    source.BeginInit();
+                    source.StreamSource = new MemoryStream(data);
+                    source.EndInit();
+                    ImageSource imageSource = source;
+                    return imageSource;
+                }
             }
             return null;
         }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace CatAlog_App.GUI.Models
-{
+{ 
     public class AdditionalDataModel : ModelBase
     {
         private DtoAdditionalDataModel _additionallyModel;
