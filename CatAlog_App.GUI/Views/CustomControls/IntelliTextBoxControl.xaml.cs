@@ -6,6 +6,8 @@ using System.Windows.Input;
 using System;
 using CatAlog_App.Db.DtoModels;
 using CatAlog_App.GUI.Models;
+using System.Text;
+using System.Linq;
 
 namespace CatAlog_App.GUI.Views.CustomControls
 {
@@ -55,7 +57,12 @@ namespace CatAlog_App.GUI.Views.CustomControls
                 (
                     "Text",
                     typeof(ObservableCollection<PairModel>),
-                    typeof(IntelliTextBoxControl)
+                    typeof(IntelliTextBoxControl),
+                    new FrameworkPropertyMetadata
+                    (
+                        null,
+                        new PropertyChangedCallback(SetData)
+                    )
                 );
 
             DataSourceProperty = DependencyProperty.Register
@@ -64,6 +71,25 @@ namespace CatAlog_App.GUI.Views.CustomControls
                     typeof(List<DtoPairModel>),
                     typeof(IntelliTextBoxControl)
                 );
+        }
+
+        private static void SetData(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            ((IntelliTextBoxControl)d).ParsText();
+        }
+
+        private void ParsText()
+        {
+            if (Text.Count != 0 && Text != null)
+            {
+                StringBuilder builder = new StringBuilder();
+                foreach (var item in Text)
+                {
+                    builder.Append(item.Name);
+                    builder.Append(", ");
+                }
+                textBox.Text = builder.ToString();
+            }
         }
 
         private void textBox_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
@@ -174,10 +200,12 @@ namespace CatAlog_App.GUI.Views.CustomControls
         {
             if (textBox.IsFocused == false && popup.IsOpen == false)
             {
-                var temp = textBox.Text.Split(", ", StringSplitOptions.RemoveEmptyEntries);
+                Text.Clear();
+                var temp = textBox.Text.Split(new string[] { ", " , ","}, StringSplitOptions.RemoveEmptyEntries);
                 foreach (var item in temp)
                 {
-                    Text.Add(new PairModel() { Name = item.Trim() });
+                    uint id = DataSource.FirstOrDefault(i => i.Name == item.Trim())?.Id ?? 0;
+                    Text.Add(new PairModel() { Id = id, Name = item.Trim() });
                 }
             }
         }

@@ -35,6 +35,9 @@ namespace CatAlog_App.GUI.Models
         public MediaDataModel()
         {
             _mediaModel = new DtoMediaModel();
+            _videoData = new ObservableCollection<VideoDataModel>();
+            _audioData = new ObservableCollection<AudioDataModel>();
+            _subtitleData = new ObservableCollection<SubtitleDataModel>();
         }
 
         public uint Id

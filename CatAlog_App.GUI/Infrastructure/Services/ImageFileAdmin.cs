@@ -6,7 +6,6 @@ using System.Net;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Resources;
-using CatAlog_App.Db.DtoModels;
 using System.Drawing;
 using CatAlog_App.GUI.Models;
 using System.Collections.ObjectModel;
@@ -17,7 +16,6 @@ namespace CatAlog_App.GUI.Infrastructure.Services
     {
         public string SaveTitleImage(string pathToImage, string newPath, string fileName)
         {
-            CreateNewFolder(newPath);
             string filePath = Path.Combine(newPath, fileName);
             DeleteExistingFile(newPath, fileName);
             return CopyFile(pathToImage, filePath);
@@ -34,7 +32,7 @@ namespace CatAlog_App.GUI.Infrastructure.Services
             }
         }
 
-        private void CreateNewFolder(string newPath)
+        public void CreateNewFolder(string newPath)
         {
             if (!Directory.Exists(newPath))
             {
@@ -53,11 +51,13 @@ namespace CatAlog_App.GUI.Infrastructure.Services
             }
         }
 
-        public void DeleteScreenshotFiles(List<DtoScreenshotModel> folderPath)
+        public void DeleteScreenshotFiles(ObservableCollection<ScreenshotDataModel> screenshots)
         {
-            foreach (var item in folderPath)
+            foreach (var item in screenshots)
             {
-                var existingFiles = Directory.GetFiles(item.Path);
+                string folderPath = Path.GetDirectoryName(item.Path);
+                string pattern = Path.GetFileName(item.Path);
+                var existingFiles = Directory.GetFiles(folderPath, pattern, SearchOption.TopDirectoryOnly);
                 for (int i = 0; i < existingFiles.Length; i++)
                 {
                     File.Delete(existingFiles[i]);
@@ -68,6 +68,11 @@ namespace CatAlog_App.GUI.Infrastructure.Services
         public void DeleteFolder(string folderPath)
         {
             Directory.Delete(folderPath, true);
+        }
+
+        public void RenameFolder(string oldPath, string newPath)
+        {
+            Directory.Move(oldPath, newPath);
         }
 
         private string GetNewName(ref int index, string newPath, ScreenshotDataModel screenshot)

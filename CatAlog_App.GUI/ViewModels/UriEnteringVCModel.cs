@@ -15,6 +15,10 @@ namespace CatAlog_App.GUI.ViewModels
     {
         private readonly string urlPattern = @"(http|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?";
 
+        private readonly string _placeholder = "Paste the url and press Enter";
+
+        private string _uris;
+
         public delegate void NotifyDelegate();
 
         /// <summary>
@@ -27,7 +31,10 @@ namespace CatAlog_App.GUI.ViewModels
         /// </summary>
         public event NotifyDelegate CloseHandler;
 
-        private string _uris;
+        public UriEnteringVCModel()
+        {
+            _uris = _placeholder;
+        }
 
         public string Urls
         {
@@ -35,9 +42,18 @@ namespace CatAlog_App.GUI.ViewModels
             set => SetProperty(ref _uris, value, "Urls");
         }
 
+        public string Placeholder
+        {
+            get => _placeholder;
+        }
+
         private RellayCommand _okCommand;
 
         private RellayCommand _closeWindow;
+
+        private RellayCommand _gotFocus;
+
+        private RellayCommand _lostFocus;
 
         public RellayCommand OkCommand
         {
@@ -46,7 +62,7 @@ namespace CatAlog_App.GUI.ViewModels
                 return _okCommand ??
                        (_okCommand = new RellayCommand(obj =>
                        {
-                           if (!string.IsNullOrEmpty(_uris))
+                           if (!string.IsNullOrEmpty(_uris) && _uris != _placeholder)
                            {
                                if (OkHandler != null)
                                {
@@ -64,5 +80,35 @@ namespace CatAlog_App.GUI.ViewModels
 
         public RellayCommand CloseWindow =>
             _closeWindow = new RellayCommand(c => CloseHandler?.Invoke());
+
+        public RellayCommand GotFocus
+        {
+            get
+            {
+                return _gotFocus ??
+                    (_gotFocus = new RellayCommand(obj =>
+                    {
+                        if (Urls == _placeholder)
+                        {
+                            Urls = "";
+                        }
+                    }));
+            }
+        }
+
+        public RellayCommand LostFocus
+        {
+            get
+            {
+                return _lostFocus ??
+                    (_lostFocus = new RellayCommand(obj =>
+                    {
+                        if (string.IsNullOrEmpty(Urls))
+                        {
+                            Urls = Placeholder;
+                        }
+                    }));
+            }
+        }
     }
 }

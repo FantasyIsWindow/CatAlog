@@ -103,7 +103,7 @@ namespace CatAlog_App.Db.Repositories
             var result = _db.Actors.ToList();
             for (int i = 0; i < models.Count; i++)
             {
-                var element = result.FirstOrDefault(a => a.Name == models[i].Name);
+                var element = result.FirstOrDefault(a => a.Id == models[i].Id);
                 if (element != null)
                 {
                     actors.Add(new AdditionallyData_Actor() { Actor = element });
@@ -123,7 +123,7 @@ namespace CatAlog_App.Db.Repositories
             var result = _db.Companies.ToList();
             for (int i = 0; i < models.Count; i++)
             {
-                var element = result.FirstOrDefault(a => a.Name == models[i].Name);
+                var element = result.FirstOrDefault(a => a.Id == models[i].Id);
                 if (element != null)
                 {
                     companies.Add(new AdditionallyData_Company() { Company = element });
@@ -143,7 +143,7 @@ namespace CatAlog_App.Db.Repositories
             var result = _db.Countries.ToList();
             for (int i = 0; i < models.Count; i++)
             {
-                var element = result.FirstOrDefault(a => a.Name == models[i].Name);
+                var element = result.FirstOrDefault(a => a.Id == models[i].Id);
                 if (element != null)
                 {
                     countries.Add(new AdditionallyData_Country() { Country = element });
@@ -163,7 +163,7 @@ namespace CatAlog_App.Db.Repositories
             var result = _db.Genres.ToList();
             for (int i = 0; i < models.Count; i++)
             {
-                var element = result.FirstOrDefault(a => a.Name == models[i].Name);
+                var element = result.FirstOrDefault(a => a.Id == models[i].Id);
                 if (element != null)
                 {
                     genres.Add(new AdditionallyData_Genre() { Genre = element });
@@ -183,7 +183,7 @@ namespace CatAlog_App.Db.Repositories
             var result = _db.Producers.ToList();
             for (int i = 0; i < models.Count; i++)
             {
-                var element = result.FirstOrDefault(a => a.Name == models[i].Name);
+                var element = result.FirstOrDefault(a => a.Id == models[i].Id);
                 if (element != null)
                 {
                     producers.Add(new AdditionallyData_Producer() { Producer = element });
@@ -203,7 +203,7 @@ namespace CatAlog_App.Db.Repositories
             var result = _db.Screenwriters.ToList();
             for (int i = 0; i < models.Count; i++)
             {
-                var element = result.FirstOrDefault(a => a.Name == models[i].Name);
+                var element = result.FirstOrDefault(a => a.Id == models[i].Id);
                 if (element != null)
                 {
                     screenwriter.Add(new AdditionallyData_Screenwriter() { Screenwriter = element });

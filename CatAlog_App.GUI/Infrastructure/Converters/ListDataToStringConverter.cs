@@ -16,7 +16,8 @@ namespace CatAlog_App.GUI.Infrastructure.Converters
                 StringBuilder builder = new StringBuilder();
                 foreach (var item in list)
                 {                    
-                    builder.Append(item.Name + ", ");
+                    builder.Append(item.Name);
+                    builder.Append(", ");
                 }
 
                 if (builder.Length != 0)

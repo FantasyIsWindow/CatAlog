@@ -1,0 +1,10 @@
+﻿<UserControl x:Class="CatAlog_App.GUI.Views.CustomControls.EpisodesTextBoxControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <TextBox TextWrapping="Wrap" 
+             AcceptsReturn="True" 
+             LostFocus="TextBox_LostFocus" 
+             GotFocus="textBox_GotFocus" 
+             x:Name="textBox"              
+             Style="{StaticResource textBoxGlobalTemplate}"/>
+</UserControl>

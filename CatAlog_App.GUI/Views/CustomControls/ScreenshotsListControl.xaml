@@ -1,6 +1,10 @@
 ﻿<UserControl x:Class="CatAlog_App.GUI.Views.CustomControls.ScreenshotsListControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:Converters="clr-namespace:CatAlog_App.GUI.Infrastructure.Converters">
+    <UserControl.Resources>
+        <Converters:ImageToByteStreamConverter x:Key="imageConverter"/>
+    </UserControl.Resources>
     <Grid>
         <ListBox x:Name="list"
                  ItemsSource="{Binding DataList}" 
@@ -16,7 +20,7 @@
                                         <ControlTemplate TargetType="{x:Type ListBoxItem}">
                                             <Border BorderThickness="0.5" BorderBrush="Gray" x:Name="border">
                                                 <Grid>
-                                                    <Image Width="250" Source="{Binding Path=Path}" Margin="5" x:Name="listImage">
+                                                    <Image Width="250" Source="{Binding Path=Path, Converter={StaticResource imageConverter}}" Margin="5" x:Name="listImage">
                                                         <Image.Triggers>
                                                             <EventTrigger RoutedEvent="UIElement.MouseDown">
                                                                 <BeginStoryboard>

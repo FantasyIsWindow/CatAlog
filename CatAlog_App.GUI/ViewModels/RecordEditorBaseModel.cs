@@ -3,9 +3,7 @@ using CatAlog_App.Db.DtoModels;
 using CatAlog_App.Db.Repositories;
 using CatAlog_App.GUI.Infrastructure.Services;
 using CatAlog_App.GUI.Models;
-using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace CatAlog_App.GUI.ViewModels
@@ -19,6 +17,8 @@ namespace CatAlog_App.GUI.ViewModels
         protected PropertyLibrary _configModel;
 
         protected ImageFileAdmin _fileAdmin;
+
+        protected DataPackModel _packModel;
 
         protected object _currentPage;
 
@@ -36,6 +36,11 @@ namespace CatAlog_App.GUI.ViewModels
             set => SetProperty(ref _displayType, value, "DisplayType");
         }
 
+        public DataPackModel PackModel
+        {
+            get => _packModel;
+            set => SetProperty(ref _packModel, value, "PackModel");
+        }
 
         protected RellayCommand _okCommand;
 
@@ -44,41 +49,10 @@ namespace CatAlog_App.GUI.ViewModels
         public RellayCommand CancelCommand =>
             _cancelCommand = new RellayCommand((c) => Close());
 
-        /// <summary>
-        /// Splitting a string and collecting a new array of objects of the SeriesGUI class
-        /// </summary>
-        /// <returns></returns>
-        protected ObservableCollection<EpisodeModel> EpisodesParser()
-        {
-            ObservableCollection<EpisodeModel> series = new ObservableCollection<EpisodeModel>();
-            if (Episodes != null)
-            {
-                var temp = Episodes.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
-                foreach (var item in temp)
-                {
-                    var str = item.Split(new string[] { ". ", ") " }, StringSplitOptions.RemoveEmptyEntries);
-                    EpisodeModel sGui = new EpisodeModel()
-                    {
-                        Number = str[0],
-                        Name = str[1]
-                    };
-                    series.Add(sGui);
-                }
-            }
-            return series;
-        }
-
         #endregion
 
         #region GENERAL_DATA
 
-        protected MainDataModel _generalData;
-
-        public MainDataModel GeneralData
-        {
-            get => _generalData;
-            set => SetProperty(ref _generalData, value, "GeneralData");
-        }
 
         #region TITLE_IMAGE_DATA
 
@@ -96,7 +70,8 @@ namespace CatAlog_App.GUI.ViewModels
                 return _addTitleImageCommand ??
                     (_addTitleImageCommand = new RellayCommand(obj =>
                     {
-                        _generalData.TitleImage = OpenDialogManager.OpenFileDialog();
+                        string newTitlePath = OpenDialogManager.OpenFileDialog();
+                        _packModel.MainData.TitleImage = newTitlePath ?? _packModel.MainData.TitleImage;
                     }));
             }
         }
@@ -108,7 +83,7 @@ namespace CatAlog_App.GUI.ViewModels
                 return _removeTitleImageCommand ??
                     (_removeTitleImageCommand = new RellayCommand(obj =>
                     {
-                        _generalData.TitleImage = _configModel.GraphicDataFolderName;
+                        _packModel.MainData.TitleImage = _configModel.GraphicDataFolderName;
                     }));
             }
         }
@@ -124,7 +99,7 @@ namespace CatAlog_App.GUI.ViewModels
                         _urlModelView.OkHandler += ((sender, args) =>
                         {
                             UriEventArgs e = args as UriEventArgs;
-                            _generalData.TitleImage = e.Uri.FirstOrDefault();
+                            _packModel.MainData.TitleImage = e.Uri.FirstOrDefault();
                         });
                         _urlModelView.CloseHandler += (() => CurrentPage = null);
                         CurrentPage = _urlModelView;
@@ -176,7 +151,7 @@ namespace CatAlog_App.GUI.ViewModels
                             UriEventArgs e = args as UriEventArgs;
                             foreach (var item in e.Uri)
                             {
-                                _generalData.Screenshots.Add(new ScreenshotDataModel()
+                                _packModel.MainData.Screenshots.Add(new ScreenshotDataModel()
                                 {
                                     Path = item
                                 });
@@ -196,12 +171,15 @@ namespace CatAlog_App.GUI.ViewModels
                     (_addScreenshotsForFilesCommand = new RellayCommand(obj =>
                     {
                         var paths = OpenDialogManager.OpenFilesDialog();
-                        foreach (var path in paths)
+                        if (paths != null)
                         {
-                            _generalData.Screenshots.Add(new ScreenshotDataModel()
+                            foreach (var path in paths)
                             {
-                                Path = path
-                            });
+                                _packModel.MainData.Screenshots.Add(new ScreenshotDataModel()
+                                {
+                                    Path = path
+                                });
+                            }
                         }
                     }));
             }
@@ -214,7 +192,7 @@ namespace CatAlog_App.GUI.ViewModels
                 return _removieScreenshotCommand ??
                     (_removieScreenshotCommand = new RellayCommand(obj =>
                     {
-                        _generalData.Screenshots.Remove(_selectedScreenshot);
+                        _packModel.MainData.Screenshots.Remove(_selectedScreenshot);
                     },
                         (obj) => _selectedScreenshot != null
                     ));
@@ -228,9 +206,9 @@ namespace CatAlog_App.GUI.ViewModels
                 return _clearScreenshotsCollectionCommand ??
                     (_clearScreenshotsCollectionCommand = new RellayCommand(obj =>
                     {
-                        _generalData.Screenshots.Clear();
+                        _packModel.MainData.Screenshots.Clear();
                     },
-                        (obj) => _generalData.Screenshots != null && _generalData.Screenshots.Count != 0
+                        (obj) => _packModel.MainData.Screenshots != null && _packModel.MainData.Screenshots.Count != 0
                     ));
             }
         }
@@ -242,7 +220,7 @@ namespace CatAlog_App.GUI.ViewModels
                 return _enterScreenUrlCommand ??
                     (_enterScreenUrlCommand = new RellayCommand(obj =>
                     {
-                        _generalData.Screenshots.Add(new ScreenshotDataModel()
+                        _packModel.MainData.Screenshots.Add(new ScreenshotDataModel()
                         {
                             Path = _screenshotUrl
                         });
@@ -257,8 +235,6 @@ namespace CatAlog_App.GUI.ViewModels
 
         #region ADDITIONALLY_DATA
 
-        protected AdditionalDataModel _additionalInfo;
-
         protected List<DtoPairModel> _countries;
 
         protected List<DtoPairModel> _genres;
@@ -272,12 +248,6 @@ namespace CatAlog_App.GUI.ViewModels
         protected List<DtoPairModel> _screenwriters;
 
         protected List<DtoPairModel> _actors;
-
-        public AdditionalDataModel AdditionalInfo
-        {
-            get => _additionalInfo;
-            set => SetProperty(ref _additionalInfo, value, "AdditionalInfo");
-        }
 
         public List<DtoPairModel> Countries
         {
@@ -325,15 +295,7 @@ namespace CatAlog_App.GUI.ViewModels
 
         #region SERIAL_DATA
 
-        protected SerialDataModel _serialInfo;
-
         protected List<string> _serialTypes;
-
-        public SerialDataModel SerialInfo
-        {
-            get => _serialInfo;
-            set => SetProperty(ref _serialInfo, value, "SerialInfo");
-        }
 
         public List<string> SerialTypes
         {
@@ -349,22 +311,11 @@ namespace CatAlog_App.GUI.ViewModels
             set => SetProperty(ref _episodes, value, "Episodes");
         }
 
-
         #endregion
 
         #region MEDIA_DATA
 
-        protected MediaDataModel _mediaInfo;
-
-        public MediaDataModel MediaInfo
-        {
-            get => _mediaInfo;
-            set => SetProperty(ref _mediaInfo, value, "MediaInfo");
-        }
-
         #region VIDEO_DATA
-
-        protected ObservableCollection<VideoDataModel> _videoInfo;
 
         protected VideoDataModel _selectedVideoItem;
 
@@ -377,12 +328,6 @@ namespace CatAlog_App.GUI.ViewModels
         protected List<ushort> _videoResolutionHeigth;
 
         protected List<string> _videoFormats;
-
-        public ObservableCollection<VideoDataModel> VideoInfo
-        {
-            get => _videoInfo;
-            set => _videoInfo = value;
-        }
 
         public VideoDataModel SelectedVideoItem
         {
@@ -434,7 +379,7 @@ namespace CatAlog_App.GUI.ViewModels
                     (_addNewVideoItemCommand = new RellayCommand(obj =>
                     {
                         VideoDataModel item = new VideoDataModel();
-                        _videoInfo.Add(item);
+                        _packModel.MediaData.VideoData.Add(item);
                     }));
             }
         }
@@ -446,7 +391,7 @@ namespace CatAlog_App.GUI.ViewModels
                 return _removieVideoItemCommand ??
                     (_removieVideoItemCommand = new RellayCommand(obj =>
                     {
-                        _videoInfo.Remove(_selectedVideoItem);
+                        _packModel.MediaData.VideoData.Remove(_selectedVideoItem);
                     },
                         (obj) => _selectedVideoItem != null)
                     );
@@ -460,9 +405,9 @@ namespace CatAlog_App.GUI.ViewModels
                 return _clearVideoCollectionCommand ??
                     (_clearVideoCollectionCommand = new RellayCommand(obj =>
                     {
-                        _videoInfo.Clear();
+                        _packModel.MediaData.VideoData.Clear();
                     },
-                        (obj) => _videoInfo != null && _videoInfo.Count != 0)
+                        (obj) => _packModel.MediaData.VideoData != null && _packModel.MediaData.VideoData.Count != 0)
                     );
             }
         }
@@ -470,8 +415,6 @@ namespace CatAlog_App.GUI.ViewModels
         #endregion
 
         #region AUDIO_DATA
-
-        protected ObservableCollection<AudioDataModel> _audioInfo;
 
         protected AudioDataModel _selectedAudioItem;
 
@@ -482,12 +425,6 @@ namespace CatAlog_App.GUI.ViewModels
         protected List<string> _audioLanguage;
 
         protected List<string> _audioAuthor;
-
-        public ObservableCollection<AudioDataModel> AudioInfo
-        {
-            get => _audioInfo;
-            set => _audioInfo = value;
-        }
 
         public AudioDataModel SelectedAudioItem
         {
@@ -533,7 +470,7 @@ namespace CatAlog_App.GUI.ViewModels
                     (_addNewAudioItemCommand = new RellayCommand(obj =>
                     {
                         AudioDataModel item = new AudioDataModel();
-                        _audioInfo.Add(item);
+                        _packModel.MediaData.AudioData.Add(item);
                     }));
             }
         }
@@ -545,7 +482,7 @@ namespace CatAlog_App.GUI.ViewModels
                 return _removieAudioItemCommand ??
                     (_removieAudioItemCommand = new RellayCommand(obj =>
                     {
-                        _audioInfo.Remove(_selectedAudioItem);
+                        _packModel.MediaData.AudioData.Remove(_selectedAudioItem);
                     },
                         (obj) => _selectedAudioItem != null)
                     );
@@ -559,9 +496,9 @@ namespace CatAlog_App.GUI.ViewModels
                 return _clearAudioCollectionCommand ??
                     (_clearAudioCollectionCommand = new RellayCommand(obj =>
                     {
-                        _audioInfo.Clear();
+                        _packModel.MediaData.AudioData.Clear();
                     },
-                        (obj) => _audioInfo != null && _audioInfo.Count != 0)
+                        (obj) => _packModel.MediaData.AudioData != null && _packModel.MediaData.AudioData.Count != 0)
                     );
             }
         }
@@ -570,8 +507,6 @@ namespace CatAlog_App.GUI.ViewModels
 
         #region SUBTITLE_DATA
 
-        protected ObservableCollection<SubtitleDataModel> _subtitleInfo;
-
         protected SubtitleDataModel _selectedSubtitleItem;
 
         protected List<string> _subtitleLanguage;
@@ -579,12 +514,6 @@ namespace CatAlog_App.GUI.ViewModels
         protected List<string> _subtitleAuthor;
 
         protected List<string> _subtitleFormat;
-
-        public ObservableCollection<SubtitleDataModel> SubtitleInfo
-        {
-            get => _subtitleInfo;
-            set => _subtitleInfo = value;
-        }
 
         public SubtitleDataModel SelectedSubtitleItem
         {
@@ -625,7 +554,7 @@ namespace CatAlog_App.GUI.ViewModels
                     (_addNewSubtitleItemCommand = new RellayCommand(obj =>
                     {
                         SubtitleDataModel item = new SubtitleDataModel();
-                        _subtitleInfo.Add(item);
+                        _packModel.MediaData.SubtitleData.Add(item);
                     }));
             }
         }
@@ -637,7 +566,7 @@ namespace CatAlog_App.GUI.ViewModels
                 return _removieSubtitleItemCommand ??
                     (_removieSubtitleItemCommand = new RellayCommand(obj =>
                     {
-                        _subtitleInfo.Remove(_selectedSubtitleItem);
+                        _packModel.MediaData.SubtitleData.Remove(_selectedSubtitleItem);
                     },
                         (obj) => _selectedSubtitleItem != null)
                     );
@@ -651,9 +580,9 @@ namespace CatAlog_App.GUI.ViewModels
                 return _clearSubtitleCollectionCommand ??
                     (_clearSubtitleCollectionCommand = new RellayCommand(obj =>
                     {
-                        _subtitleInfo.Clear();
+                        _packModel.MediaData.SubtitleData.Clear();
                     },
-                        (obj) => _subtitleInfo != null && _subtitleInfo.Count != 0)
+                        (obj) => _packModel.MediaData.SubtitleData != null && _packModel.MediaData.SubtitleData.Count != 0)
                     );
             }
         }

@@ -17,14 +17,16 @@ namespace CatAlog_App.GUI.Models
             MainData = new MainDataModel(model.DtoMainData);
             AdditionallyData = new AdditionalDataModel(model.DtoAdditionallyData);
             MediaData = new MediaDataModel(model.DtoMediaData);
-            if (model.DtoSerialData != null)
-            {
-                SerialData = new SerialDataModel(model.DtoSerialData);
-            }
+            SerialData = model.DtoSerialData != null ? new SerialDataModel(model.DtoSerialData) : new SerialDataModel();
         }
-
+        
         public DataPackModel()
-        { }
+        {
+            MainData = new MainDataModel();
+            AdditionallyData = new AdditionalDataModel();
+            SerialData = new SerialDataModel();
+            MediaData = new MediaDataModel();
+        }
 
         public DtoFullVideoData GetModel()
         {

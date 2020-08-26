@@ -4,28 +4,22 @@ using CatAlog_App.GUI.Infrastructure.Services;
 using CatAlog_App.GUI.Models;
 using System;
 using System.Collections.ObjectModel;
+using System.IO;
 
 namespace CatAlog_App.GUI.ViewModels
 {
     public class MainViewModel : WindowsManager
     {
         private LoadRepository _loadDb;
-
         private DeleteRepository _deleteDb;
-
         private CategoryModel _selectedCategoryModel;
-
         private ShortRecordInfoModel _selectedShortRecordModel;
-
         private DataPackModel _mainInfoModel;
-
         private ObservableCollection<CatalogHierarchyModel> _categoryHierarhy;
-
         private ObservableCollection<ShortRecordInfoModel> _displayedCollection;
-
         private object _viewContent;
-
         private SettingsManager _settingsManager;
+        private ImageFileAdmin _imageAdmin;
 
         public ObservableCollection<CatalogHierarchyModel> CategoryHierarhy
         {
@@ -64,10 +58,16 @@ namespace CatAlog_App.GUI.ViewModels
             _categoryHierarhy = new ObservableCollection<CatalogHierarchyModel>();
             _displayedCollection = new ObservableCollection<ShortRecordInfoModel>();
             _settingsManager = new SettingsManager();
+            _imageAdmin = new ImageFileAdmin();
             GetDataForTreeView();
         }
 
         private RellayCommand _treeViewSelectionChanged;
+        private RellayCommand _listBoxSelectionChanged;
+        private RellayCommand _openTemplateSelectionView;
+        private RellayCommand _removieSelectedRecord;
+        private RellayCommand _dbAdd;
+        private RellayCommand _updateSelectedRecord;
 
         public RellayCommand TreeViewSelectionChanged
         {
@@ -85,7 +85,6 @@ namespace CatAlog_App.GUI.ViewModels
             }
         }
 
-        private RellayCommand _listBoxSelectionChanged;
         public RellayCommand ListBoxSelectionChanged
         {
             get
@@ -102,7 +101,6 @@ namespace CatAlog_App.GUI.ViewModels
             }
         }
 
-        private RellayCommand _openTemplateSelectionView;
         public RellayCommand OpenTemplateSelectionView
         {
             get
@@ -118,7 +116,6 @@ namespace CatAlog_App.GUI.ViewModels
             }
         }
 
-        private RellayCommand _removieSelectedRecord;
         public RellayCommand RemovieSelectedRecord
         {
             get
@@ -128,6 +125,8 @@ namespace CatAlog_App.GUI.ViewModels
                     {
                         uint id = MainInfoModel.MainData.Id;
                         _deleteDb.RemoveRecord(id);
+                        string pathToFolder = Path.GetDirectoryName(MainInfoModel.MainData.TitleImage);
+                        _imageAdmin.DeleteFolder(pathToFolder);
                         _displayedCollection.Remove(_selectedShortRecordModel);
                         _selectedCategoryModel.Count -= 1;
                     },
@@ -136,7 +135,6 @@ namespace CatAlog_App.GUI.ViewModels
             }
         }
 
-        private RellayCommand _dbAdd;
         public RellayCommand DbAdd
         {
             get
@@ -152,7 +150,6 @@ namespace CatAlog_App.GUI.ViewModels
                     }));
             }
         }
-
         private void OpenEditorRecordWindow(object sender, EventArgs e)
         {
             ViewControlEventArgs eventArgs = e as ViewControlEventArgs;
@@ -160,11 +157,10 @@ namespace CatAlog_App.GUI.ViewModels
             {
                 Title = $"Filling in a new {eventArgs.FirstValue.ToLower()} record"
             };
-            baseModel.OkHandler += (() => _selectedCategoryModel.Count += 1);
+            baseModel.OkHandler += (() => _selectedCategoryModel.Count += 1); // Ошибка при отсутствии выбора в дереве
             ShowDialog(baseModel);
         }
 
-        private RellayCommand _updateSelectedRecord;
         public RellayCommand UpdateSelectedRecord
         {
             get

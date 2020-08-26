@@ -2,13 +2,40 @@
 using CatAlog_App.Db.Repositories;
 using CatAlog_App.GUI.Infrastructure.Services;
 using CatAlog_App.GUI.Models;
-using System.Text;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
+using System;
 
 namespace CatAlog_App.GUI.ViewModels
 {
     public class UpdaterRecordViewModel : RecordEditorBaseModel
     {
-        #region SHARED_PAGE_DATA
+        private readonly string _folderPath;
+        private readonly string _titlePathCopy;
+        private List<string> _categories;
+        private ObservableCollection<ScreenshotDataModel> _screenshotsCopy;
+
+        public List<string> Categories
+        {
+            get => _categories; 
+            set => _categories = value; 
+        }
+
+        public UpdaterRecordViewModel(DataPackModel generalData, LoadRepository repository, PropertyLibrary config) : base(repository, config)
+        {
+            DisplayType = "Update";
+            _packModel = generalData;
+            _folderPath = CreatePathToImagesFolder();
+            _titlePathCopy = _packModel.MainData.TitleImage;
+            _categories = repository.GetCategories();
+            _screenshotsCopy = new ObservableCollection<ScreenshotDataModel>();
+            foreach (var item in _packModel.MainData.Screenshots)
+            {
+                _screenshotsCopy.Add(item);
+            }
+        }
 
         public RellayCommand OkCommand
         {
@@ -17,62 +44,79 @@ namespace CatAlog_App.GUI.ViewModels
                 return _okCommand ??
                     (_okCommand = new RellayCommand(obj =>
                     {
-                        //if (_serialInfo != null && _serialInfo.Episodes.Count != 0)
-                        //{
-                        //    _serialInfo.Episodes = ParsingSeries();
-                        //}
-
-                        //DataPackModel gData = new DataPackModel();
-                        //gData.MainData = _generalData;
-                        //gData.AdditionallyData = _additionalInfo;
-                        //gData.SerialData = _serialInfo;
-                        //gData.MediaData = _mediaInfo;
-                        //gData.MediaData.VideoData = _videoInfo;
-                        //gData.MediaData.AudioData = _audioInfo;
-                        //gData.MediaData.SubtitleData = _subtitleInfo;
-
                         UpdateRepository updateRepository = new UpdateRepository();
-                        updateRepository.UpdateRecord()
+                        
+                        TitleUpdate(_folderPath);
+                        ScreenshotsUpdate(_folderPath);
 
-                       // _repository.UpdateData.UpdateRecord(gData.GetModel(), _configModel.DbFolderPath);
+                        string newFolderPath = CreatePathToImagesFolder();
+                        if (newFolderPath != _folderPath)
+                        {
+                            _fileAdmin.RenameFolder(_folderPath, newFolderPath);
 
+                            _packModel.MainData.TitleImage = GetNewTitlePath(newFolderPath);
+                            ReplacePathToScreenshots(newFolderPath, _packModel.MainData.Screenshots);
+                        }
+
+                        updateRepository.UpdateRecord(_packModel.GetModel());
                         CancelCommand.Execute(null);
                     }));
             }
         }
 
-        #endregion
-               
-        #region INITIALIZATION
-
-        public UpdaterRecordViewModel(DataPackModel generalData, LoadRepository repository, PropertyLibrary config) : base(repository, config)
+        private string CreatePathToImagesFolder()
         {
-            DisplayType = "Update";
-            _repository = repository;
-            _generalData = generalData.MainData;
-            _additionalInfo = generalData.AdditionallyData;
-            _serialInfo = generalData.SerialData;
-            _mediaInfo = generalData.MediaData;
-            _videoInfo = generalData.MediaData.VideoData;
-            _audioInfo = generalData.MediaData.AudioData;
-            _subtitleInfo = generalData.MediaData.SubtitleData;
-
-            GetSeriesString();
+            char[] separators = new char[] { ':', ':' };
+            var recordName = _packModel.MainData.Name.FirstName.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+            string newFolderPath = Path.Combine(_configModel.GraphicDataFolderName, _packModel.MainData.Template, _packModel.MainData.Category, recordName[0]);
+            return newFolderPath;
         }
 
-        private void GetSeriesString()
+        private void TitleUpdate(string newFolderPath)
         {
-            if (_serialInfo != null && _serialInfo.Episodes != null)
+            if (_titlePathCopy != _packModel.MainData.TitleImage)
             {
-                StringBuilder builder = new StringBuilder();
-                foreach (var info in _serialInfo.Episodes)
-                {
-                    builder.Append($"{info.Number}. {info.Name}.\n");
-                }
-                _episodes = builder.ToString();
+                _packModel.MainData.TitleImage = _fileAdmin.SaveTitleImage(_packModel.MainData.TitleImage, newFolderPath, _configModel.TitleImageName);
             }
         }
 
-        #endregion
+        private void ScreenshotsUpdate(string newFolderPath)
+        {
+            var newScreenshots = new ObservableCollection<ScreenshotDataModel>();
+            for (int i = 0; i < _packModel.MainData.Screenshots.Count; i++)
+            {
+                var tempItem = _screenshotsCopy.FirstOrDefault(s => s.Path == _packModel.MainData.Screenshots[i].Path);
+                if (tempItem != null)
+                {
+                    _screenshotsCopy.Remove(tempItem);
+                }
+                else
+                {
+                    newScreenshots.Add(_packModel.MainData.Screenshots[i]);
+                }
+            }
+            if (_screenshotsCopy.Count != 0)
+            {
+                _fileAdmin.DeleteScreenshotFiles(_screenshotsCopy);
+            }
+
+            _fileAdmin.SaveScreenshots(newScreenshots, newFolderPath);
+        }
+
+        private string GetNewTitlePath(string newFolderPath)
+        {
+            string currentPath = Path.GetFileName(_packModel.MainData.TitleImage);
+            string newPathToTitle = Path.Combine(newFolderPath, currentPath);
+            return newPathToTitle;
+        }
+
+        private void ReplacePathToScreenshots(string newFolderPath, ObservableCollection<ScreenshotDataModel> screenshots)
+        {
+            for (int i = 0; i < screenshots.Count; i++)
+            {
+                string currentPath = Path.GetFileName(screenshots[i].Path);
+                screenshots[i].Path = Path.Combine(newFolderPath, currentPath);
+            }
+        }
     }
 }

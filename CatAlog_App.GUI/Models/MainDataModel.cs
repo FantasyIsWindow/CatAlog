@@ -23,9 +23,9 @@ namespace CatAlog_App.GUI.Models
 
         public MainDataModel()
         {
+            _mainModel = new DtoMainRecordModel();
             _name = new NameDataModel();
             _screenshots = new ObservableCollection<ScreenshotDataModel>();
-            _mainModel = new DtoMainRecordModel();
         }
 
         public uint Id
