@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace CatAlog_App.Db.Repositories
 {
-    public class DeleteRepository
+    public class DeleteRepository : IDeleteRepository
     {
         private CatalogContext _db;
 

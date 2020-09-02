@@ -8,8 +8,7 @@ namespace CatAlog_App.GUI.ViewModels
         public event NotifyDelegate CloseHandler;
 
         protected RellayCommand _okCommand;
-
-        private RellayCommand _closeCommand;
+        private   RellayCommand _closeCommand;
 
         public RellayCommand CloseCommand =>
             _closeCommand = new RellayCommand(c => CloseHandler?.Invoke());

@@ -24,7 +24,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <TextBox x:Name="tb" Padding="0, 0, 30, 0" Text="{Binding Settings.DbFolderPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <Button HorizontalAlignment="Right" Margin="0, 0, 1, 0" Command="{Binding AddNewPath}" Style="{StaticResource dbInfoOpenFolderBtnStyle}"/>
+                <Button HorizontalAlignment="Right" Margin="0, 0, 1, 0" Command="{Binding AddNewPathCommand}" Style="{StaticResource dbInfoOpenFolderBtnStyle}"/>
             </Grid>
         </Border>
         <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Margin="0, 0, 10, 0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">

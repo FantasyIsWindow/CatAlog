@@ -13,28 +13,11 @@ namespace CatAlog_App.GUI.ViewModels
         #region SHARED_PAGE_DATA
 
         protected LoadRepository _repository;
-
         protected PropertyLibrary _configModel;
-
-        protected ImageFileAdmin _fileAdmin;
-
+        protected ImageAdmin _fileAdmin;
         protected DataPackModel _packModel;
-
         protected object _currentPage;
-
-        public object CurrentPage
-        {
-            get => _currentPage;
-            set => SetProperty(ref _currentPage, value, "CurrentPage");
-        }
-
         private string _displayType;
-
-        public string DisplayType
-        {
-            get => _displayType;
-            set => SetProperty(ref _displayType, value, "DisplayType");
-        }
 
         public DataPackModel PackModel
         {
@@ -42,8 +25,19 @@ namespace CatAlog_App.GUI.ViewModels
             set => SetProperty(ref _packModel, value, "PackModel");
         }
 
-        protected RellayCommand _okCommand;
+        public object CurrentPage
+        {
+            get => _currentPage;
+            set => SetProperty(ref _currentPage, value, "CurrentPage");
+        }
 
+        public string DisplayType
+        {
+            get => _displayType;
+            set => SetProperty(ref _displayType, value, "DisplayType");
+        }
+
+        protected RellayCommand _okCommand;
         protected RellayCommand _cancelCommand;
 
         public RellayCommand CancelCommand =>
@@ -51,17 +45,49 @@ namespace CatAlog_App.GUI.ViewModels
 
         #endregion
 
-        #region GENERAL_DATA
+        #region INITIALIZATION
 
+        public RecordEditorBaseModel(LoadRepository repository, PropertyLibrary config)
+        {
+            _repository = repository;
+            _configModel = config;
+            _fileAdmin = new ImageAdmin();
+
+            Countries = _repository.GetCountiesList();
+            Genres = _repository.GetGenresList();
+            Companies = _repository.GetCompaniesList();
+            ReleaseAuthors = _repository.GetReleaseAuthorsList();
+            Regisseurs = _repository.GetProducersList();
+            Screenwriters = _repository.GetScreenwritersList();
+            Actors = _repository.GetActorsList();
+
+            SerialTypes = _repository.GetSerialTypeList();
+
+            VideoQuality = _repository.GetVideoQualityList();
+            VideoRelation = _repository.GetVideoRelationList();
+            VideoResolutionWidth = _repository.GetVideoWidthList();
+            VideoResolutionHeigth = _repository.GetVideoHeightList();
+            VideoFormats = _repository.GetVideoFormatsList();
+
+            AudioFormat = _repository.GetAudioFormatsList();
+            AudioChannel = _repository.GetAudioChanelsList();
+            AudioLanguage = _repository.GetAudioLanguagesList();
+            AudioAuthor = _repository.GetAudioAuthorsList();
+
+            SubtitleLanguage = _repository.GetSubtitleLanguagesList();
+            SubtitleAuthor = _repository.GetSubtitleAuthorsList();
+            SubtitleFormat = _repository.GetSubtitlesFormatList();
+        }
+
+        #endregion
+
+        #region GENERAL_DATA
 
         #region TITLE_IMAGE_DATA
 
         private RellayCommand _addTitleImageCommand;
-
         private RellayCommand _removeTitleImageCommand;
-
         private RellayCommand _addTitleImageForUrlCommand;
-
 
         public RellayCommand AddTitleImageCommand
         {
@@ -95,14 +121,14 @@ namespace CatAlog_App.GUI.ViewModels
                 return _addTitleImageForUrlCommand ??
                     (_addTitleImageForUrlCommand = new RellayCommand(obj =>
                     {
-                        UriEnteringVCModel _urlModelView = new UriEnteringVCModel();
-                        _urlModelView.OkHandler += ((sender, args) =>
+                        UriEnteringVCModel urlModelView = new UriEnteringVCModel();
+                        urlModelView.OkHandler += ((sender, args) =>
                         {
                             UriEventArgs e = args as UriEventArgs;
                             _packModel.MainData.TitleImage = e.Uri.FirstOrDefault();
                         });
-                        _urlModelView.CloseHandler += (() => CurrentPage = null);
-                        CurrentPage = _urlModelView;
+                        urlModelView.CloseHandler += (() => CurrentPage = null);
+                        CurrentPage = urlModelView;
                     }));
             }
         }
@@ -113,30 +139,16 @@ namespace CatAlog_App.GUI.ViewModels
 
         protected ScreenshotDataModel _selectedScreenshot;
 
-        protected string _screenshotUrl;
-
         public ScreenshotDataModel SelectedScreenshot
         {
             get => _selectedScreenshot;
             set => SetProperty(ref _selectedScreenshot, value, "SelectedScreenshot");
         }
 
-        public string ScreenshotUrl
-        {
-            get => _screenshotUrl;
-            set => _screenshotUrl = value;
-        }
-
         private RellayCommand _addScrinshotsForUrlCommand;
-
         private RellayCommand _addScreenshotsForFilesCommand;
-
         private RellayCommand _removieScreenshotCommand;
-
         private RellayCommand _clearScreenshotsCollectionCommand;
-
-        private RellayCommand _enterScreenUrlCommand;
-
 
         public RellayCommand AddScrinshotsForUrlCommand
         {
@@ -213,97 +225,33 @@ namespace CatAlog_App.GUI.ViewModels
             }
         }
 
-        public RellayCommand EnterScreenUrlCommand
-        {
-            get
-            {
-                return _enterScreenUrlCommand ??
-                    (_enterScreenUrlCommand = new RellayCommand(obj =>
-                    {
-                        _packModel.MainData.Screenshots.Add(new ScreenshotDataModel()
-                        {
-                            Path = _screenshotUrl
-                        });
-                        ScreenshotUrl = null;
-                    }));
-            }
-        }
-
         #endregion
 
         #endregion
 
         #region ADDITIONALLY_DATA
 
-        protected List<DtoPairModel> _countries;
+        public List<DtoPairModel> Countries { get; }
 
-        protected List<DtoPairModel> _genres;
+        public List<DtoPairModel> Genres { get; }
 
-        protected List<DtoPairModel> _companies;
+        public List<DtoPairModel> Companies { get; }
 
-        protected List<string> _releaseAuthors;
+        public List<string>       ReleaseAuthors { get; }
 
-        protected List<DtoPairModel> _regisseurs;
+        public List<DtoPairModel> Regisseurs { get; }
 
-        protected List<DtoPairModel> _screenwriters;
+        public List<DtoPairModel> Screenwriters { get; }
 
-        protected List<DtoPairModel> _actors;
-
-        public List<DtoPairModel> Countries
-        {
-            get => _countries;
-            set => _countries = value;
-        }
-
-        public List<DtoPairModel> Genres
-        {
-            get => _genres;
-            set => _genres = value;
-        }
-
-        public List<DtoPairModel> Companies
-        {
-            get => _companies;
-            set => _companies = value;
-        }
-
-        public List<string> ReleaseAuthors
-        {
-            get => _releaseAuthors;
-            set => _releaseAuthors = value;
-        }
-
-        public List<DtoPairModel> Regisseurs
-        {
-            get => _regisseurs;
-            set => _regisseurs = value;
-        }
-
-        public List<DtoPairModel> Screenwriters
-        {
-            get => _screenwriters;
-            set => _screenwriters = value;
-        }
-
-        public List<DtoPairModel> Actors
-        {
-            get => _actors;
-            set => _actors = value;
-        }
+        public List<DtoPairModel> Actors { get; }
 
         #endregion
 
         #region SERIAL_DATA
 
-        protected List<string> _serialTypes;
+        public List<string> SerialTypes { get; }
 
-        public List<string> SerialTypes
-        {
-            get { return _serialTypes; }
-            set { _serialTypes = value; }
-        }
-
-        protected private string _episodes;
+        private string _episodes;
 
         public string Episodes
         {
@@ -317,17 +265,17 @@ namespace CatAlog_App.GUI.ViewModels
 
         #region VIDEO_DATA
 
+        public List<string> VideoQuality { get; }
+
+        public List<string> VideoRelation { get; }
+
+        public List<ushort> VideoResolutionWidth { get; }
+
+        public List<ushort> VideoResolutionHeigth { get; }
+
+        public List<string> VideoFormats { get; }
+
         protected VideoDataModel _selectedVideoItem;
-
-        protected List<string> _videoQuality;
-
-        protected List<string> _videoRelation;
-
-        protected List<ushort> _videoResolutionWidth;
-
-        protected List<ushort> _videoResolutionHeigth;
-
-        protected List<string> _videoFormats;
 
         public VideoDataModel SelectedVideoItem
         {
@@ -335,40 +283,8 @@ namespace CatAlog_App.GUI.ViewModels
             set => _selectedVideoItem = value;
         }
 
-        public List<string> VideoFormats
-        {
-            get => _videoFormats;
-            set => _videoFormats = value;
-        }
-
-        public List<string> VideoQuality
-        {
-            get => _videoQuality;
-            set => _videoQuality = value;
-        }
-
-        public List<string> VideoRelation
-        {
-            get => _videoRelation;
-            set => _videoRelation = value;
-        }
-
-        public List<ushort> VideoResolutionWidth
-        {
-            get => _videoResolutionWidth;
-            set => _videoResolutionWidth = value;
-        }
-
-        public List<ushort> VideoResolutionHeigth
-        {
-            get => _videoResolutionHeigth;
-            set => _videoResolutionHeigth = value;
-        }
-
         private RellayCommand _addNewVideoItemCommand;
-
         private RellayCommand _removieVideoItemCommand;
-
         private RellayCommand _clearVideoCollectionCommand;
 
         public RellayCommand AddNewVideoItemCommand
@@ -416,15 +332,15 @@ namespace CatAlog_App.GUI.ViewModels
 
         #region AUDIO_DATA
 
+        public List<string> AudioFormat { get; }
+
+        public List<string> AudioChannel { get; }
+
+        public List<string> AudioLanguage { get; }
+
+        public List<string> AudioAuthor { get; }
+
         protected AudioDataModel _selectedAudioItem;
-
-        protected List<string> _audioFormat;
-
-        protected List<string> _audioChannel;
-
-        protected List<string> _audioLanguage;
-
-        protected List<string> _audioAuthor;
 
         public AudioDataModel SelectedAudioItem
         {
@@ -432,34 +348,8 @@ namespace CatAlog_App.GUI.ViewModels
             set => SetProperty(ref _selectedAudioItem, value, "SelectedAudioItem");
         }
 
-        public List<string> AudioFormat
-        {
-            get => _audioFormat;
-            set => _audioFormat = value;
-        }
-
-        public List<string> AudioChannel
-        {
-            get => _audioChannel;
-            set => _audioChannel = value;
-        }
-
-        public List<string> AudioLanguage
-        {
-            get => _audioLanguage;
-            set => _audioLanguage = value;
-        }
-
-        public List<string> AudioAuthor
-        {
-            get => _audioAuthor;
-            set => _audioAuthor = value;
-        }
-
         private RellayCommand _addNewAudioItemCommand;
-
         private RellayCommand _removieAudioItemCommand;
-
         private RellayCommand _clearAudioCollectionCommand;
 
         public RellayCommand AddNewAudioItemCommand
@@ -507,13 +397,13 @@ namespace CatAlog_App.GUI.ViewModels
 
         #region SUBTITLE_DATA
 
+        public List<string> SubtitleLanguage { get; }
+
+        public List<string> SubtitleAuthor { get; }
+
+        public List<string> SubtitleFormat { get; }
+
         protected SubtitleDataModel _selectedSubtitleItem;
-
-        protected List<string> _subtitleLanguage;
-
-        protected List<string> _subtitleAuthor;
-
-        protected List<string> _subtitleFormat;
 
         public SubtitleDataModel SelectedSubtitleItem
         {
@@ -521,28 +411,8 @@ namespace CatAlog_App.GUI.ViewModels
             set => SetProperty(ref _selectedSubtitleItem, value, "SelectedSubtitleItem");
         }
 
-        public List<string> SubtitleLanguage
-        {
-            get => _subtitleLanguage;
-            set => _subtitleLanguage = value;
-        }
-
-        public List<string> SubtitleAuthor
-        {
-            get => _subtitleAuthor;
-            set => _subtitleAuthor = value;
-        }
-
-        public List<string> SubtitleFormat
-        {
-            get => _subtitleFormat;
-            set => _subtitleFormat = value;
-        }
-
         private RellayCommand _addNewSubtitleItemCommand;
-
         private RellayCommand _removieSubtitleItemCommand;
-
         private RellayCommand _clearSubtitleCollectionCommand;
 
 
@@ -589,42 +459,6 @@ namespace CatAlog_App.GUI.ViewModels
 
         #endregion
 
-        #endregion        
-
-        #region INITIALIZATION
-
-        public RecordEditorBaseModel(LoadRepository repository, PropertyLibrary config)
-        {
-            _repository = repository;
-            _configModel = config;
-            _fileAdmin = new ImageFileAdmin();
-
-            _countries = _repository.GetCountiesList();
-            _genres = _repository.GetGenresList();
-            _companies = _repository.GetCompaniesList();
-            _releaseAuthors = _repository.GetReleaseAuthorsList();
-            _regisseurs = _repository.GetProducersList();
-            _screenwriters = _repository.GetScreenwritersList();
-            _actors = _repository.GetActorsList();
-
-            _serialTypes = _repository.GetSerialTypeList();
-
-            _videoQuality = _repository.GetVideoQualityList();
-            _videoRelation = _repository.GetVideoRelationList();
-            _videoResolutionWidth = _repository.GetVideoWidthList();
-            _videoResolutionHeigth = _repository.GetVideoHeightList();
-            _videoFormats = _repository.GetVideoFormatsList();
-
-            _audioFormat = _repository.GetAudioFormatsList();
-            _audioChannel = _repository.GetAudioChanelsList();
-            _audioLanguage = _repository.GetAudioLanguagesList();
-            _audioAuthor = _repository.GetAudioAuthorsList();
-
-            _subtitleLanguage = _repository.GetSubtitleLanguagesList();
-            _subtitleAuthor = _repository.GetSubtitleAuthorsList();
-            _subtitleFormat = _repository.GetSubtitlesFormatList();
-        }
-
-        #endregion
+        #endregion                      
     }
 }

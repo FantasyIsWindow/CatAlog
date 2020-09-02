@@ -13,6 +13,8 @@
     </Style>
 
     <Style TargetType="{x:Type TextBox}" x:Key="textBoxWithoutScrollViewer" BasedOn="{StaticResource textBoxGlobalTemplate}">
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled"/>
         <Style.Resources>
             <Style TargetType="{x:Type ScrollViewer}"/>
         </Style.Resources>

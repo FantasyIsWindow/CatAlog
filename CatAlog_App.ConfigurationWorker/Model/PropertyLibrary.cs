@@ -9,6 +9,8 @@ namespace CatAlog_App.ConfigurationWorker.Model
 
         private string _dbFileName;
 
+        private string _extension;
+
         private string _graphicDataFolderName;
 
         private string _titleImageName;
@@ -30,6 +32,16 @@ namespace CatAlog_App.ConfigurationWorker.Model
             { 
                 _dbFileName = value;
                 OnPropertyChanged("DbFileName");
+            }
+        }
+
+        public string Extension
+        {
+            get => _extension;
+            set
+            {
+                _extension = value;
+                OnPropertyChanged("Extension");
             }
         }
 

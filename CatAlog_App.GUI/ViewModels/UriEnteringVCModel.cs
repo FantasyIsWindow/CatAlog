@@ -48,12 +48,9 @@ namespace CatAlog_App.GUI.ViewModels
         }
 
         private RellayCommand _okCommand;
-
-        private RellayCommand _closeWindow;
-
-        private RellayCommand _gotFocus;
-
-        private RellayCommand _lostFocus;
+        private RellayCommand _closeCommand;
+        private RellayCommand _gotFocusCommand;
+        private RellayCommand _lostFocusCommand;
 
         public RellayCommand OkCommand
         {
@@ -73,20 +70,20 @@ namespace CatAlog_App.GUI.ViewModels
                                    OkHandler.Invoke(this, args);
                                }
                            }
-                           _closeWindow.Execute(null);
+                           _closeCommand.Execute(null);
                        }));
             }
         }
 
-        public RellayCommand CloseWindow =>
-            _closeWindow = new RellayCommand(c => CloseHandler?.Invoke());
+        public RellayCommand CloseCommand =>
+            _closeCommand = new RellayCommand(c => CloseHandler?.Invoke());
 
-        public RellayCommand GotFocus
+        public RellayCommand GotFocusCommand
         {
             get
             {
-                return _gotFocus ??
-                    (_gotFocus = new RellayCommand(obj =>
+                return _gotFocusCommand ??
+                    (_gotFocusCommand = new RellayCommand(obj =>
                     {
                         if (Urls == _placeholder)
                         {
@@ -96,12 +93,12 @@ namespace CatAlog_App.GUI.ViewModels
             }
         }
 
-        public RellayCommand LostFocus
+        public RellayCommand LostFocusCommand
         {
             get
             {
-                return _lostFocus ??
-                    (_lostFocus = new RellayCommand(obj =>
+                return _lostFocusCommand ??
+                    (_lostFocusCommand = new RellayCommand(obj =>
                     {
                         if (string.IsNullOrEmpty(Urls))
                         {

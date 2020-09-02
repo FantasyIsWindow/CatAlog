@@ -57,6 +57,23 @@ namespace CatAlog_App.Db.Repositories
             return result;
         }
 
+        public DtoShortRecordInfo GetShortInfo(uint id)
+        {
+            var result = (from m in _db.MainRecordDatas
+                          where m.Id == id
+                          select new DtoShortRecordInfo
+                          {
+                              Id = m.Id,
+                              FirstName = m.Name.FirstName,
+                              SecondName = m.Name.SecondName,
+                              Rating = m.Rating,
+                              ReleaseDate = m.ReleaseDate,
+                              TitleImage = m.TitleImage
+                          }).FirstOrDefault();
+
+            return result;
+        }
+
         public List<string> GetTemplates() => 
             _db.Templates.Select(t => t.Name).ToList();
 

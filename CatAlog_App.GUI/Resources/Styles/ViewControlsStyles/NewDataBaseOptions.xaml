@@ -4,7 +4,7 @@
     <Style TargetType="{x:Type UserControl}" x:Key="newDBOptionsStyle" BasedOn="{StaticResource userControlGlobalTemplateStyle}">
         <Style.Resources>
             <Style TargetType="{x:Type Label}" BasedOn="{StaticResource labelGlobalTemplate}"/>
-            <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource textBoxGlobalTemplate}"/>
+            <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource textBoxWithoutScrollViewer}"/>
             <Style TargetType="{x:Type Button}" BasedOn="{StaticResource buttonGlobalTemplate}"/>
         </Style.Resources>
     </Style>

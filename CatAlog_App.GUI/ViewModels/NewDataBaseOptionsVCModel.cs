@@ -2,7 +2,6 @@
 using CatAlog_App.ConfigurationWorker.Model;
 using CatAlog_App.GUI.Infrastructure.Services;
 using System.IO;
-using System.Linq;
 
 namespace CatAlog_App.GUI.ViewModels
 {
@@ -33,27 +32,26 @@ namespace CatAlog_App.GUI.ViewModels
             _sManager = new SettingsManager();
         }
 
-        private RellayCommand _addNewPath;
+        private RellayCommand _addNewPathCommand;
 
-        public RellayCommand AddNewPath
+        public RellayCommand AddNewPathCommand
         {
             get
             {
-                return _addNewPath ??
-                    (_addNewPath = new RellayCommand(obj =>
+                return _addNewPathCommand ??
+                    (_addNewPathCommand = new RellayCommand(obj =>
                     {
-                        string FullPath = OpenDialogManager.OpenFolderDialog();
+                        string FullPath = OpenDialogManager.OpenFolderDialog(Settings.Extension);
+                        bool isDbFile = Path.GetExtension(FullPath) == Settings.Extension;
 
-                        if (!string.IsNullOrEmpty(FullPath) && FullPath.EndsWith(".db"))
+                        if (!string.IsNullOrEmpty(FullPath) && isDbFile)
                         {
-                            string[] tempArr = FullPath.Split('\\');
-                            string name = tempArr.LastOrDefault();
-
-                            Settings.DbFileName = name.Replace(".db", "");
-                            Settings.DbFolderPath = FullPath.Replace(tempArr.LastOrDefault(), "");
+                            Settings.DbFileName = Path.GetFileNameWithoutExtension(FullPath);
+                            Settings.DbFolderPath = Path.GetDirectoryName(FullPath);
                         }
                         else
                         {
+                            Settings.DbFileName = "";
                             Settings.DbFolderPath = FullPath;
                         }
                     }));
@@ -66,14 +64,13 @@ namespace CatAlog_App.GUI.ViewModels
             {
                 return _okCommand ??
                     (_okCommand = new RellayCommand(obj =>
-                    {
-                        string imageFolderName = Settings.GraphicDataFolderName.Split('\\').LastOrDefault();
+                    {                       
+                        _sManager.SaveConfig();
 
-                        Settings.DbFolderPath = Path.Combine(Settings.DbFolderPath, Settings.DbFileName + ".db");
-                        Settings.GraphicDataFolderName = Path.Combine(Settings.DbFolderPath, imageFolderName);
                         OkHandler?.Invoke();
+                        CloseCommand.Execute(null);
                     },
-                        (obj) => !string.IsNullOrEmpty(Settings.DbFileName) &&
+                        (obj) => !string.IsNullOrEmpty(Settings.DbFileName) && // Подумать о конвертере
                                  !string.IsNullOrEmpty(Settings.DbFolderPath)
                     ));
             }

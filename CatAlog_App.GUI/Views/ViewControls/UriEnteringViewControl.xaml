@@ -19,16 +19,16 @@
                  x:Name="textBox">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="GotFocus">
-                    <i:InvokeCommandAction Command="{Binding GotFocus}"/>
+                    <i:InvokeCommandAction Command="{Binding GotFocusCommand}"/>
                 </i:EventTrigger>
                 <i:EventTrigger EventName="LostFocus">
-                    <i:InvokeCommandAction Command="{Binding LostFocus}"/>
+                    <i:InvokeCommandAction Command="{Binding LostFocusCommand}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </TextBox>
         <StackPanel Grid.Row="1" HorizontalAlignment="Right" Orientation="Horizontal" Margin="0, 10, 10, 10">
             <Button Content="OK" Margin="5" Width="80" Height="25" Command="{Binding OkCommand}"/>
-            <Button Content="Cancel" Margin="5" Width="80" Height="25" Command="{Binding CloseWindow}"/>
+            <Button Content="Cancel" Margin="5" Width="80" Height="25" Command="{Binding CloseCommand}"/>
         </StackPanel>
     </Grid>
 </UserControl>

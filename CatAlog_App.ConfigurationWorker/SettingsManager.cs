@@ -33,11 +33,19 @@ namespace CatAlog_App.ConfigurationWorker
         /// </summary>
         public void SaveConfig()
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(PropertyLibrary));
-            using (TextWriter writer = new StreamWriter(ConfigurationFilePath))
+            try
             {
-                serializer.Serialize(writer, Settings);
+                XmlSerializer serializer = new XmlSerializer(typeof(PropertyLibrary));
+                using (TextWriter writer = new StreamWriter(ConfigurationFilePath))
+                {
+                    serializer.Serialize(writer, Settings);
+                }
             }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
         }
 
         /// <summary>
@@ -64,9 +72,10 @@ namespace CatAlog_App.ConfigurationWorker
         /// </summary>
         private void CreateConfigurationFile()
         {
-            Settings.DbFileName = "catalog.db";
+            Settings.DbFileName = "catalog";
+            Settings.Extension = ".db";
             Settings.DbFolderPath = Path.Combine(Environment.CurrentDirectory, "CatAlog DataBase");
-            Settings.GraphicDataFolderName = Path.Combine(Settings.DbFolderPath, "Image Library");
+            Settings.GraphicDataFolderName = "Image Library";
             Settings.TitleImageName = "title";
 
             SaveConfig();

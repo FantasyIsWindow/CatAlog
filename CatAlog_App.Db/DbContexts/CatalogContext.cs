@@ -49,7 +49,8 @@ namespace CatAlog_App.Db.DbContexts
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
             SettingsManager config = new SettingsManager();
-            string connectionString = Path.Combine(config.Settings.DbFolderPath, config.Settings.DbFileName);
+            string fileName = config.Settings.DbFileName + config.Settings.Extension;
+            string connectionString = Path.Combine(config.Settings.DbFolderPath, fileName);
 
             builder.UseSqlite("Filename=" + connectionString);
             builder.UseLoggerFactory(LoggerProvider);

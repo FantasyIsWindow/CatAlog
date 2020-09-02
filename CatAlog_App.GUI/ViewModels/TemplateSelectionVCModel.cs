@@ -16,53 +16,25 @@ namespace CatAlog_App.GUI.ViewModels
     {
         public event EventHandler OkHandler;
 
-        private List<string> _templates;
-
-        private List<string> _categories;
-
         private string _selectedTemplate;
-
         private string _selectedCategory;
-
         private string _newGeneralType;
-
         private LoadRepository _repository;
 
-        /// <summary>
-        /// List of existing templates
-        /// </summary>
-        public List<string> Templates
-        {
-            get => _templates;
-        }
+        public List<string> Templates { get; }
 
-        /// <summary>
-        /// List of existing record types
-        /// </summary>
-        public List<string> Categories
-        {
-            get => _categories;
-        }
+        public List<string> Categories { get; }
 
-        /// <summary>
-        /// New record type to add
-        /// </summary>
         public string NewGeneralType
         {
             set => SetProperty(ref _newGeneralType, value, "NewGeneralType");
         }
 
-        /// <summary>
-        /// Selected template
-        /// </summary>
         public string SelectedTemplate
         {
             set => SetProperty(ref _selectedTemplate, value, "SelectedTemplate");
         }
 
-        /// <summary>
-        /// Selected type
-        /// </summary>
         public string SelectedCategory
         {
             set => SetProperty(ref _selectedCategory, value, "SelectedCategory");
@@ -71,8 +43,8 @@ namespace CatAlog_App.GUI.ViewModels
         public TemplateSelectionVCModel(LoadRepository repository)
         {
             _repository = repository;
-            _templates = repository.GetTemplates();
-            _categories = repository.GetCategories();
+            Templates = repository.GetTemplates();
+            Categories = repository.GetCategories();
             Categories.Add("-- New record type --");
         } 
 

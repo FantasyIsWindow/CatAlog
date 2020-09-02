@@ -42,10 +42,10 @@
         </Menu>
 
         <ToolBar Grid.Row="1" Grid.ColumnSpan="5">
-            <Button Margin="5, 2, 0, 2" Padding="3, 3, 1, 1" Command="{Binding OpenTemplateSelectionView}" Style="{StaticResource addNewRecordBtnStyle}"/>
-            <Button Margin="5, 2, 0, 2" Padding="5, 3, 1, 1" Command="{Binding UpdateSelectedRecord}" Style="{StaticResource updateRecordBtnStyle}"/>
-            <Button Margin="5, 2, 0, 2" Padding="3, 3, 1, 1" Command="{Binding RemovieSelectedRecord}" Style="{StaticResource deleteRecordBtnStyle}"/>
-            <Button Margin="5, 2, 0, 2" Style="{StaticResource buttonGlobalTemplate}" Content="Db" Command="{Binding DbAdd}"/>
+            <Button Margin="5, 2, 0, 2" Padding="3, 3, 1, 1" Command="{Binding OpenTemplateSelectionViewCommand}" Style="{StaticResource addNewRecordBtnStyle}"/>
+            <Button Margin="5, 2, 0, 2" Padding="5, 3, 1, 1" Command="{Binding UpdateSelectedRecordCommand}" Style="{StaticResource updateRecordBtnStyle}"/>
+            <Button Margin="5, 2, 0, 2" Padding="3, 3, 1, 1" Command="{Binding RemovieSelectedRecordCommand}" Style="{StaticResource deleteRecordBtnStyle}"/>
+            <Button Margin="5, 2, 0, 2" Padding="1.5, 1.5, 1, 1" Command="{Binding DbAddCommand}" Style="{StaticResource addNewDbBtnStyle}" />
         </ToolBar>
 
         <StackPanel Grid.Row="2" Grid.RowSpan="5" Grid.Column="0">
@@ -68,7 +68,7 @@
                 </TreeView.ItemTemplate>
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectedItemChanged">
-                        <i:InvokeCommandAction Command="{Binding TreeViewSelectionChanged}" 
+                        <i:InvokeCommandAction Command="{Binding TreeViewSelectionChangedCommand}" 
                                            CommandParameter="{Binding ElementName=treeView, Path=SelectedItem}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
@@ -86,7 +86,7 @@
         <ListBox Grid.Row="3" Grid.RowSpan="2" Grid.Column="2" Style="{StaticResource mainListBoxStyle}" ItemsSource="{Binding DisplayedCollection}" SelectedItem="{Binding SelectedShortRecordModel}" x:Name="lb">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
-                    <i:InvokeCommandAction Command="{Binding ListBoxSelectionChanged}"/>
+                    <i:InvokeCommandAction Command="{Binding ListBoxSelectionChangedCommand}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </ListBox>

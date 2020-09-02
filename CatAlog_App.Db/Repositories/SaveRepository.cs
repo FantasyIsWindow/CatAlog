@@ -17,7 +17,7 @@ namespace CatAlog_App.Db.Repositories
             _db = new CatalogContext();
         }
         
-        public void SaveNewRecord(DtoFullVideoData record)
+        public uint SaveNewRecord(DtoFullVideoData record)
         {
             MainRecordData mainRecord = new MainRecordData()
             {
@@ -67,6 +67,7 @@ namespace CatAlog_App.Db.Repositories
 
             _db.MainRecordDatas.Add(mainRecord);
             _db.SaveChanges();
+            return mainRecord.Id;
         }
 
         private Template GetTemplate(DtoMainRecordModel model) => 

@@ -1,4 +1,5 @@
 ﻿using CatAlog_App.GUI.Infrastructure.Constants;
+using CatAlog_App.GUI.Infrastructure.Services;
 using System;
 using System.Globalization;
 using System.IO;
@@ -14,7 +15,11 @@ namespace CatAlog_App.GUI.Infrastructure.Converters
         {
             if (value is string str)
             {
-                if (!File.Exists(str))
+                if (RegexManager.IsUrl(str))
+                {
+                    return str;
+                }
+                else if (!File.Exists(str))
                 {
                     return OtherConstants.TitleImageDummy;
                 }

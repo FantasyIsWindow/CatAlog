@@ -58,7 +58,7 @@
     </Style>
 
     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource buttonGlobalTemplate}" x:Key="addNewRecordToListBtnStyle">
-        <Setter Property="Content" Value="{StaticResource createNewRecordInListIconIcon}"/>
+        <Setter Property="Content" Value="{StaticResource createNewRecordInListIcon}"/>
         <Setter Property="Height" Value="22"/>
         <Setter Property="Width" Value="50"/>
         <Setter Property="Margin" Value="5"/>

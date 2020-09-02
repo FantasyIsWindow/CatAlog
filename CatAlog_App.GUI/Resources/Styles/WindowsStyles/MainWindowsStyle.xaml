@@ -178,23 +178,29 @@
     <!-- Button styles -->
 
     <Style TargetType="{x:Type Button}" x:Key="addNewRecordBtnStyle" BasedOn="{StaticResource buttonGlobalTemplate}">
-        <Setter Property="Content" Value="{StaticResource addNewRecordBrnIcon}"/>
+        <Setter Property="Content" Value="{StaticResource addNewRecordBtnIcon}"/>
         <Setter Property="Height" Value="25"/>
         <Setter Property="Width" Value="25"/>
     </Style>
 
     <Style TargetType="{x:Type Button}" x:Key="updateRecordBtnStyle" BasedOn="{StaticResource buttonGlobalTemplate}">
-        <Setter Property="Content" Value="{StaticResource updateNewRecordBrnIcon}"/>
+        <Setter Property="Content" Value="{StaticResource updateNewRecordBtnIcon}"/>
         <Setter Property="Height" Value="25"/>
         <Setter Property="Width" Value="25"/>
     </Style>
 
     <Style TargetType="{x:Type Button}" x:Key="deleteRecordBtnStyle" BasedOn="{StaticResource buttonGlobalTemplate}">
-        <Setter Property="Content" Value="{StaticResource deleteNewRecordBrnIcon}"/>
+        <Setter Property="Content" Value="{StaticResource deleteNewRecordBtnIcon}"/>
         <Setter Property="Height" Value="25"/>
         <Setter Property="Width" Value="25"/>
     </Style>
 
+    <Style TargetType="{x:Type Button}" x:Key="addNewDbBtnStyle" BasedOn="{StaticResource buttonGlobalTemplate}">
+        <Setter Property="Content" Value="{StaticResource addNewDbBtnIcon}"/>
+        <Setter Property="Height" Value="25"/>
+        <Setter Property="Width" Value="25"/>
+    </Style>
+    
     <!-- RadioButtons -->
     
     <Style TargetType="{x:Type RadioButton}" x:Key="extendedRbStyle">
